@@ -108,25 +108,10 @@ class NavDataset(Dataset):
         for i in range(seq_len):
             actions[i] = self.labels[self.data[idx + i]]
 
-        # random_scaling = random.uniform(1.1, 2)
-        # new_h = int(random_scaling * self.img_h)
-        # if new_h % 2 == 1:
-        #     new_h = new_h + 1
-        # pad_h = (new_h - self.img_h) // 2
-        # new_w = int(random_scaling * self.img_w)
-        # if new_w % 2 == 1:
-        #     new_w = new_w + 1
-        # pad_w = (new_w - self.img_w) // 2
-        # images = torch.zeros((self.max_seq_len+1, 6, new_h, new_w))
-
         goal_img = Image.open(os.path.join(self.dirname, str(idx + seq_len).zfill(6) + '.png')).convert('RGB')
         new_w, new_h = goal_img.size
         images = torch.zeros((self.max_seq_len+1, 6, new_h, new_w))
 
-        # if self.phase == 'train':
-        #     goal_img = transforms.Resize((new_h, new_w))(goal_img)
-        # else:
-        #     goal_img = transforms.Pad((pad_w, pad_h))(goal_img)
         if self.transform:
             goal_img = self.transform(goal_img.copy())
 
@@ -134,11 +119,6 @@ class NavDataset(Dataset):
             image_idx = idx + i
             img_name = os.path.join(self.dirname,  str(image_idx).zfill(6) + '.png')
             img = Image.open(img_name).convert('RGB')
-            # if self.phase == 'train':
-            #     # upscale to for random cropping 
-            #     img = transforms.Resize((new_h, new_w))(img) 
-            # else:
-            #     img = transforms.Pad((pad_w, pad_h))(img) 
 
             if self.transform:
                 img = self.transform(img.copy())
@@ -186,9 +166,6 @@ class invLSTM(nn.Module):
         super(invLSTM, self).__init__()
         self.lstm = nn.LSTM(input_dim, hidden_dim, num_layers=num_layers, batch_first=True)
         self.inv = nn.Linear(hidden_dim, output_dim)
-        # self.preproc = nn.Sequential(nn.Linear(input_dim, input_dim),
-        #                              nn.ReLU(),
-        #                              nn.Linear(input_dim, input_dim))
         self.input_dim = input_dim
         self.num_layers = num_layers
         self.hidden_dim = hidden_dim
