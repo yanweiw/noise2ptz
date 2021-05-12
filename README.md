@@ -18,7 +18,16 @@
 
 ## Generate training data for navigation policy
 
-1. **TODO** Run `./gen_nav_data.sh`
+1. Run `./gen_nav_data.sh`
+2. `nav_train` contains 10 environments, each has 1k validation data in `nav0` and 5k training data in `nav1`
+3. 
+
+## Run inference in testing environments
+
+1. Build a target environment floor map by first randomly exploring the the space via `gen_ptz_data.sh`. 
+2. Generate a scatter plot of all the valid locations via `load_all_states` from `nav.py`
+3. Contour a floor map using a concave hull algorithm via `load_floor` from `nav.py`
+4. 
 
 ## Evaluation 
 

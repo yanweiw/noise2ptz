@@ -124,6 +124,9 @@ def make_cfg(settings):
         "spin": habitat_sim.agent.ActionSpec(
             "turn_right", habitat_sim.agent.ActuationSpec(amount=36.0)
         ),
+        "move_backward": habitat_sim.agent.ActionSpec(
+            "move_forward", habitat_sim.agent.ActuationSpec(amount=-0.3)
+        ),
     }
 
     # override action space to no-op to test physics

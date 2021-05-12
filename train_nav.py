@@ -19,7 +19,6 @@ import itertools
 from torch.nn.utils.rnn import pad_packed_sequence, pack_padded_sequence, PackedSequence
 
 import sys
-from CoordConv.coordconv import CoordConv2d
 from train_ptz import Net as ptz_net
 from collections import OrderedDict
 from aug_data import *
@@ -71,8 +70,8 @@ default_transform = transforms.Compose([
 
 class NavDataset(Dataset):
 
-    def __init__(self, modality, dirname, max_seq_len, phase, img_h, img_w, 
-                                size=None, transform=default_transform, single_action=False):
+    def __init__(self, dirname, max_seq_len, phase, img_h, img_w, 
+                                size=None, transform=default_transform, with_lstm=True):
         self.dirname = dirname
         self.phase = phase
         self.data = np.loadtxt(dirname + '_action.txt', dtype=str)[1:50] # discard first action
@@ -81,18 +80,11 @@ class NavDataset(Dataset):
         self.max_seq_len = max_seq_len
         self.img_h = img_h
         self.img_w = img_w
-        assert modality in ['rob', 'cam']
-        if modality == 'rob':
-            self.labels = {'stop': 0,
-                           'move_forward': 1,
-                           'turn_left': 2,
-                           'turn_right': 3}
-        else:                        
-            self.labels = {'stop': 0,
-                           'zoom_in': 1,
-                           'pan_left': 2,
-                           'pan_right': 3}        
-        self.single_action = single_action
+        self.labels = {'stop':         0,
+                       'move_forward': 1,
+                       'turn_left':    2,
+                       'turn_right':   3}
+        self.with_lstm = with_lstm 
 
     def __len__(self):
         if self.size: # in cases where I want to define size
@@ -104,18 +96,11 @@ class NavDataset(Dataset):
         if torch.is_tensor(idx):
             idx = idx.tolist()
 
-        # random sample the starting location of the sub-traj
+        # random sample the starting location of the sub-traj 
         idx = random.choice(range(len(self.data)))
-
-        # sample random sequence 
-        # if self.max_seq_len < 5:
-            # seq_len = self.max_seq_len
-        # else:
-            # seq_len = random.randint(5, self.max_seq_len) # sequence length
         seq_len = random.randint(1, self.max_seq_len)
-        # assert len(self.data) == 49
-        if idx + seq_len > len(self.data): # self.__len__():
-            seq_len = len(self.data) - idx # self.__len__() - idx
+        if idx + seq_len > len(self.data): 
+            seq_len = len(self.data) - idx 
             assert seq_len > 0
 
         '''len(self.data) = num of images -1 '''
@@ -135,7 +120,6 @@ class NavDataset(Dataset):
         # images = torch.zeros((self.max_seq_len+1, 6, new_h, new_w))
 
         goal_img = Image.open(os.path.join(self.dirname, str(idx + seq_len).zfill(6) + '.png')).convert('RGB')
-        
         new_w, new_h = goal_img.size
         images = torch.zeros((self.max_seq_len+1, 6, new_h, new_w))
 
@@ -173,8 +157,8 @@ class NavDataset(Dataset):
         etg = np.zeros(self.max_seq_len)
         etg[:seq_len] = np.arange(seq_len, 0, -1)
 
-        if self.single_action:
-            images = images[:2] # need the second image pair for forward models potentially
+        if not self.with_lstm: # feedforward inputs a sequence of length 1
+            images = images[:1] # notice here the goal and the current view can be multiple steps away
             seq_len = 1
             actions = actions[:1]
             etg = etg[:1]
@@ -216,109 +200,10 @@ class invLSTM(nn.Module):
         return out, hidden
 
 
-# class OldSiamese(nn.Module):
-
-#     def __init__(self, max_seq_len=20, state_size=128, action_size=4, act_embed_size=4, lstm_hidden_dim=512):
-#         super(OldSiamese, self).__init__()
-#         self.action_size = action_size
-#         self.state_size = state_size
-#         self.act_embed_size = act_embed_size
-#         self.max_seq_len = max_seq_len
-#         self.base_model = models.resnet18()
-#         self.base_model.conv1 = nn.Conv2d(6, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
-#         self.base_model.avgpool = nn.Sequential(nn.Conv1d(512, state_size, (1,1)), 
-#                                                 nn.BatchNorm2d(state_size, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True),
-#                                                 nn.ReLU(),
-#                                                 nn.AdaptiveMaxPool2d(output_size=(1, 1)))
-#         # self.base_model.avgpool = nn.AdaptiveMaxPool2d(output_size=(1, 1))
-#         # resnet will flatten output before fc layer, should not assign any layers after avgpool
-#         self.base_model.fc = Identity()
-#         # self.base_model.fc = nn.Linear(512, 128)
-#         # self.embed_act = nn.Linear(action_size, act_embed_size)
-#         self.inv_model = invLSTM(state_size + act_embed_size, lstm_hidden_dim, action_size, num_layers=1)
-#         self.for_model = nn.Sequential(nn.Linear(state_size+act_embed_size, state_size+act_embed_size),
-#                                        nn.ReLU(),
-#                                        nn.Linear(state_size+act_embed_size, state_size),
-#                                        nn.ReLU(),
-#                                        nn.Linear(state_size, state_size))    
-#         self.with_lstm = True    
-
-
-#     def forward(self, images, act_lens, hidden, action=None, phase='train', prev_action=None):
-#         h, c = hidden
-#         h = torch.transpose(h, 0, 1).contiguous()
-#         c = torch.transpose(c, 0, 1).contiguous()
-#         hidden = (h, c)
-#         # print(h.size(), c.size())
-
-#         # assert images.size()[1:] == (self.max_seq_len+1, 6, 120, 160)
-#         # states = self.base_model(images.view(-1, 6, 120, 160)).view(-1, self.max_seq_len+1, self.state_size)
-#         assert images.size()[1:] == (self.max_seq_len+1, 6, 120, 160)
-#         states = self.base_model(images.view(-1, 6, 120, 160)).view(-1, self.max_seq_len+1, self.state_size)
-
-#         if phase == 'infer':
-#             assert prev_action.size()[1:] == (self.max_seq_len,)
-#             prev_action_vec = nn.functional.one_hot(prev_action, self.action_size).float()
-#             # prev_action_vec = prev_action_vec.view(-1, self.action_size)
-#             # prev_action_vec = self.embed_act(prev_action_vec)
-#             # prev_action_vec = prev_action_vec.view(-1, self.max_seq_len, self.act_embed_size) 
-
-#             # assert states.size() == (1, 1, self.state_size)
-#             assert prev_action_vec.size() == (1, 1, self.act_embed_size)
-#             # state_pair_act = torch.cat([states[:, [0]], states[:, [1]], prev_action_vec], dim=2)
-#             state_pair_act = torch.cat([states[:, [0]], prev_action_vec], dim=2)
-#             # state_pair_act = self.inv_model.preproc(state_pair_act)
-#             action_pd, hidden = self.inv_model(state_pair_act, hidden)
-#             return action_pd, hidden
-
-
-#         # goal_state = torch.cat([states[x, y].unsqueeze(0) for x, y in zip(torch.arange(states.size(0)), act_lens)])
-#         # assert goal_state.size()[1:] == (128,)
-#         # goal_state = goal_state.unsqueeze(1).expand(-1, self.max_seq_len+1, -1)
-#         # state_pair = torch.cat((states, goal_state), dim=2)[:, :-1, :]
-#         # assert state_pair.size()[1:] == (self.max_seq_len, self.state_size*2)
-
-#         # action
-#         assert action.size()[1:] == (self.max_seq_len,)
-#         action_vec = nn.functional.one_hot(action, self.action_size).float()
-#         assert action_vec.size()[1:] == (self.max_seq_len, self.action_size)
-#         #prev_action
-#         prev_action = torch.cat((torch.zeros(action.size(0), 1).long().cuda(), action[:, :-1]), dim=1)
-#         prev_action_vec = nn.functional.one_hot(prev_action, self.action_size).float()
-#         assert prev_action_vec.size() == action_vec.size()
-#         # predict action
-#         assert states.size()[1:] == (self.max_seq_len+1, self.state_size)
-#         state_pair_act = torch.cat((states[:, :-1], prev_action_vec), dim=2)
-#         # state_pair_act = self.inv_model.preproc(state_pair_act)
-#         packed_state_pair_act = pack_padded_sequence(state_pair_act, act_lens, batch_first=True, enforce_sorted=False)
-#         out_act_pd, _ = self.inv_model(packed_state_pair_act, hidden)
-#         packed_act_pd = PackedSequence(out_act_pd, packed_state_pair_act.batch_sizes,
-#                                            packed_state_pair_act.sorted_indices,
-#                                            packed_state_pair_act.unsorted_indices)
-#         act_pd, _ = pad_packed_sequence(packed_act_pd, batch_first=True, total_length=self.max_seq_len)
-#         assert act_pd.size()[1:] == (self.max_seq_len, self.action_size)
-#         # predict next state
-#         assert states[:, :-1, :].size()[:2] == action_vec.size()[:2]
-#         state_act = torch.cat((states[:, :-1, :], action_vec), dim=2)
-#         assert state_act.is_contiguous()
-#         state_pd = self.for_model(state_act.view(-1, self.state_size + self.act_embed_size))
-#         state_pd = state_pd.view(-1, self.max_seq_len, self.state_size)
-#         # mask out everything
-#         assert act_pd.size() == action_vec.size()
-#         mask = torch.arange(self.max_seq_len)[None, :].cuda() < act_lens[:, None]
-#         act_pd = act_pd[mask]
-#         act_gt = action_vec[mask]
-#         assert act_pd.size() == act_gt.size()
-#         state_pd = state_pd[mask]
-#         state_gt = states[:, 1:, :][mask]
-
-#         return act_pd, act_gt, state_pd, state_gt
-
-
 class Siamese(nn.Module):
 
     def __init__(self, max_seq_len=20, state_size=128, action_size=4, act_embed_size=4, lstm_hidden_dim=512,
-                 use_PTZ=False, base_model_weights=None, with_lstm=True, img_h=128, img_w=128):#, gpu_idx=0):
+                 PTZ_weights=None, with_lstm=True, img_h=128, img_w=128):#, gpu_idx=0):
         super(Siamese, self).__init__()
         self.action_size = action_size
         self.state_size = state_size
@@ -326,10 +211,11 @@ class Siamese(nn.Module):
         self.max_seq_len = max_seq_len
         self.img_h = img_h
         self.img_w = img_w
-        if base_model_weights is not None or use_PTZ:
+        if PTZ_weights is not None:
+            self.state_size = 3
             self.base_model = ptz_net()#device=gpu_idx)
-            if base_model_weights is not None:
-                state_dict = torch.load(base_model_weights)
+            if type(PTZ_weights) == str:
+                state_dict = torch.load(PTZ_weights)
                 if 'module' in list(state_dict.keys())[0]:
                     new_state_dict = OrderedDict()
                     for k, v in state_dict.items():
@@ -337,7 +223,7 @@ class Siamese(nn.Module):
                         new_state_dict[name] = v
                     state_dict = new_state_dict
                 # loading weights
-                print('loading base_model weights from: ', base_model_weights)
+                print('loading PTZ weights from: ', PTZ_weights)
                 self.base_model.load_state_dict(state_dict)
                 # freeze weights in base_model
                 for parameter in self.base_model.parameters():
@@ -345,15 +231,15 @@ class Siamese(nn.Module):
         else:
             self.base_model = models.resnet18()
             self.base_model.conv1 = nn.Conv2d(6, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3))
-            self.base_model.fc = nn.Linear(512, state_size)
+            self.base_model.fc = nn.Linear(512, self.state_size)
 
         self.with_lstm = with_lstm
         if self.with_lstm:
             print('using lstm....')
-            self.inv_model = invLSTM(state_size + act_embed_size, lstm_hidden_dim, action_size, num_layers=1)
+            self.inv_model = invLSTM(self.state_size + act_embed_size, lstm_hidden_dim, action_size, num_layers=1)
         else:
-            print('not using lstm...')
-            self.inv_model = nn.Sequential(nn.Linear(state_size, 128),
+            print('using feedforward network...')
+            self.inv_model = nn.Sequential(nn.Linear(self.state_size, 128),
                                            nn.ReLU(),
                                            nn.Linear(128, action_size))
 
@@ -370,9 +256,6 @@ class Siamese(nn.Module):
             assert images.size()[1:] == (self.max_seq_len+1, 6, self.img_h, self.img_w)
             states = self.base_model(images.view(-1, 6, self.img_h, self.img_w))
             states = states.view(-1, self.max_seq_len+1, self.state_size)
-            # coords = self.pred_coord(latent)
-            # states = self.proj_state(latent)
-            # states = torch.cat((coords, states), dim=1).view(-1, self.max_seq_len+1, self.state_size)
         else: # single action sequence
             states = self.base_model(images[:, 0])
             assert states.size()[1:] == (self.state_size,)
@@ -388,7 +271,6 @@ class Siamese(nn.Module):
                 action_pd = self.inv_model(states)
             return action_pd, hidden
 
-        # action
         if self.with_lstm:
             assert action.size()[1:] == (self.max_seq_len,)
             action_vec = nn.functional.one_hot(action, self.action_size).float()
@@ -407,38 +289,29 @@ class Siamese(nn.Module):
                                                packed_state_pair_act.unsorted_indices)
             act_pd, _ = pad_packed_sequence(packed_act_pd, batch_first=True, total_length=self.max_seq_len)
             assert act_pd.size()[1:] == (self.max_seq_len, self.action_size)
-            # predict next state
-            # assert states[:, :-1, :].size()[:2] == action_vec.size()[:2]
-            # state_act = torch.cat((states[:, :-1, :], action_vec), dim=2)
-            # assert state_act.is_contiguous()
-            # state_pd = self.for_model(state_act.view(-1, self.state_size + self.act_embed_size))
-            # state_pd = state_pd.view(-1, self.max_seq_len, self.state_size)
             # mask out everything
             assert act_pd.size() == action_vec.size()
             mask = torch.arange(self.max_seq_len)[None, :].cuda() < act_lens[:, None]
             act_pd = act_pd[mask]
             act_gt = action_vec[mask]
             assert act_pd.size() == act_gt.size()
-            # state_pd = state_pd[mask]
-            # state_gt = states[:, 1:, :][mask]
         else:
             act_pd = self.inv_model(states)
             act_gt = nn.functional.one_hot(action.squeeze(), self.action_size).float()
 
-        return act_pd, act_gt, #state_pd, state_gt
+        return act_pd, act_gt, 
 
 
-def load_data(base_dir, train_envs, valid_envs, train_dirs, valid_dirs, modality, seq_len, bsize, 
-                img_h, img_w, num_of_location=100, single_action=False):
+def load_data(base_dir, train_envs, valid_envs, train_dirs, valid_dirs, seq_len, bsize, 
+                img_h, img_w, num_of_location=100, with_lstm=True):
     '''
     load_data from 'base_dir/env_dir/data_dir', e.g. 'data/train/Delton/rob0'
     env_dirs, train_dirs, and valid_dirs are list of dirs
     train_dirs ['rob1'], valid_dirs ['rob2']
     '''
-    assert modality in ['rob', 'cam']
     env_dirs = {'train': train_envs, 'valid': valid_envs}
     data_dirs = {'train' : train_dirs, 'valid' : valid_dirs}
-    base_dirs = {'train': 'data/train', 'valid': 'data/train'}
+    base_dirs = {'train': base_dir, 'valid': base_dir}
 
     datasets = {'train': [], 'valid': []}
     dataloaders = {}
@@ -447,7 +320,7 @@ def load_data(base_dir, train_envs, valid_envs, train_dirs, valid_dirs, modality
             env_dirs[phase] = ['Delton', 'Goffs', 'Oyens', 'Placida', 'Sumas', 'Crandon', 'Roane', 'Springhill', 'Superior', 'Woonsocket']
                         # 'valid': ['Hambleton', 'Eastville', 'Pettigrew', 'Albertville', 'Hometown']}
         for env_dir in env_dirs[phase]:
-            env_path = os.path.join(base_dir, base_dirs[phase], env_dir)
+            env_path = os.path.join(base_dirs[phase], env_dir)
             for data_dir in data_dirs[phase]:
                 d_list = sorted(os.listdir(os.path.join(env_path, data_dir))) # list of image folders
                 if phase == 'train': # num_of_location < 100
@@ -458,8 +331,8 @@ def load_data(base_dir, train_envs, valid_envs, train_dirs, valid_dirs, modality
                     #################################
                     # only sample 1 subtraj as defined by size
                     #################################
-                    datasets[phase].append(NavDataset(modality, os.path.join(env_path, data_dir, d), 
-                        max_seq_len=seq_len, phase=phase, img_h=img_h, img_w=img_w, size=1, single_action=single_action))
+                    datasets[phase].append(NavDataset(os.path.join(env_path, data_dir, d), 
+                        max_seq_len=seq_len, phase=phase, img_h=img_h, img_w=img_w, size=1, with_lstm=with_lstm))
         concatsets = ConcatDataset(datasets[phase])
         dataloaders[phase] = DataLoader(concatsets, batch_size=bsize, shuffle=True, num_workers=8)
 
@@ -468,43 +341,21 @@ def load_data(base_dir, train_envs, valid_envs, train_dirs, valid_dirs, modality
 
 
 
-def train(run, base_dir, train_envs, valid_envs, train_dirs, valid_dirs, modality=None, seq_len=None, base_model_weights=None, 
+def train(run, base_dir, train_envs, valid_envs, train_dirs, valid_dirs, seq_len=None, PTZ_weights=None, 
             data_parallel=True, lr=0.0001, bsize=32, num_epochs=20, pretrained_weights=None, num_of_location=100, 
-            state_size=128, freeze_bn=False, img_h=128, img_w=128, with_lstm=True, use_PTZ=False, single_action=False,
-            policy='nav', action_size=6, device=0):
+            state_size=128, img_h=128, img_w=128, with_lstm=True, device=0):
             # gpu_idx=0):
     # device = torch.device('cuda:{}'.format(gpu_idx) )
 
     # select training policy
-    assert policy in ['nav', 'reach']
-    if policy == 'nav':
-        print('training navigation policy...')
-        dataloaders = load_data(base_dir, train_envs, valid_envs, train_dirs, valid_dirs, modality, seq_len, bsize, 
-                                img_h, img_w, num_of_location, single_action=single_action)
-        if single_action:
-            model = Siamese(max_seq_len=1, base_model_weights=base_model_weights, state_size=state_size, 
-                        with_lstm=with_lstm, img_h=img_h, img_w=img_w, use_PTZ=use_PTZ)#, gpu_idx=gpu_idx)
-        else:
-            model = Siamese(max_seq_len=seq_len, base_model_weights=base_model_weights, state_size=state_size, 
-                        with_lstm=with_lstm, img_h=img_h, img_w=img_w, use_PTZ=use_PTZ)#, gpu_idx=gpu_idx)
-        
-        inv_criterion = nn.CrossEntropyLoss()
+    dataloaders = load_data(base_dir, train_envs, valid_envs, train_dirs, valid_dirs, seq_len, bsize, 
+                            img_h, img_w, num_of_location, with_lstm=with_lstm)
 
-    else:
-        print('training reaching policy...')
-        dataloaders = {'train': DataLoader(PokeDataset(os.path.join(base_dir, train_dirs[0]), 
-                                                       os.path.join(base_dir, 'poke_goal2.png')), 
-                                            batch_size=bsize, shuffle=True, num_workers=8), 
-                       'valid': DataLoader(PokeDataset(os.path.join(base_dir, valid_dirs[0]), 
-                                                       os.path.join(base_dir, 'poke_goal2.png')), 
-                                            batch_size=bsize, shuffle=True, num_workers=8), }
-        model = Reach(state_size=state_size, action_size=action_size, base_model_weights=base_model_weights, 
-                        use_PTZ=use_PTZ)
+    model = Siamese(max_seq_len=seq_len, PTZ_weights=PTZ_weights, state_size=state_size, 
+                with_lstm=with_lstm, img_h=img_h, img_w=img_w)#, gpu_idx=gpu_idx)
         
-        inv_criterion = nn.L1Loss()
-
+    inv_criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(model.parameters(), lr=lr)
-
 
     model = model.float().cuda(device)
     if pretrained_weights:
@@ -513,7 +364,7 @@ def train(run, base_dir, train_envs, valid_envs, train_dirs, valid_dirs, modalit
     if data_parallel:
         model = torch.nn.DataParallel(model)
         print('\nUsing multiple gpus...')
-    if freeze_bn:
+    if PTZ_weights is not None:
         print('\nfreezing runing stats of batchnorms...')
     else:
         print('\n NOT freezing running stats of batchnorms...')
@@ -522,13 +373,14 @@ def train(run, base_dir, train_envs, valid_envs, train_dirs, valid_dirs, modalit
     # write to tensorboard images and model graphs
     if not os.path.exists('runs'):
         os.makedirs('runs') # create runs folder to hold indivdual runs
-    writer = SummaryWriter('runs/run'+str(run).zfill(3))
+    writer = SummaryWriter('runs/'+str(run).zfill(3))
     print('\nrun num: ', run)
     print('lr: ', lr)
     print('bsize: ', bsize)
     print('seq_len ', seq_len)
-    print('training num ', len(dataloaders['train'].dataset))
-    print('validation num ', len(dataloaders['valid'].dataset))
+    print('training num ', len(dataloaders['train'].dataset) * 50)  # num of locations * datapoints per location
+    print('validation num ', len(dataloaders['valid'].dataset) * 50)
+    print('max bsize: ', len(dataloaders['train'].dataset))
     print()
     # record time
     since = time.time()
@@ -548,7 +400,7 @@ def train(run, base_dir, train_envs, valid_envs, train_dirs, valid_dirs, modalit
                 model.train()
                 #################################################################
                 # we want to freeze the running_stats of batchnorms in base model
-                if freeze_bn:
+                if PTZ_weights is not None:
                     for module in model.modules():
                         if isinstance(module, nn.BatchNorm2d):
                             _ = module.eval()
@@ -556,32 +408,19 @@ def train(run, base_dir, train_envs, valid_envs, train_dirs, valid_dirs, modalit
             else:
                 model.eval()
 
-
             # iterate over data
             for batch_iter, batched_sample in enumerate(dataloaders[phase]):
-                if policy == 'nav':
-                    h = batched_sample['h'].cuda(device)
-                    c = batched_sample['c'].cuda(device)
-                    act_lens = batched_sample['act_lens'].cuda(device)
-                    images = batched_sample['images'].cuda(device)
-                    action = batched_sample['action'].cuda(device)
-                else:
-                    images = batched_sample['images'].cuda(device)
-                    assert action_size in [3, 6]
-                    if action_size == 6:
-                        action = batched_sample['action'].cuda(device)
-                    else:
-                        action = batched_sample['pos'].cuda(device)
+                h = batched_sample['h'].cuda(device)
+                c = batched_sample['c'].cuda(device)
+                act_lens = batched_sample['act_lens'].cuda(device)
+                images = batched_sample['images'].cuda(device)
+                action = batched_sample['action'].cuda(device)
 
                 # forward pass
                 with torch.set_grad_enabled(phase == 'train'):
-                    if policy == 'nav':
-                        act_pd, act_gt = model(images, act_lens, (h, c), action)
-                        _, label = act_gt.max(dim=1)
-                        loss = inv_criterion(act_pd, label)
-                    else:
-                        act_pd = model(images)
-                        loss = inv_criterion(act_pd, action)
+                    act_pd, act_gt = model(images, act_lens, (h, c), action)
+                    _, label = act_gt.max(dim=1)
+                    loss = inv_criterion(act_pd, label)
 
                     if phase == 'train':
                         loss.backward()
@@ -610,7 +449,7 @@ def train(run, base_dir, train_envs, valid_envs, train_dirs, valid_dirs, modalit
             print('updating best weights...')
             if not os.path.exists('weights'):
                 os.makedirs('weights')
-            save_path = 'weights/run' + str(run).zfill(3) + '.pth'
+            save_path = 'weights/' + str(run).zfill(3) + '.pth'
             if data_parallel:
                 torch.save(model.module.state_dict(), save_path)
             else:
@@ -622,7 +461,7 @@ def train(run, base_dir, train_envs, valid_envs, train_dirs, valid_dirs, modalit
             print('saving epoch weights...')
             if not os.path.exists('weights'):
                 os.makedirs('weights')
-            save_path = 'weights/run' + str(run).zfill(3) + '_lep.pth' # last epoch
+            save_path = 'weights/' + str(run).zfill(3) + '_lep.pth' # last epoch
             if data_parallel:
                 torch.save(model.module.state_dict(), save_path)
             else:
@@ -641,7 +480,7 @@ def train(run, base_dir, train_envs, valid_envs, train_dirs, valid_dirs, modalit
 
     # finish training, now return weights
     print("training finished...")
-    save_path = 'weights/run' + str(run).zfill(3) + '.pth'
+    save_path = 'weights/' + str(run).zfill(3) + '.pth'
     print("model saved to ", save_path)
     print()
 
@@ -650,12 +489,12 @@ def train(run, base_dir, train_envs, valid_envs, train_dirs, valid_dirs, modalit
     return model, dataloaders['valid']
 
 
-def inspect_data(dataiter):
+def inspect_data(dataiter, num=20):
     data = dataiter.next()
     images = data['images']
     action = data['action']
     images = images.permute(0, 1, 3, 4, 2) / 2 + 0.5 
-    for i in range(20): 
+    for i in range(num): 
         plt.figure(figsize=(30, 2)) 
         for j in range(len(action[i])): 
             ax = plt.subplot(1, 16, j+1)  
@@ -709,3 +548,34 @@ def pred_bbox(dataiter, model=None, max_seq_len=15, state_size=3, img_h=128, img
             else:
                 atext = 'right'
             ax.set_title(atext+' '+str(etg[i, j].item()), fontsize=8)
+
+
+if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--run', required=True)
+    parser.add_argument('--base_dir', type=str, default='data/nav_train')
+    parser.add_argument('--train_envs', nargs='+', default=None)
+    parser.add_argument('--valid_envs', nargs='+', default=None)
+    parser.add_argument('--train_dirs', nargs='+', default=['nav1'])
+    parser.add_argument('--valid_dirs', nargs='+', default=['nav0'])
+    parser.add_argument('--seq_len', type=int, default=15)
+    parser.add_argument('--PTZ_weights', type=str, default=None)
+    parser.add_argument('--data_parallel', action='store_true')
+    parser.add_argument('--lr', type=float, default=0.001)
+    parser.add_argument('--bsize', type=int, default=128)
+    parser.add_argument('--num_epochs', type=int, default=5000)
+    parser.add_argument('--pretrained_weights', type=str, default=None)
+    parser.add_argument('--num_loc', type=int, default=100, help='number of locations used for training, controlling training data size')
+    parser.add_argument('--state_size', type=int, default=128)
+    parser.add_argument('--img_h', type=int, default=128)
+    parser.add_argument('--img_w', type=int, default=128)
+    parser.add_argument('--with_lstm', action='store_true')
+    parser.add_argument('--device', type=int, default=0)
+    args = parser.parse_args()
+
+    train(run=args.run, base_dir=args.base_dir, train_envs=args.train_envs, valid_envs=args.valid_envs, 
+            train_dirs=args.train_dirs, valid_dirs=args.valid_dirs, seq_len=args.seq_len, PTZ_weights=args.PTZ_weights, 
+            data_parallel=args.data_parallel, lr=args.lr, bsize=args.bsize, num_epochs=args.num_epochs, 
+            pretrained_weights=args.pretrained_weights, num_of_location=args.num_loc, state_size=args.state_size,
+            img_h=args.img_h, img_w=args.img_w, with_lstm=args.with_lstm, device=args.device)
