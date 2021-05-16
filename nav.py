@@ -75,8 +75,6 @@ class NavInfer:
         self.use_goal_recognizer = True
         self.distance_threshold = 0.5
         self.sample_deviation = sample_deviation
-        self.use_PTZ = None
-        self.with_lstm = True
 
         
     def load_perceptual_model(self, confidence_threshold=0.6):
@@ -131,7 +129,7 @@ class NavInfer:
         print('action space: ', list(cfg.agents[0].action_space.keys()), '\n')
 
 
-    def load_policy(self, tag, weight_path=None, state_size=128, with_lstm=True, img_h=128, img_w=128, 
+    def load_policy(self, tag, weight_path=None, state_size=128, with_lstm=False, img_h=128, img_w=128, 
                     use_PTZ=None):
         '''
         load navigation policy, which is a pretrained model from train.py
@@ -270,8 +268,8 @@ class NavInfer:
         return self.curr_state
 
 
-    def infer_traj(self, save_dir, start_state, goal_image_path=None, goal_state=None, max_steps=40, save_img=True, 
-                    policy_tag='random'):
+    def infer_traj(self, save_dir, start_state, goal_image_path=None, goal_state=None, 
+                                                max_steps=40, save_img=True, policy_tag='random'):
         '''
         infer trajectory from current observation to goal image
         '''
@@ -353,7 +351,7 @@ class NavInfer:
             assert imgs.size() == (1, 2, 6, self.infer_h, self.infer_w)
 
             prev_act_idx = torch.unsqueeze(self.prev_act_idx.clone().detach(), 0).cuda()
-            if self.with_lstm: # need recurrency
+            if self.policy[tag].with_lstm: # need recurrency, verified that recurrency does not affect lstm_1
                 hidden = (self.hidden[0].cuda(), self.hidden[1].cuda())
                 # hidden = self.hidden
             else:
@@ -606,33 +604,6 @@ class NavInfer:
             plt.pause(0.3)
 
 
-    def eval(self, scene):
-        '''
-        demo script to display evaluation on in-distriubtion and out-of-distribution start/goal pairs
-        '''
-        self.load_sim('gibson/' + scene + '.glb')
-        self.load_all_states('data/test/' + scene)
-        self.load_floor(load_floor_path='floor_maps/' + scene)
-        self.confidence_threshold = 0.9
-        if scene == 'Beach':
-            start_state = [0, 1.68, 0, 150]
-            goal_state = [-2.0, 1.68, -0.96, 360]
-        elif scene == 'Hometown':
-            start_state  = [0.5, 1.68, -5, 50]
-            goal_state = [2.48, 1.68, -6.03, 351]
-        elif scene == 'Eastville':
-            start_state = [3, 1.68, 6.5, 85]
-            goal_state = [5.15, 1.68, 7.14, 275]
-        elif scene == 'Hambleton':
-            start_state = [-3, 1.68, 0, 270]
-            goal_state = [-2.18, 1.68, 2.02, 165]
-        else:
-            raise ValueError('no scene found')
-
-        for mw in ['00', '01', '02', '03', '04', '05']:
-            self.infer_traj(scene + '/mw' + mw, start_state, 'example/images/microwave' + mw + '.png', goal_state, max_steps=100)
-
-
     def sample_goal_cone(self, x_min=None, x_max=None, y_min=None, y_max=None, dist_min=2, dist_max=3):
         '''
         sample start and goal locations x meters apart, where dist_min < x < dist_max
@@ -707,7 +678,7 @@ class NavInfer:
 
 
     def compare_infer(self, env, seed, sample_boundary, dist_min=2, dist_max=3, 
-                        sample_scheme='start', max_steps=50, init_sep_steps=7):
+                        sample_scheme='start', max_steps=50, init_sep_steps=7, tags=None):
         '''
         run inference on four models 'random', 'r50k', 'c50k', 'r200'
         save trajectories at save_dir made up from env, idx and policy, e.g. 'Hambleton/r1k/03'
@@ -724,7 +695,9 @@ class NavInfer:
             start_state, goal_state = self.sample_goal_cone(x_min, x_max, y_min, y_max, 
                                         dist_min=dist_min, dist_max=dist_max)
 
-        for tag in self.policy.keys():
+        if tags is None:
+            tags = self.policy.keys()
+        for tag in tags:
             save_dir = os.path.join(env, tag, str(seed).zfill(3))
             self.infer_traj(save_dir, start_state, None, goal_state, max_steps=max_steps, policy_tag=tag)
 
@@ -775,27 +748,29 @@ def compare_traj(nav, env, idx, figsize=(10, 8), nor=2): # nor denotes num of ro
     plt.tight_layout()
 
     
-def init(scene_name, base_dir='tmp', policy_name=None, weights=None, state_size=128, with_lstm=True, use_PTZ=None,
-                                                        img_h=128, img_w=128, infer_h=128,  sample_deviation=360):
+def init(scene_name, base_dir='tmp', policies=None, sample_deviation=360):
     import matplotlib.pyplot as plt
     import nav as nv 
-    nav = nv.NavInfer(base_dir, infer_h=infer_h, sample_deviation=sample_deviation)
+    nav = nv.NavInfer(base_dir, sample_deviation=sample_deviation)
     nav.load_all_states('data/nav_test/' + scene_name)
     nav.load_floor('data/floor_maps/' + scene_name)
     nav.load_sim('data/gibson/' + scene_name + '.glb')
-    nav.use_PTZ = use_PTZ
-    nav.with_lstm = with_lstm
     nav.use_goal_recognizer = True 
     nav.load_perceptual_model(0.60)
 
-    if policy_name is not None:
-        nav.load_policy(policy_name, weights, state_size=state_size, with_lstm=with_lstm, 
-                        img_h=img_h, img_w=img_w, use_PTZ=use_PTZ)
-    else:
-        nav.load_policy('2k_ptz_ff_1', 'weights/2k_ptz_ff_1.pth', with_lstm=False, use_PTZ=True)
-        nav.load_policy('2k_ptz_lstm_1', 'weights/2k_ptz_lstm_1.pth', with_lstm=True, use_PTZ=True)
-        nav.load_policy('2k_lstm_15', 'weights/2k_lstm_15.pth', with_lstm=True, use_PTZ=None)
-        nav.load_policy('60k_lstm_15', 'weights/60k_lstm_15.pth', with_lstm=True, use_PTZ=None)                      
+    if policies is not None:
+        assert type(policies) is list 
+        for policy in policies:
+            weight_path = os.path.join('weights', policy+'.pth')
+            if 'ptz' in policy:
+                use_PTZ = True
+            else:
+                use_PTZ = None
+            if 'lstm' in policy:
+                with_lstm = True
+            else:
+                with_lstm = False
+            nav.load_policy(policy, weight_path, with_lstm=with_lstm, use_PTZ=use_PTZ)                   
     return nav
 
 

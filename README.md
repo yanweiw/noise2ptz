@@ -37,7 +37,10 @@
 | 25k              |             | 60%         |            |           |
 | 50k              |             | 70%         |            |           |
 
-!["Inference results so far"](figs/res00.png)
+
+<img src="figs/res00.png" alt="inference results" width="500"/>
+<img src="figs/res01.png" alt="inference results" width="1000"/>
+
 
 ### Sample trajectories
 

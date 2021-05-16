@@ -27,7 +27,6 @@ class Net(nn.Module):
         # self.resnet.conv1 = nn.Conv2d(6, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3))
         self.resnet.conv1 = CoordConv2d(6, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False, 
                                         use_cuda=True, device=device)
-        # self.resnet.layer4 = Identity()
         self.resnet.fc = nn.Sequential(nn.Linear(512, 3),
                                        nn.Sigmoid())
 
@@ -50,22 +49,18 @@ def load_data(base_dir, bsize=128, shuffle=True, overlap_chance=2/3):
 
 
 def train(run, train_dir, test_dir, lr=0.001, bsize=128, num_epochs=1000, 
-                                                  weight_path=None, data_parallel=False, overlap_chance=2/3, device=[0]):
-    model = Net(device=device[0]).cuda(device[0])
+                                                  weight_path=None, data_parallel=False, overlap_chance=2/3): #, device=[0]):
+    # model = Net(device=device[0]).cuda(device[0])
+    model = Net().cuda()
     if weight_path:
         print('\nUsing pretrained weights...', weight_path)
         model.load_state_dict(torch.load(weight_path))        
     if data_parallel:
-        model = nn.DataParallel(model, device_ids=device, output_device=device[0])
+        model = nn.DataParallel(model)
     criterion = nn.L1Loss()
     # criterion = nn.MSELoss()
     optimizer = optim.Adam(model.parameters(), lr=lr)
 
-    # trainloader = load_data(rand_num=40000, bsize=bsize, shuffle=True)
-    # testloader = load_data(rand_num=4000, bsize=bsize, shuffle=True)
-    # trainloader = load_data('data/habitat_train/', bsize=bsize, shuffle=True)
-    # trainloader = load_data('data/random_train/', bsize=bsize, shuffle=True)
-    # testloader = load_data('data/habitat_test/', bsize=bsize, shuffle=True)
     trainloader = load_data(train_dir, bsize=bsize, shuffle=True, overlap_chance=overlap_chance)
     testloader = load_data(test_dir, bsize=bsize, shuffle=True, overlap_chance=overlap_chance)
     dataloaders = {'train': trainloader, 'test': testloader}
@@ -73,7 +68,7 @@ def train(run, train_dir, test_dir, lr=0.001, bsize=128, num_epochs=1000,
     # write to tensorboard images and model graphs
     if not os.path.exists('runs'):
         os.makedirs('runs') # create runs folder to hold indivdual runs
-    writer = SummaryWriter('runs/run'+str(run).zfill(3))
+    writer = SummaryWriter('runs/'+str(run).zfill(3))
     print('\nrun num: ', run)
     print('lr: ', lr)
     print('bsize: ', bsize)
@@ -101,8 +96,8 @@ def train(run, train_dir, test_dir, lr=0.001, bsize=128, num_epochs=1000,
 
             for batch_iter, batch_data in enumerate(loaders[phase]):
                 img0, imgs, c1, c2, rc = batch_data
-                imgs = imgs.cuda(device[0])
-                rc = rc.cuda(device[0])
+                imgs = imgs.cuda() #device[0])
+                rc = rc.cuda() #device[0])
 
                 with torch.set_grad_enabled(phase == 'train'):
                     # zero the parameter gradients
@@ -129,7 +124,7 @@ def train(run, train_dir, test_dir, lr=0.001, bsize=128, num_epochs=1000,
             print('updating best weights...')
             if not os.path.exists('weights'):
                 os.makedirs('weights')
-            save_path = 'weights/run' + str(run).zfill(3) + '.pth'
+            save_path = 'weights/' + str(run).zfill(3) + '.pth'
             if data_parallel:
                 torch.save(model.module.state_dict(), save_path)
             else:
@@ -141,7 +136,7 @@ def train(run, train_dir, test_dir, lr=0.001, bsize=128, num_epochs=1000,
             print('saving epoch weights...')
             if not os.path.exists('weights'):
                 os.makedirs('weights')
-            save_path = 'weights/run' + str(run).zfill(3) + '_lep.pth' # last epoch
+            save_path = 'weights/' + str(run).zfill(3) + '_lep.pth' # last epoch
             if data_parallel:
                 torch.save(model.module.state_dict(), save_path)
             else:
@@ -160,7 +155,7 @@ def train(run, train_dir, test_dir, lr=0.001, bsize=128, num_epochs=1000,
                     
     # finish training, now return weights
     print("training finished...")
-    save_path = 'weights/run' + str(run).zfill(3) + '.pth'
+    save_path = 'weights/' + str(run).zfill(3) + '.pth'
     print("model saved to ", save_path)
     print()
 
@@ -171,8 +166,8 @@ def train(run, train_dir, test_dir, lr=0.001, bsize=128, num_epochs=1000,
     return model, dataloaders['test']
 
 
-def eval(dataloader, model, pixel_tolerance=10, default_rc=None):
-    location_error = []
+def eval(dataloader, model, pixel_tolerance=10, default_rc=None): # rc stands for relative coordinates
+    location_error = []                                           # default for non-overlap is [0, 0, 0]
     ious = []
     l2loss = []
 
@@ -267,3 +262,31 @@ def get_iou(bb1, bb2):
     assert iou >= 0.0
     assert iou <= 1.0
     return iou
+
+
+if __name__ == '__main__':
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--eval', action='store_true')
+    parser.add_argument('--overlap', type=float, default=1)
+    parser.add_argument('--weight', type=str)
+    parser.add_argument('--train', action='store_true')
+    parser.add_argument('--run', type=str)
+    parser.add_argument('--train_dir', type=str)
+    parser.add_argument('--test_dir', type=str)
+    parser.add_argument('--lr', type=float, default=0.001)
+    parser.add_argument('--bsize', type=int, default=512)
+    parser.add_argument('--epochs', type=int, default=5000)
+    parser.add_argument('--parallel', action='store_true')
+    args = parser.parse_args()
+
+    if args.eval:
+        loader = load_data('data/habitat_test', bsize=128, overlap_chance=1)
+        model = Net()
+        model.load_state_dict(torch.load(args.weight))
+        model = model.cuda()
+        eval(loader, model)
+    elif args.train:
+        train(args.run, args.train_dir, args.test_dir, args.lr, args.bsize, args.epochs, 
+                args.weight, args.parallel, args.overlap)
+

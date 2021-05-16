@@ -5,6 +5,8 @@ import seaborn as sns
 import sys
 import nav as nv
 import torch
+from matplotlib import pyplot as plt
+
 
 def load_traj(base_dir, env_name, policy_name):
 	# load traj by env and policy into a dataframe
@@ -27,18 +29,17 @@ def load_traj(base_dir, env_name, policy_name):
 	df['policy'] = policy_name
 	return df
 
-def gen_plot(sample_deviation):
+def gen_plot(sample_deviation, policies):
 	base_dir = 'infer/' + str(sample_deviation) + '_deg'
 	dfs = []
 	for env in ['Eastville', 'Hambleton', 'Hometown', 'Pettigrew', 'Beach']:
-		for policy in ['2k_ptz_ff_1', '2k_ptz_lstm_1', '2k_lstm_15', '60k_lstm_15']:
+		for policy in policies:
 			dfs.append(load_traj(base_dir, env, policy))
 	df = pd.concat(dfs, ignore_index=True)
 	sns.catplot(data=df, kind='bar', x='env', y='succ', hue='policy')
 
 
-
-def infer(sample_deviation):
+def infer(sample_deviation, policies=None): # policy argument expects a list
 	sample_region = {'Eastville': (0, 2, 3, 7),
 					 'Hambleton': (-8, -2, 0, 2.1), 
 					 'Hometown': (-0.5, 2, -6, 0), 
@@ -51,9 +52,9 @@ def infer(sample_deviation):
 		except:
 			pass
 
-		nav = nv.init(env, 'infer/' + str(sample_deviation) + '_deg', sample_deviation=sample_deviation)
+		nav = nv.init(env, 'infer/' + str(sample_deviation) + '_deg', policies=policies, sample_deviation=sample_deviation)
 		for i in range(30):
-			nav.compare_infer(env, i, sample_region[env], init_sep_steps=5)
+			nav.compare_infer(env, i, sample_region[env], init_sep_steps=5, tags=policies)
 
 
 if __name__ == "__main__":
@@ -62,10 +63,12 @@ if __name__ == "__main__":
 	parser.add_argument('--infer', action='store_true')
 	parser.add_argument('--deg', type=int, default=360, help='sample deviation in degrees')
 	parser.add_argument('--plot', action='store_true')
+	parser.add_argument('--policy', nargs='+', default=None)
 	args = parser.parse_args()
 
 	if args.infer:
-		infer(args.deg)
+		infer(args.deg, args.policy)
 
 	if args.plot:
-		gen_plot(args.deg)
+		gen_plot(args.deg, args.policy)
+		plt.show()

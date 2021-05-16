@@ -189,9 +189,10 @@ class Siamese(nn.Module):
         self.img_h = img_h
         self.img_w = img_w
         if PTZ_weights is not None:
+            print('using ptz architecture...')
             self.state_size = 3
             self.base_model = ptz_net()#device=gpu_idx)
-            if type(PTZ_weights) == str:
+            if type(PTZ_weights) == str: # argument can be bool
                 state_dict = torch.load(PTZ_weights)
                 if 'module' in list(state_dict.keys())[0]:
                     new_state_dict = OrderedDict()
