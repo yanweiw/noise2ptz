@@ -27,8 +27,7 @@ import alphashape
 from descartes import PolygonPatch
 sys.path.append('../PerceptualSimilarity/')
 import models
-
-sys.path.append('../data_aug_pred')
+sys.path.append('scripts')
 from aug_data import *
 import train_nav as tn
 
@@ -552,7 +551,7 @@ class NavInfer:
         self.plot_marker(state, color, marker_ax, alpha=marker_alpha)
 
 
-    def replay(self, traj_dir, start=None, steps=None, inferred=True):
+    def replay(self, traj_dir, start=None, steps=None, inferred=True, figsize=(30, 15)):
         '''
         replay image sequence of a single trajectory
         in addition to single state trajectory, images are shown too
@@ -561,7 +560,7 @@ class NavInfer:
         goal_first means the first image in the folder is goal image
         '''
         # set up axes to plot on 
-        fig = plt.figure(figsize=(30,15))
+        fig = plt.figure(figsize=figsize)
         fig.tight_layout()
         ax1 = fig.add_subplot(1,3,(1,2)) # floor map occupies 2/3 of the plot
         ax2 = fig.add_subplot(233)       # curr observation
@@ -748,7 +747,7 @@ def compare_traj(nav, env, idx, figsize=(10, 8), nor=2): # nor denotes num of ro
     plt.tight_layout()
 
     
-def init(scene_name, base_dir='tmp', policies=None, sample_deviation=360):
+def init(scene_name, base_dir='infer', policies=None, sample_deviation=360):
     import matplotlib.pyplot as plt
     import nav as nv 
     nav = nv.NavInfer(base_dir, sample_deviation=sample_deviation)
@@ -932,16 +931,16 @@ def pair(images):
     return image_pair.float()
 
 
-def pred_single_traj_bbox(nav, env, idx, policy_tag=None, steps=None, thumbnail=True):
+def pred_single_traj_bbox(model, nav, env, idx, policy_tag=None, steps=None, thumbnail=True, sample_deviation=360):
     # given a sequence of images, predict bounding boxes
-    traj_dir = os.path.join(nav.base_dir, env, policy_tag, str(idx).zfill(3))
+    # if policy_tag is None:
+        # policy_tag = list(nav.policy.keys())[0]
+    traj_dir = os.path.join(nav.base_dir, str(sample_deviation)+'_deg', env, policy_tag, str(idx).zfill(3))
     _, images = nav.load_single_traj(traj_dir, steps=steps, inferred=False, load_img=True, thumbnail=thumbnail)
     image_pair = pair(images) # images are numpy, image_pair tensor for a single traj
-    if policy_tag is None:
-        policy_tag = list(nav.policy.keys())[0]
-    model = nav.policy[policy_tag]
-    # bbox = model.pred_coord(model.base_model(image_pair)).unsqueeze(0)
-    bbox = model.base_model(image_pair).unsqueeze(0)
+    # model = nav.policy[policy_tag]
+    # bbox = model.base_model(image_pair).unsqueeze(0)
+    bbox = model(image_pair).unsqueeze(0)
     image_pair = image_pair.unsqueeze(0)
     actions = np.append(np.loadtxt(traj_dir + '_action.txt', dtype=str), 'stop')
     conf = np.loadtxt(traj_dir + '_conf.txt')
@@ -952,7 +951,7 @@ def pred_single_traj_bbox(nav, env, idx, policy_tag=None, steps=None, thumbnail=
         gs = gridspec.GridSpec(2, len(bbox[0]), hspace=0, wspace=0.1)
         for j in range(len(bbox[i])):
             im0 = nav.tensor2np(image_pair[i, j, :3])
-            ax = setup_ax(fig, gs[0, j])
+            ax = setup_ax(fig, gs[0, j], c='k')
             ax.imshow(im0)
             if thumbnail:
                 draw_bbox(ax, (bbox[i, j, 0]*128, bbox[i, j, 1]*128), 'r', scaling=bbox[i, j, -1], 
@@ -964,7 +963,7 @@ def pred_single_traj_bbox(nav, env, idx, policy_tag=None, steps=None, thumbnail=
                           round(bbox[i, j][2].item(), 2)], fontsize=8)
 
             im1 = nav.tensor2np(image_pair[i, j, 3:])
-            ax = setup_ax(fig, gs[1, j])
+            ax = setup_ax(fig, gs[1, j], c='r')
             ax.imshow(im1)
             if actions[j] == 'stop':
                 atext = 'stp'

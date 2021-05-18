@@ -43,3 +43,14 @@
 
 # python train_nav.py --run 60k_lstm_1 --base_dir data/nav_train --train_dir nav1 --valid_dir nav0 --num_epochs 600 \
 # 					--lr 0.001 --bsize 128 --seq_len 1 --with_lstm --data_parallel
+
+# python scripts/train_nav.py --run 60k_ptz_lstm_15 --base_dir data/nav_train --train_dir nav1 --valid_dir nav0 --num_epochs 600 \
+					# --lr 0.001 --bsize 128 --seq_len 15 --with_lstm --data_parallel --PTZ_weights weights/noise.pth
+
+# python scripts/train_nav.py --run 30k_lstm_15_cont --base_dir data/nav_train --train_dir nav1 --valid_dir nav0 \
+# 					--lr 0.001 --bsize 128 --seq_len 15 --with_lstm --data_parallel --num_loc 40 \
+# 					--pretrained_weights weights/30k_lstm_15.pth
+
+python scripts/train_nav.py --run 60k_lstm_1_cont --base_dir data/nav_train --train_dir nav1 --valid_dir nav0 \
+					--lr 0.001 --bsize 512 --seq_len 1 --with_lstm --data_parallel \
+					--pretrained_weights weights/60k_lstm_1.pth

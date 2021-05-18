@@ -1,14 +1,18 @@
+## Dependency
+1. PerceptualSimilarity
+2. CoordConv
+3. requirements.py
+
 ## Generate training data (natural home images) for PTZ module
 
 1. Download Gibson `.glb` files and store them in a folder called `gibson`
-2. **TODO** Run `./gen_ptz_data.sh < train/test_env.txt`
-3. Folders `habitat_train` and `habitat_test` have 6500 images and 2300 images in total respectively from different environments. We sample 10 locations from each environment and generate 10 images at each location via consecutive right turns.
+2. To generate habitat dataset to train PTZ module, run `./gen_ptz_data.sh < train/test_env.txt` inside `scripts/gen_data`
+3. Folders `habitat_train` and `habitat_test` should now have 6500 images and 2300 images in total respectively from different environments. We sample 10 locations from each environment and generate 10 images at each location via consecutive right turns.
 
 ## Generate training data (noise images) for PTZ module
 
-1. Use `gen_pn`, `gen_fn`, `gen_rand_shape` from `aug_data.py` to generate perlin noise, fractal noise and random shapes. 
-2. **TODO** script to do that 
-3. Folders `noise_train` and `noise_test` have 40k and 4k images in total respectively. Both contain 4 folders corresponding to fractal noise, perlin noise, overlaping random shapes and non-overlaping random shapes. 
+1. To generate noise dataset to train PTZ module, run `./gen_noise_data.sh` inside `scripts/gen_data`
+2. Folders `noise_train` and `noise_test` should now have 40k and 4k images in total respectively. Both contain 4 folders corresponding to fractal noise, perlin noise, overlaping random shapes and non-overlaping random shapes. 
 
 ## Train PTZ module
 

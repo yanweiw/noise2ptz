@@ -1,4 +1,5 @@
 import os
+import sys
 import time
 import numpy as np
 import torch
@@ -38,7 +39,8 @@ class Net(nn.Module):
 def load_data(base_dir, bsize=128, shuffle=True, overlap_chance=2/3):
     dataset_list = []
     env_list = os.listdir(base_dir)
-    print('loading data from folders: ', env_list)
+    print('loading data from folders: ', base_dir, env_list)
+    print('overlap chance: ', overlap_chance)
     for env in env_list:
         data_path = os.path.join(base_dir, env)
         dataset_list.append(AugDataset(data_path, overlap_chance=overlap_chance))
@@ -281,11 +283,14 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     if args.eval:
-        loader = load_data('data/habitat_test', bsize=128, overlap_chance=1)
+        loader = load_data('data/habitat_test', bsize=128, overlap_chance=args.overlap)
         model = Net()
         model.load_state_dict(torch.load(args.weight))
         model = model.cuda()
-        eval(loader, model)
+        if args.overlap == 0:
+            eval(loader, model, default_rc=[0, 0, 0])
+        else:            
+            eval(loader, model)
     elif args.train:
         train(args.run, args.train_dir, args.test_dir, args.lr, args.bsize, args.epochs, 
                 args.weight, args.parallel, args.overlap)

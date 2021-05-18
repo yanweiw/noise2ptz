@@ -237,3 +237,24 @@ def gen_noise(save_path, num=10000):
         img = np.random.rand(256, 256, 3) * 255
         img = Image.fromarray(img.astype('uint8')).convert('RGB')
         img.save(os.path.join(save_path, str(i).zfill(5) + '.png'))
+
+
+if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--type', type=str, required=True)
+    parser.add_argument('--num', type=int, default=10000)
+    parser.add_argument('--save_path', required=True)
+    parser.add_argument('--overlap', action='store_true')
+
+    args = parser.parse_args()
+    assert args.type in ['fractal', 'perlin', 'shape']
+    if not os.path.exists(args.save_path):
+        os.makedirs(args.save_path)
+    if args.type == 'fractal':
+        gen_fn(args.save_path, args.num)
+    elif args.type == 'perlin':
+        gen_pn(args.save_path, args.num)
+    elif args.type == 'shape':
+        gen_rand_shape(args.save_path, args.num, allow_overlap=args.overlap)
+
