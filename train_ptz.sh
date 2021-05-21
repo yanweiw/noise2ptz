@@ -40,6 +40,6 @@
 # 							--lr 0.0001 --bsize 512 --epochs 200 --overlap 0.67 --parallel \
 # 							--weight weights/perlin_init.pth
 
-python scripts/train_ptz.py --train --run habitat_tune --train_dir data/habitat_train --test_dir data/habitat_test \
-							--lr 0.0001 --bsize 512 --epochs 200 --overlap 0.67 --parallel \
-							--weight weights/habitat.pth							
+# python scripts/train_ptz.py --train --run habitat_tune --train_dir data/habitat_train --test_dir data/habitat_test \
+# 							--lr 0.0001 --bsize 512 --epochs 200 --overlap 0.67 --parallel \
+# 							--weight weights/habitat.pth							
