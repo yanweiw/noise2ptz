@@ -39,8 +39,8 @@ class Net(nn.Module):
 def load_data(base_dir, bsize=128, shuffle=True, overlap_chance=2/3):
     dataset_list = []
     env_list = os.listdir(base_dir)
-    print('loading data from folders: ', base_dir, env_list)
-    print('overlap chance: ', overlap_chance)
+    # print('loading data from folders: ', base_dir, env_list)
+    # print('overlap chance: ', overlap_chance)
     for env in env_list:
         data_path = os.path.join(base_dir, env)
         dataset_list.append(AugDataset(data_path, overlap_chance=overlap_chance))
@@ -50,13 +50,27 @@ def load_data(base_dir, bsize=128, shuffle=True, overlap_chance=2/3):
     return dataloader
 
 
+def load_model(model, weight_path):
+    state_dict = torch.load(weight_path, map_location=torch.device('cpu'))
+    # create new OrderedDict that does not contain `module.`
+    if 'module' in list(state_dict.keys())[0]:
+        from collections import OrderedDict
+        new_state_dict = OrderedDict()
+        for k, v in state_dict.items():
+            name = k[7:] # remove `module.`
+            new_state_dict[name] = v
+        state_dict = new_state_dict        
+    model.load_state_dict(state_dict)
+    return model
+
+
 def train(run, train_dir, test_dir, lr=0.001, bsize=128, num_epochs=1000, 
                                                   weight_path=None, data_parallel=False, overlap_chance=2/3): #, device=[0]):
     # model = Net(device=device[0]).cuda(device[0])
     model = Net().cuda()
     if weight_path:
         print('\nUsing pretrained weights...', weight_path)
-        model.load_state_dict(torch.load(weight_path))        
+        model = load_model(model, weight_path)
     if data_parallel:
         model = nn.DataParallel(model)
     criterion = nn.L1Loss()
@@ -206,13 +220,17 @@ def eval(dataloader, model, pixel_tolerance=10, default_rc=None): # rc stands fo
     # print('average MSE loss: {:.4f}'.format(ave_loss.item()))
     location_error = np.asarray(location_error)
     on_target_rate = (location_error < pixel_tolerance).sum() / len(location_error)
-    print('on target rate: {:.4f}'.format(on_target_rate))
+    # print('on target rate: {:.4f}'.format(on_target_rate))
     ious = np.asarray(ious)
     if default_rc is None: # predicting overlapping 
-        print('ious: {:.4f}'.format(ious.mean()))
+        # print('ious: {:.4f}'.format(ious.mean()))
+        ious = ious.mean()
+    else:
+        ious = 0
     l2loss = np.asarray(l2loss)
-    print('l2loss: {:.4f}'.format(l2loss.mean()))
-    return location_error, ious, l2loss
+    # print('l2loss: {:.4f}'.format(l2loss.mean()))
+    # return location_error, ious, l2loss
+    return on_target_rate, ious
 
 
 def get_iou(bb1, bb2):
@@ -284,13 +302,27 @@ if __name__ == '__main__':
 
     if args.eval:
         loader = load_data('data/habitat_test', bsize=128, overlap_chance=args.overlap)
-        model = Net()
-        model.load_state_dict(torch.load(args.weight))
-        model = model.cuda()
-        if args.overlap == 0:
-            eval(loader, model, default_rc=[0, 0, 0])
-        else:            
-            eval(loader, model)
+        model = Net().cuda()
+        model = load_model(model, args.weight)
+        on_target = []
+        ious = []
+        for i in range (5):
+            if args.overlap == 0:
+                on_target_rate, iou = eval(loader, model, default_rc=[0, 0, 0])
+            else:            
+                on_target_rate, iou = eval(loader, model)
+            on_target.append(on_target_rate)
+            ious.append(iou)
+        on_target = np.array(on_target)
+        ious = np.array(ious)
+        print()
+        print('weights: ', args.weight)
+        print('overlap: ', args.overlap)
+        print('on target rate: {:.4f}, {:.4f}'.format(on_target.mean(), on_target.std()))
+        print('ious: {:.4f}, {:.4f}'.format(ious.mean(), ious.std()))
+        print()
+
+
     elif args.train:
         train(args.run, args.train_dir, args.test_dir, args.lr, args.bsize, args.epochs, 
                 args.weight, args.parallel, args.overlap)

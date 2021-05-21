@@ -14,3 +14,12 @@ python scripts/eval.py --plot --deg 360 --save_path figs --policy 2k_ptz_lstm_1 
 																  60k_lstm_1     \
 																  60k_lstm_5     \
 																  60k_lstm_15    
+
+# python scripts/eval.py --plot --deg 360 --policy  2k_ptz_lstm_1 \
+#                                                   2k_ptz_lstm_1_fractal \
+# 												  2k_ptz_lstm_1_shape \
+#                                                   2k_ptz_lstm_1_perlin \
+#                                                   2k_ptz_lstm_1_habitat \
+#                                                   2k_ptz_lstm_15_habitat \
+
+# python scripts/eval.py --infer --deg 360 --policy 2k_ptz_lstm_15_habitat

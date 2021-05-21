@@ -65,7 +65,7 @@ def gen_plot(sample_deviation, policies=None, save_path=None):
 	# sns.catplot(data=df, kind='bar', x='env', y='succ', hue='policy', 
 				# palette=cmap(np.linspace(0, 1, cmap.N)))
 	df['x'] = 'policy'
-	sns.set()
+	sns.set(font_scale=1.)
 	sns.set_style({'font.family':'serif', 'font.serif':['Times New Roman']})
 
 	plot = sns.catplot(data=df, kind='bar', x='x', y='succ', hue='policy',

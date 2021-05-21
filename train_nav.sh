@@ -51,6 +51,26 @@
 # 					--lr 0.001 --bsize 128 --seq_len 15 --with_lstm --data_parallel --num_loc 40 \
 # 					--pretrained_weights weights/30k_lstm_15.pth
 
-python scripts/train_nav.py --run 60k_lstm_1_cont --base_dir data/nav_train --train_dir nav1 --valid_dir nav0 \
-					--lr 0.001 --bsize 512 --seq_len 1 --with_lstm --data_parallel \
-					--pretrained_weights weights/60k_lstm_1.pth
+# python scripts/train_nav.py --run 60k_lstm_1_cont --base_dir data/nav_train --train_dir nav1 --valid_dir nav0 \
+# 					--lr 0.001 --bsize 512 --seq_len 1 --with_lstm --data_parallel \
+# 					--pretrained_weights weights/60k_lstm_1.pth
+
+
+# python scripts/train_nav.py --run 2k_ptz_lstm_15_habitat --base_dir data/nav_train --train_env Superior --valid_env Crandon \
+# 		--train_dir nav0 --valid_dir nav0 --PTZ_weights weights/habitat.pth --lr 0.001 --bsize 32 --seq_len 15 \
+# 		--with_lstm	--num_epochs 1500
+					
+python scripts/train_nav.py --run 2k_ptz_lstm_15_fractal --base_dir data/nav_train --train_env Superior --valid_env Crandon \
+		--train_dir nav0 --valid_dir nav0 --PTZ_weights weights/fractal_tune_lep.pth --lr 0.001 --bsize 32 --seq_len 15 \
+		--with_lstm	--num_epochs 1000
+
+python scripts/train_nav.py --run 2k_ptz_lstm_15_nshape --base_dir data/nav_train --train_env Superior --valid_env Crandon \
+		--train_dir nav0 --valid_dir nav0 --PTZ_weights weights/nshape_tune_lep.pth --lr 0.001 --bsize 32 --seq_len 15 \
+		--with_lstm	--num_epochs 1000
+
+python scripts/train_nav.py --run 2k_ptz_lstm_15_perlin --base_dir data/nav_train --train_env Superior --valid_env Crandon \
+		--train_dir nav0 --valid_dir nav0 --PTZ_weights weights/perlin_tune_lep.pth --lr 0.001 --bsize 32 --seq_len 15 \
+		--with_lstm	--num_epochs 1000
+
+
+

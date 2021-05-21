@@ -931,16 +931,16 @@ def pair(images):
     return image_pair.float()
 
 
-def pred_single_traj_bbox(model, nav, env, idx, policy_tag=None, steps=None, thumbnail=True, sample_deviation=360):
+def pred_single_traj_bbox(nav, env, idx, policy_tag=None, steps=None, thumbnail=True, sample_deviation=360):
     # given a sequence of images, predict bounding boxes
-    # if policy_tag is None:
-        # policy_tag = list(nav.policy.keys())[0]
+    if policy_tag is None:
+        policy_tag = list(nav.policy.keys())[0]
     traj_dir = os.path.join(nav.base_dir, str(sample_deviation)+'_deg', env, policy_tag, str(idx).zfill(3))
     _, images = nav.load_single_traj(traj_dir, steps=steps, inferred=False, load_img=True, thumbnail=thumbnail)
     image_pair = pair(images) # images are numpy, image_pair tensor for a single traj
-    # model = nav.policy[policy_tag]
-    # bbox = model.base_model(image_pair).unsqueeze(0)
-    bbox = model(image_pair).unsqueeze(0)
+    model = nav.policy[policy_tag]
+    bbox = model.base_model(image_pair).unsqueeze(0)
+    # bbox = model(image_pair).unsqueeze(0)
     image_pair = image_pair.unsqueeze(0)
     actions = np.append(np.loadtxt(traj_dir + '_action.txt', dtype=str), 'stop')
     conf = np.loadtxt(traj_dir + '_conf.txt')
