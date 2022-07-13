@@ -1,3 +1,8 @@
+## Visual Pre-training for Navigation: What Can We Learn from Noise?
+[Yanwei Wang](https://yanweiw.github.io/), [Ching-Yun Ko](https://ireneko.github.io/)
+
+Codebase of this [paper](https://arxiv.org/abs/2207.00052).
+
 ### Dependency
 1. Run `conda create --name <env> --file requirements.txt`
 1. Install package [`PerceptualSimilarity`](https://github.com/richzhang/PerceptualSimilarity)
@@ -35,6 +40,3 @@
 3. Contour a floor map using a concave hull algorithm via `load_floor` from `nav.py`
 4. Run `./eval_nav.sh`
 
-### Results
-
-Please refer to the [paper](https://arxiv.org/abs/2207.00052).  
