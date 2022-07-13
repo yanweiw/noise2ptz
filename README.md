@@ -37,4 +37,4 @@
 
 ### Results
 
-Please refer to the [report](http://people.csail.mit.edu/felixw/noise2ptz/assets/noise2ptz.pdf).  
+Please refer to the [paper](https://arxiv.org/abs/2207.00052).  
