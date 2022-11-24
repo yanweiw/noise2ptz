@@ -1,8 +1,0 @@
-CoordConv
-data
-*__pycache__*
-gibson
-weights
-runs
-infer
-old_weights
