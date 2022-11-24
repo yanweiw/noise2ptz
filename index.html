@@ -1,3 +1,922 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
 
-<!-- saved from url=(0059)https://taochenshh.github.io/projects/in-hand-reorientation -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="color-scheme" content="light dark"></head><body><div class="line-gutter-backdrop"></div><form autocomplete="off"><label class="line-wrap-control">Line wrap<input type="checkbox" aria-label="Line wrap"></label></form><table><tbody><tr><td class="line-number" value="1"></td><td class="line-content"><span class="html-doctype">&lt;!DOCTYPE html&gt;</span></td></tr><tr><td class="line-number" value="2"></td><td class="line-content"><span class="html-tag">&lt;html <span class="html-attribute-name">lang</span>="<span class="html-attribute-value">en</span>"&gt;</span></td></tr><tr><td class="line-number" value="3"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="4"></td><td class="line-content"><span class="html-tag">&lt;head&gt;</span></td></tr><tr><td class="line-number" value="5"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="6"></td><td class="line-content"><span class="html-tag">&lt;/head&gt;</span></td></tr><tr><td class="line-number" value="7"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="8"></td><td class="line-content"><span class="html-tag">&lt;head&gt;</span></td></tr><tr><td class="line-number" value="9"></td><td class="line-content">    <span class="html-comment">&lt;!-- Title --&gt;</span></td></tr><tr><td class="line-number" value="10"></td><td class="line-content">    <span class="html-tag">&lt;title&gt;</span>A System for General In-Hand Object Re-Orientation<span class="html-tag">&lt;/title&gt;</span></td></tr><tr><td class="line-number" value="11"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="12"></td><td class="line-content">    <span class="html-comment">&lt;!-- Required meta tags --&gt;</span></td></tr><tr><td class="line-number" value="13"></td><td class="line-content">    <span class="html-tag">&lt;meta <span class="html-attribute-name">charset</span>="<span class="html-attribute-value">utf-8</span>"&gt;</span></td></tr><tr><td class="line-number" value="14"></td><td class="line-content">    <span class="html-tag">&lt;meta <span class="html-attribute-name">name</span>="<span class="html-attribute-value">viewport</span>" <span class="html-attribute-name">content</span>="<span class="html-attribute-value">width=device-width, initial-scale=1, shrink-to-fit=no</span>"&gt;</span></td></tr><tr><td class="line-number" value="15"></td><td class="line-content">    <span class="html-tag">&lt;meta <span class="html-attribute-name">name</span>="<span class="html-attribute-value">description</span>" <span class="html-attribute-name">content</span>="<span class="html-attribute-value">A System for General In-Hand Object Re-Orientation</span>"&gt;</span></td></tr><tr><td class="line-number" value="16"></td><td class="line-content">    <span class="html-tag">&lt;meta <span class="html-attribute-name">name</span>="<span class="html-attribute-value">keywords</span>" <span class="html-attribute-name">content</span>="<span class="html-attribute-value">Dexterous manipulation, in-hand reorientation</span>"&gt;</span></td></tr><tr><td class="line-number" value="17"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="18"></td><td class="line-content">    <span class="html-comment">&lt;!-- Bootstrap core CSS --&gt;</span></td></tr><tr><td class="line-number" value="19"></td><td class="line-content">    <span class="html-tag">&lt;link <span class="html-attribute-name">rel</span>="<span class="html-attribute-value">stylesheet</span>" <span class="html-attribute-name">href</span>="<a class="html-attribute-value html-resource-link" target="_blank" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="noreferrer noopener">https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css</a>" <span class="html-attribute-name">integrity</span>="<span class="html-attribute-value">sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm</span>" <span class="html-attribute-name">crossorigin</span>="<span class="html-attribute-value">anonymous</span>"&gt;</span></td></tr><tr><td class="line-number" value="20"></td><td class="line-content">    <span class="html-comment">&lt;!-- https://fontawesome.com/cheatsheet --&gt;</span></td></tr><tr><td class="line-number" value="21"></td><td class="line-content">    <span class="html-tag">&lt;link <span class="html-attribute-name">rel</span>="<span class="html-attribute-value">stylesheet</span>" <span class="html-attribute-name">href</span>="<a class="html-attribute-value html-resource-link" target="_blank" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" rel="noreferrer noopener">https://use.fontawesome.com/releases/v5.3.1/css/all.css</a>" <span class="html-attribute-name">integrity</span>="<span class="html-attribute-value">sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU</span>" <span class="html-attribute-name">crossorigin</span>="<span class="html-attribute-value">anonymous</span>"&gt;</span></td></tr><tr><td class="line-number" value="22"></td><td class="line-content">    <span class="html-tag">&lt;link <span class="html-attribute-name">rel</span>="<span class="html-attribute-value">stylesheet</span>" <span class="html-attribute-name">href</span>="<a class="html-attribute-value html-resource-link" target="_blank" href="https://cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css" rel="noreferrer noopener">https://cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css</a>"&gt;</span></td></tr><tr><td class="line-number" value="23"></td><td class="line-content">    <span class="html-comment">&lt;!-- Global site tag (gtag.js) - Google Analytics --&gt;</span></td></tr><tr><td class="line-number" value="24"></td><td class="line-content">    <span class="html-tag">&lt;script <span class="html-attribute-name">async</span> <span class="html-attribute-name">src</span>="<a class="html-attribute-value html-resource-link" target="_blank" href="https://www.googletagmanager.com/gtag/js?id=UA-79592980-2" rel="noreferrer noopener">https://www.googletagmanager.com/gtag/js?id=UA-79592980-2</a>"&gt;</span><span class="html-tag">&lt;/script&gt;</span></td></tr><tr><td class="line-number" value="25"></td><td class="line-content">    <span class="html-tag">&lt;script&gt;</span></td></tr><tr><td class="line-number" value="26"></td><td class="line-content">        window.dataLayer = window.dataLayer || [];</td></tr><tr><td class="line-number" value="27"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="28"></td><td class="line-content">        function gtag() {</td></tr><tr><td class="line-number" value="29"></td><td class="line-content">            dataLayer.push(arguments);</td></tr><tr><td class="line-number" value="30"></td><td class="line-content">        }</td></tr><tr><td class="line-number" value="31"></td><td class="line-content">        gtag('js', new Date());</td></tr><tr><td class="line-number" value="32"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="33"></td><td class="line-content">        gtag('config', 'UA-79592980-2');</td></tr><tr><td class="line-number" value="34"></td><td class="line-content">    <span class="html-tag">&lt;/script&gt;</span></td></tr><tr><td class="line-number" value="35"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="36"></td><td class="line-content"><span class="html-tag">&lt;/head&gt;</span></td></tr><tr><td class="line-number" value="37"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="38"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="39"></td><td class="line-content"><span class="html-tag">&lt;body&gt;</span></td></tr><tr><td class="line-number" value="40"></td><td class="line-content">    <span class="html-comment">&lt;!-- &lt;nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark"&gt; --&gt;</span></td></tr><tr><td class="line-number" value="41"></td><td class="line-content">    <span class="html-tag">&lt;nav <span class="html-attribute-name">class</span>="<span class="html-attribute-value">navbar navbar-expand-md fixed-top navbar-dark</span>" <span class="html-attribute-name">style</span>="<span class="html-attribute-value">background-color: #A31F34;</span>"&gt;</span></td></tr><tr><td class="line-number" value="42"></td><td class="line-content">        <span class="html-tag">&lt;a <span class="html-attribute-name">class</span>="<span class="html-attribute-value">navbar-brand</span>" <span class="html-attribute-name">href</span>="<a class="html-attribute-value html-external-link" target="_blank" href="https://taochenshh.github.io/projects/in-hand-reorientation#" rel="noreferrer noopener">#</a>"&gt;</span>In-hand Object Reorienation<span class="html-tag">&lt;/a&gt;</span></td></tr><tr><td class="line-number" value="43"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="44"></td><td class="line-content">        <span class="html-tag">&lt;button <span class="html-attribute-name">class</span>="<span class="html-attribute-value">navbar-toggler</span>" <span class="html-attribute-name">type</span>="<span class="html-attribute-value">button</span>" <span class="html-attribute-name">data-toggle</span>="<span class="html-attribute-value">collapse</span>" <span class="html-attribute-name">data-target</span>="<span class="html-attribute-value">#navbarToggle</span>"&gt;</span></td></tr><tr><td class="line-number" value="45"></td><td class="line-content">            <span class="html-tag">&lt;span <span class="html-attribute-name">class</span>="<span class="html-attribute-value">navbar-toggler-icon</span>"&gt;</span><span class="html-tag">&lt;/span&gt;</span></td></tr><tr><td class="line-number" value="46"></td><td class="line-content">        <span class="html-tag">&lt;/button&gt;</span></td></tr><tr><td class="line-number" value="47"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="48"></td><td class="line-content">        <span class="html-tag">&lt;div <span class="html-attribute-name">class</span>="<span class="html-attribute-value">collapse navbar-collapse</span>" <span class="html-attribute-name">id</span>="<span class="html-attribute-value">navbarToggle</span>"&gt;</span></td></tr><tr><td class="line-number" value="49"></td><td class="line-content">            <span class="html-tag">&lt;ul <span class="html-attribute-name">class</span>="<span class="html-attribute-value">navbar-nav ml-auto</span>"&gt;</span></td></tr><tr><td class="line-number" value="50"></td><td class="line-content">                <span class="html-tag">&lt;li <span class="html-attribute-name">class</span>="<span class="html-attribute-value">nav-item</span>"&gt;</span></td></tr><tr><td class="line-number" value="51"></td><td class="line-content">                    <span class="html-tag">&lt;a <span class="html-attribute-name">class</span>="<span class="html-attribute-value">nav-link</span>" <span class="html-attribute-name">href</span>="<a class="html-attribute-value html-external-link" target="_blank" href="https://taochenshh.github.io/projects/in-hand-reorientation#" rel="noreferrer noopener">#</a>"&gt;</span>Home<span class="html-tag">&lt;/a&gt;</span></td></tr><tr><td class="line-number" value="52"></td><td class="line-content">                <span class="html-tag">&lt;/li&gt;</span></td></tr><tr><td class="line-number" value="53"></td><td class="line-content">                <span class="html-tag">&lt;li <span class="html-attribute-name">class</span>="<span class="html-attribute-value">nav-item</span>"&gt;</span></td></tr><tr><td class="line-number" value="54"></td><td class="line-content">                    <span class="html-tag">&lt;a <span class="html-attribute-name">class</span>="<span class="html-attribute-value">nav-link</span>" <span class="html-attribute-name">href</span>="<a class="html-attribute-value html-external-link" target="_blank" href="https://taochenshh.github.io/projects/in-hand-reorientation#Abstract" rel="noreferrer noopener">#Abstract</a>"&gt;</span>Abstract<span class="html-tag">&lt;/a&gt;</span></td></tr><tr><td class="line-number" value="55"></td><td class="line-content">                <span class="html-tag">&lt;/li&gt;</span></td></tr><tr><td class="line-number" value="56"></td><td class="line-content">                <span class="html-tag">&lt;li <span class="html-attribute-name">class</span>="<span class="html-attribute-value">nav-item</span>"&gt;</span></td></tr><tr><td class="line-number" value="57"></td><td class="line-content">                    <span class="html-tag">&lt;a <span class="html-attribute-name">class</span>="<span class="html-attribute-value">nav-link</span>" <span class="html-attribute-name">href</span>="<a class="html-attribute-value html-external-link" target="_blank" href="https://taochenshh.github.io/projects/in-hand-reorientation#Paper" rel="noreferrer noopener">#Paper</a>"&gt;</span>Paper<span class="html-tag">&lt;/a&gt;</span></td></tr><tr><td class="line-number" value="58"></td><td class="line-content">                <span class="html-tag">&lt;/li&gt;</span></td></tr><tr><td class="line-number" value="59"></td><td class="line-content">                <span class="html-tag">&lt;li <span class="html-attribute-name">class</span>="<span class="html-attribute-value">nav-item</span>"&gt;</span></td></tr><tr><td class="line-number" value="60"></td><td class="line-content">                    <span class="html-tag">&lt;a <span class="html-attribute-name">class</span>="<span class="html-attribute-value">nav-link</span>" <span class="html-attribute-name">href</span>="<a class="html-attribute-value html-external-link" target="_blank" href="https://taochenshh.github.io/projects/in-hand-reorientation#Oral" rel="noreferrer noopener">#Oral</a>"&gt;</span>Oral Talk<span class="html-tag">&lt;/a&gt;</span></td></tr><tr><td class="line-number" value="61"></td><td class="line-content">                <span class="html-tag">&lt;/li&gt;</span></td></tr><tr><td class="line-number" value="62"></td><td class="line-content">                <span class="html-tag">&lt;li <span class="html-attribute-name">class</span>="<span class="html-attribute-value">nav-item</span>"&gt;</span></td></tr><tr><td class="line-number" value="63"></td><td class="line-content">                    <span class="html-tag">&lt;a <span class="html-attribute-name">class</span>="<span class="html-attribute-value">nav-link</span>" <span class="html-attribute-name">href</span>="<a class="html-attribute-value html-external-link" target="_blank" href="https://taochenshh.github.io/projects/in-hand-reorientation#Teaser" rel="noreferrer noopener">#Teaser</a>"&gt;</span>Teaser<span class="html-tag">&lt;/a&gt;</span></td></tr><tr><td class="line-number" value="64"></td><td class="line-content">                <span class="html-tag">&lt;/li&gt;</span></td></tr><tr><td class="line-number" value="65"></td><td class="line-content">                <span class="html-tag">&lt;li <span class="html-attribute-name">class</span>="<span class="html-attribute-value">nav-item</span>"&gt;</span></td></tr><tr><td class="line-number" value="66"></td><td class="line-content">                    <span class="html-tag">&lt;a <span class="html-attribute-name">class</span>="<span class="html-attribute-value">nav-link</span>" <span class="html-attribute-name">href</span>="<a class="html-attribute-value html-external-link" target="_blank" href="https://taochenshh.github.io/projects/in-hand-reorientation#MoreVideos" rel="noreferrer noopener">#MoreVideos</a>"&gt;</span>More Videos<span class="html-tag">&lt;/a&gt;</span></td></tr><tr><td class="line-number" value="67"></td><td class="line-content">                <span class="html-tag">&lt;/li&gt;</span></td></tr><tr><td class="line-number" value="68"></td><td class="line-content">            <span class="html-tag">&lt;/ul&gt;</span></td></tr><tr><td class="line-number" value="69"></td><td class="line-content">        <span class="html-tag">&lt;/div&gt;</span></td></tr><tr><td class="line-number" value="70"></td><td class="line-content">    <span class="html-tag">&lt;/nav&gt;</span></td></tr><tr><td class="line-number" value="71"></td><td class="line-content">    <span class="html-tag">&lt;br&gt;</span></td></tr><tr><td class="line-number" value="72"></td><td class="line-content">    <span class="html-tag">&lt;div <span class="html-attribute-name">class</span>="<span class="html-attribute-value">container</span>" <span class="html-attribute-name">style</span>="<span class="html-attribute-value">padding-top: 80px; font-size: 20px</span>"&gt;</span></td></tr><tr><td class="line-number" value="73"></td><td class="line-content">        <span class="html-tag">&lt;div <span class="html-attribute-name">align</span>="<span class="html-attribute-value">center</span>"&gt;</span></td></tr><tr><td class="line-number" value="74"></td><td class="line-content">            <span class="html-tag">&lt;h2 <span class="html-attribute-name">class</span>="<span class="html-attribute-value">text-center</span>" <span class="html-attribute-name">align</span>="<span class="html-attribute-value">center</span>"&gt;</span></td></tr><tr><td class="line-number" value="75"></td><td class="line-content">                A System for General In-Hand Object Re-Orientation</td></tr><tr><td class="line-number" value="76"></td><td class="line-content">            <span class="html-tag">&lt;/h2&gt;</span></td></tr><tr><td class="line-number" value="77"></td><td class="line-content">            <span class="html-tag">&lt;h6&gt;</span></td></tr><tr><td class="line-number" value="78"></td><td class="line-content">                <span class="html-tag">&lt;a <span class="html-attribute-name">href</span>="<a class="html-attribute-value html-external-link" target="_blank" href="https://taochenshh.github.io/" rel="noreferrer noopener">https://taochenshh.github.io/</a>" <span class="html-attribute-name">target</span>="<span class="html-attribute-value">_blank</span>"&gt;</span>Tao Chen<span class="html-tag">&lt;/a&gt;</span>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;</td></tr><tr><td class="line-number" value="79"></td><td class="line-content">                <span class="html-tag">&lt;a <span class="html-attribute-name">href</span>="<a class="html-attribute-value html-external-link" target="_blank" href="https://people.csail.mit.edu/jiex" rel="noreferrer noopener">https://people.csail.mit.edu/jiex</a>" <span class="html-attribute-name">target</span>="<span class="html-attribute-value">_blank</span>"&gt;</span>Jie Xu<span class="html-tag">&lt;/a&gt;</span>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;</td></tr><tr><td class="line-number" value="80"></td><td class="line-content">                <span class="html-tag">&lt;a <span class="html-attribute-name">href</span>="<a class="html-attribute-value html-external-link" target="_blank" href="https://people.csail.mit.edu/pulkitag/" rel="noreferrer noopener">https://people.csail.mit.edu/pulkitag/</a>" <span class="html-attribute-name">target</span>="<span class="html-attribute-value">_blank</span>"&gt;</span>Pulkit Agrawal<span class="html-tag">&lt;/a&gt;</span><span class="html-tag">&lt;br&gt;</span></td></tr><tr><td class="line-number" value="81"></td><td class="line-content">            <span class="html-tag">&lt;/h6&gt;</span></td></tr><tr><td class="line-number" value="82"></td><td class="line-content">            <span class="html-tag">&lt;small&gt;</span>Computer Science and Artificial Intelligence Laboratory (CSAIL)<span class="html-tag">&lt;/small&gt;</span> <span class="html-tag">&lt;br&gt;</span></td></tr><tr><td class="line-number" value="83"></td><td class="line-content">            <span class="html-tag">&lt;small&gt;</span>Massachusetts Institute of Technology<span class="html-tag">&lt;/small&gt;</span></td></tr><tr><td class="line-number" value="84"></td><td class="line-content">        <span class="html-tag">&lt;/div&gt;</span></td></tr><tr><td class="line-number" value="85"></td><td class="line-content">    <span class="html-tag">&lt;/div&gt;</span><span class="html-tag">&lt;br&gt;</span></td></tr><tr><td class="line-number" value="86"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="87"></td><td class="line-content">    <span class="html-tag">&lt;div <span class="html-attribute-name">class</span>="<span class="html-attribute-value">container</span>" <span class="html-attribute-name">style</span>="<span class="html-attribute-value">padding-top: 10px; font-size: 20px</span>"&gt;</span></td></tr><tr><td class="line-number" value="88"></td><td class="line-content">        <span class="html-tag">&lt;div <span class="html-attribute-name">align</span>="<span class="html-attribute-value">center</span>"&gt;</span></td></tr><tr><td class="line-number" value="89"></td><td class="line-content">            <span class="html-tag">&lt;div <span class="html-attribute-name">class</span>="<span class="html-attribute-value">center</span>"&gt;</span></td></tr><tr><td class="line-number" value="90"></td><td class="line-content">                <span class="html-tag">&lt;img <span class="html-attribute-name">class</span>="<span class="html-attribute-value">img-responsive img-rounded</span>" <span class="html-attribute-name">src</span>="<a class="html-attribute-value html-resource-link" target="_blank" href="https://taochenshh.github.io/projects/files/in_hand_reorientation/teaser.png" rel="noreferrer noopener">files/in_hand_reorientation/teaser.png</a>" <span class="html-attribute-name">style</span>="<span class="html-attribute-value">width:100%</span>" <span class="html-attribute-name">alt</span>=""&gt;</span></td></tr><tr><td class="line-number" value="91"></td><td class="line-content">            <span class="html-tag">&lt;/div&gt;</span></td></tr><tr><td class="line-number" value="92"></td><td class="line-content">        <span class="html-tag">&lt;/div&gt;</span></td></tr><tr><td class="line-number" value="93"></td><td class="line-content">    <span class="html-tag">&lt;/div&gt;</span><span class="html-tag">&lt;br&gt;</span></td></tr><tr><td class="line-number" value="94"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="95"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="96"></td><td class="line-content">    <span class="html-comment">&lt;!-- Abstract --&gt;</span></td></tr><tr><td class="line-number" value="97"></td><td class="line-content">    <span class="html-tag">&lt;div <span class="html-attribute-name">class</span>="<span class="html-attribute-value">container</span>"&gt;</span></td></tr><tr><td class="line-number" value="98"></td><td class="line-content">        <span class="html-tag">&lt;h4 <span class="html-attribute-name">id</span>="<span class="html-attribute-value">Abstract</span>" <span class="html-attribute-name">style</span>="<span class="html-attribute-value">padding-top: 70px; margin-top: -80px; </span>"&gt;</span>Abstract<span class="html-tag">&lt;/h4&gt;</span></td></tr><tr><td class="line-number" value="99"></td><td class="line-content">        <span class="html-tag">&lt;hr&gt;</span></td></tr><tr><td class="line-number" value="100"></td><td class="line-content">        <span class="html-tag">&lt;div <span class="html-attribute-name">style</span>="<span class="html-attribute-value">text-align: justify</span>"&gt;</span></td></tr><tr><td class="line-number" value="101"></td><td class="line-content">            In-hand object reorientation has been a challenging problem in robotics due to high dimensional actuation space and the frequent change in contact state between the fingers and the objects. We present a simple model-free framework that can learn to reorient</td></tr><tr><td class="line-number" value="102"></td><td class="line-content">            objects with both the hand facing upwards and downwards. We demonstrate the capability of reorienting over 2000 geometrically different objects in both cases. The learned policies show strong zero-shot transfer performance on new objects.</td></tr><tr><td class="line-number" value="103"></td><td class="line-content">            We provide evidence that these policies are amenable to real-world operation by distilling them to use observations easily available in the real world.</td></tr><tr><td class="line-number" value="104"></td><td class="line-content">        <span class="html-tag">&lt;/div&gt;</span></td></tr><tr><td class="line-number" value="105"></td><td class="line-content">    <span class="html-tag">&lt;/div&gt;</span><span class="html-tag">&lt;br&gt;</span><span class="html-tag">&lt;br&gt;</span></td></tr><tr><td class="line-number" value="106"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="107"></td><td class="line-content">    <span class="html-comment">&lt;!-- Paper --&gt;</span></td></tr><tr><td class="line-number" value="108"></td><td class="line-content">    <span class="html-tag">&lt;div <span class="html-attribute-name">class</span>="<span class="html-attribute-value">container</span>"&gt;</span></td></tr><tr><td class="line-number" value="109"></td><td class="line-content">        <span class="html-tag">&lt;h4 <span class="html-attribute-name">id</span>="<span class="html-attribute-value">Paper</span>" <span class="html-attribute-name">style</span>="<span class="html-attribute-value">padding-top: 70px; margin-top: -80px;</span>"&gt;</span>Paper<span class="html-tag">&lt;/h4&gt;</span></td></tr><tr><td class="line-number" value="110"></td><td class="line-content">        <span class="html-tag">&lt;hr&gt;</span></td></tr><tr><td class="line-number" value="111"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="112"></td><td class="line-content">        <span class="html-tag">&lt;div <span class="html-attribute-name">class</span>="<span class="html-attribute-value">row</span>"&gt;</span></td></tr><tr><td class="line-number" value="113"></td><td class="line-content">            <span class="html-tag">&lt;div <span class="html-attribute-name">class</span>="<span class="html-attribute-value">col-md-12</span>"&gt;</span></td></tr><tr><td class="line-number" value="114"></td><td class="line-content">                <span class="html-tag">&lt;b&gt;</span>A System for General In-Hand Object Re-Orientation<span class="html-tag">&lt;/b&gt;</span><span class="html-tag">&lt;br&gt;</span></td></tr><tr><td class="line-number" value="115"></td><td class="line-content">                <span class="html-tag">&lt;a <span class="html-attribute-name">href</span>="<a class="html-attribute-value html-external-link" target="_blank" href="https://taochenshh.github.io/" rel="noreferrer noopener">https://taochenshh.github.io/</a>" <span class="html-attribute-name">target</span>="<span class="html-attribute-value">_blank</span>"&gt;</span>Tao Chen<span class="html-tag">&lt;/a&gt;</span>,</td></tr><tr><td class="line-number" value="116"></td><td class="line-content">                <span class="html-tag">&lt;a <span class="html-attribute-name">href</span>="<a class="html-attribute-value html-external-link" target="_blank" href="https://people.csail.mit.edu/jiex" rel="noreferrer noopener">https://people.csail.mit.edu/jiex</a>" <span class="html-attribute-name">target</span>="<span class="html-attribute-value">_blank</span>"&gt;</span>Jie Xu<span class="html-tag">&lt;/a&gt;</span>,</td></tr><tr><td class="line-number" value="117"></td><td class="line-content">                <span class="html-tag">&lt;a <span class="html-attribute-name">href</span>="<a class="html-attribute-value html-external-link" target="_blank" href="https://people.csail.mit.edu/pulkitag/" rel="noreferrer noopener">https://people.csail.mit.edu/pulkitag/</a>" <span class="html-attribute-name">target</span>="<span class="html-attribute-value">_blank</span>"&gt;</span>Pulkit Agrawal<span class="html-tag">&lt;/a&gt;</span> <span class="html-tag">&lt;br&gt;</span></td></tr><tr><td class="line-number" value="118"></td><td class="line-content">                <span class="html-tag">&lt;em&gt;</span>Conference on Robot Learning (<span class="html-tag">&lt;strong&gt;</span>CoRL<span class="html-tag">&lt;/strong&gt;</span>)<span class="html-tag">&lt;/em&gt;</span>, 2021 <span class="html-tag">&lt;strong&gt;</span>(<span class="html-tag">&lt;font <span class="html-attribute-name">color</span>="<span class="html-attribute-value">red</span>"&gt;</span>Best Paper Award<span class="html-tag">&lt;/font&gt;</span>) (<span class="html-tag">&lt;font <span class="html-attribute-name">color</span>="<span class="html-attribute-value">red</span>"&gt;</span>Oral</td></tr><tr><td class="line-number" value="119"></td><td class="line-content">                    <span class="html-tag">&lt;/font&gt;</span>, acceptance rate: 6.5%)<span class="html-tag">&lt;/strong&gt;</span></td></tr><tr><td class="line-number" value="120"></td><td class="line-content">                <span class="html-tag">&lt;br&gt;</span></td></tr><tr><td class="line-number" value="121"></td><td class="line-content">                <span class="html-tag">&lt;a <span class="html-attribute-name">href</span>="<a class="html-attribute-value html-external-link" target="_blank" href="https://openreview.net/forum?id=7uSBJDoP7tY" rel="noreferrer noopener">https://openreview.net/forum?id=7uSBJDoP7tY</a>" <span class="html-attribute-name">target</span>="<span class="html-attribute-value">_blank</span>"&gt;</span>paper<span class="html-tag">&lt;/a&gt;</span> /</td></tr><tr><td class="line-number" value="122"></td><td class="line-content">                <span class="html-tag">&lt;a <span class="html-attribute-name">href</span>="<a class="html-attribute-value html-external-link" target="_blank" href="https://arxiv.org/abs/2111.03043" rel="noreferrer noopener">https://arxiv.org/abs/2111.03043</a>" <span class="html-attribute-name">target</span>="<span class="html-attribute-value">_blank</span>"&gt;</span>arXiv<span class="html-tag">&lt;/a&gt;</span> /</td></tr><tr><td class="line-number" value="123"></td><td class="line-content">                <span class="html-tag">&lt;a <span class="html-attribute-name">href</span>="<a class="html-attribute-value html-external-link" target="_blank" href="https://taochenshh.github.io/projects/in-hand-reorientation" rel="noreferrer noopener">https://taochenshh.github.io/projects/in-hand-reorientation</a>" <span class="html-attribute-name">target</span>="<span class="html-attribute-value">_blank</span>"&gt;</span>project page<span class="html-tag">&lt;/a&gt;</span> /</td></tr><tr><td class="line-number" value="124"></td><td class="line-content">                <span class="html-tag">&lt;a <span class="html-attribute-name">href</span>="" <span class="html-attribute-name">data-toggle</span>="<span class="html-attribute-value">modal</span>" <span class="html-attribute-name">data-target</span>="<span class="html-attribute-value">#bibtex</span>"&gt;</span></td></tr><tr><td class="line-number" value="125"></td><td class="line-content">                    bibtex</td></tr><tr><td class="line-number" value="126"></td><td class="line-content">                <span class="html-tag">&lt;/a&gt;</span> <span class="html-tag">&lt;br&gt;</span></td></tr><tr><td class="line-number" value="127"></td><td class="line-content">                <span class="html-tag">&lt;br&gt;</span> Press coverage:</td></tr><tr><td class="line-number" value="128"></td><td class="line-content">                <span class="html-tag">&lt;a <span class="html-attribute-name">href</span>="<a class="html-attribute-value html-external-link" target="_blank" href="https://news.mit.edu/2021/dexterous-robotic-hands-manipulate-thousands-objects-1112" rel="noreferrer noopener">https://news.mit.edu/2021/dexterous-robotic-hands-manipulate-thousands-objects-1112</a>" <span class="html-attribute-name">target</span>="<span class="html-attribute-value">_blank</span>"&gt;</span>MIT News<span class="html-tag">&lt;/a&gt;</span>,</td></tr><tr><td class="line-number" value="129"></td><td class="line-content">                <span class="html-tag">&lt;a <span class="html-attribute-name">href</span>="<a class="html-attribute-value html-external-link" target="_blank" href="https://www.csail.mit.edu/news/dexterous-robotic-hands-manipulate-thousands-objects-ease" rel="noreferrer noopener">https://www.csail.mit.edu/news/dexterous-robotic-hands-manipulate-thousands-objects-ease</a>" <span class="html-attribute-name">target</span>="<span class="html-attribute-value">_blank</span>"&gt;</span>MIT CSAIL News<span class="html-tag">&lt;/a&gt;</span>,</td></tr><tr><td class="line-number" value="130"></td><td class="line-content">                <span class="html-tag">&lt;a <span class="html-attribute-name">href</span>="<a class="html-attribute-value html-external-link" target="_blank" href="https://www.azorobotics.com/Article.aspx?ArticleID=426" rel="noreferrer noopener">https://www.azorobotics.com/Article.aspx?ArticleID=426</a>" <span class="html-attribute-name">target</span>="<span class="html-attribute-value">_blank</span>"&gt;</span>AZO Robotics<span class="html-tag">&lt;/a&gt;</span>,</td></tr><tr><td class="line-number" value="131"></td><td class="line-content">                <span class="html-tag">&lt;a <span class="html-attribute-name">href</span>="<a class="html-attribute-value html-external-link" target="_blank" href="https://aihub.org/2021/11/24/interview-with-tao-chen-jie-xu-and-pulkit-agrawal-corl-2021-best-paper-award-winners/" rel="noreferrer noopener">https://aihub.org/2021/11/24/interview-with-tao-chen-jie-xu-and-pulkit-agrawal-corl-2021-best-paper-award-winners/</a>" <span class="html-attribute-name">target</span>="<span class="html-attribute-value">_blank</span>"&gt;</span>AIHub<span class="html-tag">&lt;/a&gt;</span>,</td></tr><tr><td class="line-number" value="132"></td><td class="line-content">                <span class="html-tag">&lt;a <span class="html-attribute-name">href</span>="<a class="html-attribute-value html-external-link" target="_blank" href="https://mp.weixin.qq.com/s/hjJ4R_AifvRaZJ9gH6_AbA" rel="noreferrer noopener">https://mp.weixin.qq.com/s/hjJ4R_AifvRaZJ9gH6_AbA</a>" <span class="html-attribute-name">target</span>="<span class="html-attribute-value">_blank</span>"&gt;</span>AI科技评论<span class="html-tag">&lt;/a&gt;</span>,</td></tr><tr><td class="line-number" value="133"></td><td class="line-content">                <span class="html-tag">&lt;a <span class="html-attribute-name">href</span>="<a class="html-attribute-value html-external-link" target="_blank" href="https://techxplore.com/news/2021-11-dexterous-robotic-thousands-ease.html" rel="noreferrer noopener">https://techxplore.com/news/2021-11-dexterous-robotic-thousands-ease.html</a>" <span class="html-attribute-name">target</span>="<span class="html-attribute-value">_blank</span>"&gt;</span>Tech Xplore<span class="html-tag">&lt;/a&gt;</span>,</td></tr><tr><td class="line-number" value="134"></td><td class="line-content">                <span class="html-tag">&lt;a <span class="html-attribute-name">href</span>="<a class="html-attribute-value html-external-link" target="_blank" href="https://cacm.acm.org/news/256757-dexterous-robotic-hands-manipulate-objects-with-ease/fulltext" rel="noreferrer noopener">https://cacm.acm.org/news/256757-dexterous-robotic-hands-manipulate-objects-with-ease/fulltext</a>" <span class="html-attribute-name">target</span>="<span class="html-attribute-value">_blank</span>"&gt;</span>Communications of the ACM<span class="html-tag">&lt;/a&gt;</span>,</td></tr><tr><td class="line-number" value="135"></td><td class="line-content">                <span class="html-tag">&lt;a <span class="html-attribute-name">href</span>="<a class="html-attribute-value html-external-link" target="_blank" href="https://www.inceptivemind.com/new-ai-system-allows-robots-manipulate-thousands-objects/21936/" rel="noreferrer noopener">https://www.inceptivemind.com/new-ai-system-allows-robots-manipulate-thousands-objects/21936/</a>" <span class="html-attribute-name">target</span>="<span class="html-attribute-value">_blank</span>"&gt;</span>Inceptive Mind<span class="html-tag">&lt;/a&gt;</span>,</td></tr><tr><td class="line-number" value="136"></td><td class="line-content">                <span class="html-tag">&lt;a <span class="html-attribute-name">href</span>="<a class="html-attribute-value html-external-link" target="_blank" href="https://spectrum.ieee.org/video-friday-fridgebot" rel="noreferrer noopener">https://spectrum.ieee.org/video-friday-fridgebot</a>" <span class="html-attribute-name">target</span>="<span class="html-attribute-value">_blank</span>"&gt;</span>IEEE Spectrum<span class="html-tag">&lt;/a&gt;</span>,</td></tr><tr><td class="line-number" value="137"></td><td class="line-content">                <span class="html-tag">&lt;a <span class="html-attribute-name">href</span>="<a class="html-attribute-value html-external-link" target="_blank" href="https://thehackposts.com/dexterous-robotic-hands-manipulate-thousands-of-objects-with-ease/" rel="noreferrer noopener">https://thehackposts.com/dexterous-robotic-hands-manipulate-thousands-of-objects-with-ease/</a>" <span class="html-attribute-name">target</span>="<span class="html-attribute-value">_blank</span>"&gt;</span>The Hack Posts<span class="html-tag">&lt;/a&gt;</span>,</td></tr><tr><td class="line-number" value="138"></td><td class="line-content">                <span class="html-tag">&lt;a <span class="html-attribute-name">href</span>="<a class="html-attribute-value html-external-link" target="_blank" href="https://tectales.com/bionics-robotics/robotic-hands-manipulate-objects-with-ease.html" rel="noreferrer noopener">https://tectales.com/bionics-robotics/robotic-hands-manipulate-objects-with-ease.html</a>" <span class="html-attribute-name">target</span>="<span class="html-attribute-value">_blank</span>"&gt;</span>Tectales<span class="html-tag">&lt;/a&gt;</span>,</td></tr><tr><td class="line-number" value="139"></td><td class="line-content">                <span class="html-tag">&lt;a <span class="html-attribute-name">href</span>="<a class="html-attribute-value html-external-link" target="_blank" href="https://www.therobotreport.com/mit-teaches-robotic-hands-to-reorient-2000-objects-in-one-hand/" rel="noreferrer noopener">https://www.therobotreport.com/mit-teaches-robotic-hands-to-reorient-2000-objects-in-one-hand/</a>" <span class="html-attribute-name">target</span>="<span class="html-attribute-value">_blank</span>"&gt;</span>The Robot Report<span class="html-tag">&lt;/a&gt;</span></td></tr><tr><td class="line-number" value="140"></td><td class="line-content">                <span class="html-comment">&lt;!-- Modal --&gt;</span></td></tr><tr><td class="line-number" value="141"></td><td class="line-content">                <span class="html-tag">&lt;div <span class="html-attribute-name">class</span>="<span class="html-attribute-value">modal fade</span>" <span class="html-attribute-name">id</span>="<span class="html-attribute-value">bibtex</span>" <span class="html-attribute-name">tabindex</span>="<span class="html-attribute-value">-1</span>" <span class="html-attribute-name">role</span>="<span class="html-attribute-value">dialog</span>" <span class="html-attribute-name">aria-labelledby</span>="<span class="html-attribute-value">exampleModalCenterTitle</span>" <span class="html-attribute-name">aria-hidden</span>="<span class="html-attribute-value">true</span>"&gt;</span></td></tr><tr><td class="line-number" value="142"></td><td class="line-content">                    <span class="html-tag">&lt;div <span class="html-attribute-name">class</span>="<span class="html-attribute-value">modal-dialog modal-dialog-centered modal-lg</span>" <span class="html-attribute-name">role</span>="<span class="html-attribute-value">document</span>"&gt;</span></td></tr><tr><td class="line-number" value="143"></td><td class="line-content">                        <span class="html-tag">&lt;div <span class="html-attribute-name">class</span>="<span class="html-attribute-value">modal-content</span>"&gt;</span></td></tr><tr><td class="line-number" value="144"></td><td class="line-content">                            <span class="html-tag">&lt;div <span class="html-attribute-name">class</span>="<span class="html-attribute-value">modal-header</span>"&gt;</span></td></tr><tr><td class="line-number" value="145"></td><td class="line-content">                                <span class="html-tag">&lt;h5 <span class="html-attribute-name">class</span>="<span class="html-attribute-value">modal-title</span>" <span class="html-attribute-name">id</span>="<span class="html-attribute-value">bibtex-title</span>"&gt;</span>bibtex<span class="html-tag">&lt;/h5&gt;</span></td></tr><tr><td class="line-number" value="146"></td><td class="line-content">                                <span class="html-tag">&lt;button <span class="html-attribute-name">type</span>="<span class="html-attribute-value">button</span>" <span class="html-attribute-name">class</span>="<span class="html-attribute-value">close</span>" <span class="html-attribute-name">data-dismiss</span>="<span class="html-attribute-value">modal</span>" <span class="html-attribute-name">aria-label</span>="<span class="html-attribute-value">Close</span>"&gt;</span></td></tr><tr><td class="line-number" value="147"></td><td class="line-content">                                    <span class="html-tag">&lt;span <span class="html-attribute-name">aria-hidden</span>="<span class="html-attribute-value">true</span>"&gt;</span>&amp;times;<span class="html-tag">&lt;/span&gt;</span></td></tr><tr><td class="line-number" value="148"></td><td class="line-content">                                <span class="html-tag">&lt;/button&gt;</span></td></tr><tr><td class="line-number" value="149"></td><td class="line-content">                            <span class="html-tag">&lt;/div&gt;</span></td></tr><tr><td class="line-number" value="150"></td><td class="line-content">                            <span class="html-tag">&lt;div <span class="html-attribute-name">class</span>="<span class="html-attribute-value">modal-body</span>"&gt;</span></td></tr><tr><td class="line-number" value="151"></td><td class="line-content">                                <span class="html-tag">&lt;pre&gt;</span></td></tr><tr><td class="line-number" value="152"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="153"></td><td class="line-content">@inproceedings{chen2021system,</td></tr><tr><td class="line-number" value="154"></td><td class="line-content">    title={A system for general in-hand object re-orientation},</td></tr><tr><td class="line-number" value="155"></td><td class="line-content">    author={Chen, Tao and Xu, Jie and Agrawal, Pulkit},</td></tr><tr><td class="line-number" value="156"></td><td class="line-content">    booktitle={Conference on Robot Learning},</td></tr><tr><td class="line-number" value="157"></td><td class="line-content">    year={2021},</td></tr><tr><td class="line-number" value="158"></td><td class="line-content">  }</td></tr><tr><td class="line-number" value="159"></td><td class="line-content"><span class="html-tag">&lt;/pre&gt;</span></td></tr><tr><td class="line-number" value="160"></td><td class="line-content">                            <span class="html-tag">&lt;/div&gt;</span></td></tr><tr><td class="line-number" value="161"></td><td class="line-content">                        <span class="html-tag">&lt;/div&gt;</span></td></tr><tr><td class="line-number" value="162"></td><td class="line-content">                    <span class="html-tag">&lt;/div&gt;</span></td></tr><tr><td class="line-number" value="163"></td><td class="line-content">                <span class="html-tag">&lt;/div&gt;</span></td></tr><tr><td class="line-number" value="164"></td><td class="line-content">            <span class="html-tag">&lt;/div&gt;</span></td></tr><tr><td class="line-number" value="165"></td><td class="line-content">        <span class="html-tag">&lt;/div&gt;</span></td></tr><tr><td class="line-number" value="166"></td><td class="line-content">    <span class="html-tag">&lt;/div&gt;</span><span class="html-tag">&lt;br&gt;</span><span class="html-tag">&lt;br&gt;</span></td></tr><tr><td class="line-number" value="167"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="168"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="169"></td><td class="line-content">    <span class="html-comment">&lt;!-- Video --&gt;</span></td></tr><tr><td class="line-number" value="170"></td><td class="line-content">    <span class="html-tag">&lt;div <span class="html-attribute-name">class</span>="<span class="html-attribute-value">container</span>"&gt;</span></td></tr><tr><td class="line-number" value="171"></td><td class="line-content">        <span class="html-tag">&lt;h4 <span class="html-attribute-name">id</span>="<span class="html-attribute-value">Oral</span>" <span class="html-attribute-name">style</span>="<span class="html-attribute-value">padding-top: 30px; margin-top: -40px;</span>"&gt;</span>Oral Talk<span class="html-tag">&lt;/h4&gt;</span></td></tr><tr><td class="line-number" value="172"></td><td class="line-content">        <span class="html-tag">&lt;hr&gt;</span></td></tr><tr><td class="line-number" value="173"></td><td class="line-content">        <span class="html-tag">&lt;div <span class="html-attribute-name">class</span>="<span class="html-attribute-value">row justify-content-md-center</span>"&gt;</span></td></tr><tr><td class="line-number" value="174"></td><td class="line-content">            <span class="html-tag">&lt;div <span class="html-attribute-name">class</span>="<span class="html-attribute-value">col-md-10 embed-responsive embed-responsive-16by9</span>"&gt;</span></td></tr><tr><td class="line-number" value="175"></td><td class="line-content">                <span class="html-tag">&lt;iframe <span class="html-attribute-name">width</span>="<span class="html-attribute-value">560</span>" <span class="html-attribute-name">height</span>="<span class="html-attribute-value">315</span>" <span class="html-attribute-name">src</span>="<a class="html-attribute-value html-resource-link" target="_blank" href="https://www.youtube.com/embed/r7neFpA20ck" rel="noreferrer noopener">https://www.youtube.com/embed/r7neFpA20ck</a>" <span class="html-attribute-name">title</span>="<span class="html-attribute-value">Oral Presentation</span>" <span class="html-attribute-name">frameborder</span>="<span class="html-attribute-value">0</span>" <span class="html-attribute-name">allow</span>="<span class="html-attribute-value">accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture</span>" <span class="html-attribute-name">allowfullscreen</span>&gt;</span><span class="html-tag">&lt;/iframe&gt;</span></td></tr><tr><td class="line-number" value="176"></td><td class="line-content">            <span class="html-tag">&lt;/div&gt;</span></td></tr><tr><td class="line-number" value="177"></td><td class="line-content">        <span class="html-tag">&lt;/div&gt;</span></td></tr><tr><td class="line-number" value="178"></td><td class="line-content">    <span class="html-tag">&lt;/div&gt;</span><span class="html-tag">&lt;br&gt;</span><span class="html-tag">&lt;br&gt;</span><span class="html-tag">&lt;br&gt;</span></td></tr><tr><td class="line-number" value="179"></td><td class="line-content">    <span class="html-tag">&lt;div <span class="html-attribute-name">class</span>="<span class="html-attribute-value">container</span>"&gt;</span></td></tr><tr><td class="line-number" value="180"></td><td class="line-content">        <span class="html-tag">&lt;h4 <span class="html-attribute-name">id</span>="<span class="html-attribute-value">Teaser</span>" <span class="html-attribute-name">style</span>="<span class="html-attribute-value">padding-top: 30px; margin-top: -40px;</span>"&gt;</span>Teaser<span class="html-tag">&lt;/h4&gt;</span></td></tr><tr><td class="line-number" value="181"></td><td class="line-content">        <span class="html-tag">&lt;hr&gt;</span></td></tr><tr><td class="line-number" value="182"></td><td class="line-content">        <span class="html-tag">&lt;div <span class="html-attribute-name">class</span>="<span class="html-attribute-value">row justify-content-md-center</span>"&gt;</span></td></tr><tr><td class="line-number" value="183"></td><td class="line-content">            <span class="html-tag">&lt;div <span class="html-attribute-name">class</span>="<span class="html-attribute-value">col-md-10 embed-responsive embed-responsive-16by9</span>"&gt;</span></td></tr><tr><td class="line-number" value="184"></td><td class="line-content">                <span class="html-tag">&lt;iframe <span class="html-attribute-name">width</span>="<span class="html-attribute-value">560</span>" <span class="html-attribute-name">height</span>="<span class="html-attribute-value">315</span>" <span class="html-attribute-name">src</span>="<a class="html-attribute-value html-resource-link" target="_blank" href="https://www.youtube.com/embed/HgDgIHTmokE" rel="noreferrer noopener">https://www.youtube.com/embed/HgDgIHTmokE</a>" <span class="html-attribute-name">title</span>="<span class="html-attribute-value">In-hand Manipulation</span>" <span class="html-attribute-name">frameborder</span>="<span class="html-attribute-value">0</span>" <span class="html-attribute-name">allow</span>="<span class="html-attribute-value">accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture</span>" <span class="html-attribute-name">allowfullscreen</span>&gt;</span><span class="html-tag">&lt;/iframe&gt;</span></td></tr><tr><td class="line-number" value="185"></td><td class="line-content">            <span class="html-tag">&lt;/div&gt;</span></td></tr><tr><td class="line-number" value="186"></td><td class="line-content">        <span class="html-tag">&lt;/div&gt;</span></td></tr><tr><td class="line-number" value="187"></td><td class="line-content">    <span class="html-tag">&lt;/div&gt;</span><span class="html-tag">&lt;br&gt;</span><span class="html-tag">&lt;br&gt;</span><span class="html-tag">&lt;br&gt;</span></td></tr><tr><td class="line-number" value="188"></td><td class="line-content">    <span class="html-tag">&lt;div <span class="html-attribute-name">class</span>="<span class="html-attribute-value">container</span>"&gt;</span></td></tr><tr><td class="line-number" value="189"></td><td class="line-content">        <span class="html-tag">&lt;h4 <span class="html-attribute-name">id</span>="<span class="html-attribute-value">Video</span>" <span class="html-attribute-name">style</span>="<span class="html-attribute-value">padding-top: 30px; margin-top: -40px;</span>"&gt;</span>Video Demo<span class="html-tag">&lt;/h4&gt;</span></td></tr><tr><td class="line-number" value="190"></td><td class="line-content">        <span class="html-tag">&lt;hr&gt;</span></td></tr><tr><td class="line-number" value="191"></td><td class="line-content">        <span class="html-tag">&lt;div <span class="html-attribute-name">class</span>="<span class="html-attribute-value">row justify-content-md-center</span>"&gt;</span></td></tr><tr><td class="line-number" value="192"></td><td class="line-content">            <span class="html-tag">&lt;div <span class="html-attribute-name">class</span>="<span class="html-attribute-value">col-md-10 embed-responsive embed-responsive-16by9</span>"&gt;</span></td></tr><tr><td class="line-number" value="193"></td><td class="line-content">                <span class="html-tag">&lt;video <span class="html-attribute-name">controls</span>&gt;</span></td></tr><tr><td class="line-number" value="194"></td><td class="line-content">                    <span class="html-tag">&lt;source <span class="html-attribute-name">src</span>="<a class="html-attribute-value html-resource-link" target="_blank" href="https://taochenshh.github.io/projects/files/in_hand_reorientation/teaser.mp4" rel="noreferrer noopener">files/in_hand_reorientation/teaser.mp4</a>" <span class="html-attribute-name">type</span>="<span class="html-attribute-value">video/mp4</span>"&gt;</span></td></tr><tr><td class="line-number" value="195"></td><td class="line-content">                <span class="html-tag">&lt;/video&gt;</span></td></tr><tr><td class="line-number" value="196"></td><td class="line-content">            <span class="html-tag">&lt;/div&gt;</span></td></tr><tr><td class="line-number" value="197"></td><td class="line-content">        <span class="html-tag">&lt;/div&gt;</span></td></tr><tr><td class="line-number" value="198"></td><td class="line-content">    <span class="html-tag">&lt;/div&gt;</span><span class="html-tag">&lt;br&gt;</span><span class="html-tag">&lt;br&gt;</span><span class="html-tag">&lt;br&gt;</span></td></tr><tr><td class="line-number" value="199"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="200"></td><td class="line-content">    <span class="html-tag">&lt;div <span class="html-attribute-name">class</span>="<span class="html-attribute-value">container</span>"&gt;</span></td></tr><tr><td class="line-number" value="201"></td><td class="line-content">        <span class="html-tag">&lt;h4 <span class="html-attribute-name">id</span>="<span class="html-attribute-value">MoreVideos</span>" <span class="html-attribute-name">style</span>="<span class="html-attribute-value">padding-top: 30px; margin-top: -40px;</span>"&gt;</span>More Videos<span class="html-tag">&lt;/h4&gt;</span></td></tr><tr><td class="line-number" value="202"></td><td class="line-content">        <span class="html-tag">&lt;hr&gt;</span></td></tr><tr><td class="line-number" value="203"></td><td class="line-content">        <span class="html-tag">&lt;div <span class="html-attribute-name">class</span>="<span class="html-attribute-value">row</span>"&gt;</span></td></tr><tr><td class="line-number" value="204"></td><td class="line-content">            <span class="html-tag">&lt;div <span class="html-attribute-name">class</span>="<span class="html-attribute-value">col-md-12</span>"&gt;</span></td></tr><tr><td class="line-number" value="205"></td><td class="line-content">                <span class="html-tag">&lt;ul&gt;</span></td></tr><tr><td class="line-number" value="206"></td><td class="line-content">                    <span class="html-tag">&lt;table <span class="html-attribute-name">class</span>="<span class="html-attribute-value">center</span>"&gt;</span></td></tr><tr><td class="line-number" value="207"></td><td class="line-content">                        <span class="html-tag">&lt;tr <span class="html-attribute-name">style</span>=<span class="html-attribute-value">font-size:15pt</span>&gt;</span></td></tr><tr><td class="line-number" value="208"></td><td class="line-content">                            <span class="html-tag">&lt;td <span class="html-attribute-name">style</span>='<span class="html-attribute-value">text-align:center; vertical-align:middle; color:#A31F34</span>' <span class="html-attribute-name">colspan</span>="<span class="html-attribute-value">2</span>"&gt;</span>Hand faces downward</td></tr><tr><td class="line-number" value="209"></td><td class="line-content">                                <span class="html-tag">&lt;p&gt;</span>(with a table)<span class="html-tag">&lt;/td&gt;</span></td></tr><tr><td class="line-number" value="210"></td><td class="line-content">                        <span class="html-tag">&lt;/tr&gt;</span></td></tr><tr><td class="line-number" value="211"></td><td class="line-content">                        <span class="html-tag">&lt;tr&gt;</span></td></tr><tr><td class="line-number" value="212"></td><td class="line-content">                            <span class="html-tag">&lt;td&gt;</span></td></tr><tr><td class="line-number" value="213"></td><td class="line-content">                                <span class="html-tag">&lt;video <span class="html-attribute-name">width</span>="<span class="html-attribute-value">500</span>" <span class="html-attribute-name">class</span>="<span class="html-attribute-value">center</span>" <span class="html-attribute-name">controls</span>&gt;</span></td></tr><tr><td class="line-number" value="214"></td><td class="line-content">                                    <span class="html-tag">&lt;source <span class="html-attribute-name">src</span>="<a class="html-attribute-value html-resource-link" target="_blank" href="https://taochenshh.github.io/projects/files/in_hand_reorientation/downward-table/downward-table-1.mp4" rel="noreferrer noopener">files/in_hand_reorientation/downward-table/downward-table-1.mp4</a>" <span class="html-attribute-name">type</span>="<span class="html-attribute-value">video/mp4</span>"&gt;</span></td></tr><tr><td class="line-number" value="215"></td><td class="line-content">                                <span class="html-tag">&lt;/video&gt;</span></td></tr><tr><td class="line-number" value="216"></td><td class="line-content">                                <span class="html-comment">&lt;!-- &lt;iframe width="560" height="315" src="https://www.youtube.com/embed/8aWinuHxzM8?rel=0&amp;modestbranding=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt; --&gt;</span></td></tr><tr><td class="line-number" value="217"></td><td class="line-content">                            <span class="html-tag">&lt;/td&gt;</span></td></tr><tr><td class="line-number" value="218"></td><td class="line-content">                            <span class="html-tag">&lt;td&gt;</span></td></tr><tr><td class="line-number" value="219"></td><td class="line-content">                                <span class="html-tag">&lt;video <span class="html-attribute-name">width</span>="<span class="html-attribute-value">500</span>" <span class="html-attribute-name">class</span>="<span class="html-attribute-value">center</span>" <span class="html-attribute-name">controls</span>&gt;</span></td></tr><tr><td class="line-number" value="220"></td><td class="line-content">                                    <span class="html-tag">&lt;source <span class="html-attribute-name">src</span>="<a class="html-attribute-value html-resource-link" target="_blank" href="https://taochenshh.github.io/projects/files/in_hand_reorientation/downward-table/downward-table-2.mp4" rel="noreferrer noopener">files/in_hand_reorientation/downward-table/downward-table-2.mp4</a>" <span class="html-attribute-name">type</span>="<span class="html-attribute-value">video/mp4</span>"&gt;</span></td></tr><tr><td class="line-number" value="221"></td><td class="line-content">                                <span class="html-tag">&lt;/video&gt;</span></td></tr><tr><td class="line-number" value="222"></td><td class="line-content">                            <span class="html-tag">&lt;/td&gt;</span></td></tr><tr><td class="line-number" value="223"></td><td class="line-content">                        <span class="html-tag">&lt;/tr&gt;</span></td></tr><tr><td class="line-number" value="224"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="225"></td><td class="line-content">                        <span class="html-tag">&lt;tr&gt;</span></td></tr><tr><td class="line-number" value="226"></td><td class="line-content">                            <span class="html-tag">&lt;td&gt;</span></td></tr><tr><td class="line-number" value="227"></td><td class="line-content">                                <span class="html-tag">&lt;video <span class="html-attribute-name">width</span>="<span class="html-attribute-value">500</span>" <span class="html-attribute-name">class</span>="<span class="html-attribute-value">center</span>" <span class="html-attribute-name">controls</span>&gt;</span></td></tr><tr><td class="line-number" value="228"></td><td class="line-content">                                    <span class="html-tag">&lt;source <span class="html-attribute-name">src</span>="<a class="html-attribute-value html-resource-link" target="_blank" href="https://taochenshh.github.io/projects/files/in_hand_reorientation/downward-table/downward-table-3.mp4" rel="noreferrer noopener">files/in_hand_reorientation/downward-table/downward-table-3.mp4</a>" <span class="html-attribute-name">type</span>="<span class="html-attribute-value">video/mp4</span>"&gt;</span></td></tr><tr><td class="line-number" value="229"></td><td class="line-content">                                <span class="html-tag">&lt;/video&gt;</span></td></tr><tr><td class="line-number" value="230"></td><td class="line-content">                            <span class="html-tag">&lt;/td&gt;</span></td></tr><tr><td class="line-number" value="231"></td><td class="line-content">                            <span class="html-tag">&lt;td&gt;</span></td></tr><tr><td class="line-number" value="232"></td><td class="line-content">                                <span class="html-tag">&lt;video <span class="html-attribute-name">width</span>="<span class="html-attribute-value">500</span>" <span class="html-attribute-name">class</span>="<span class="html-attribute-value">center</span>" <span class="html-attribute-name">controls</span>&gt;</span></td></tr><tr><td class="line-number" value="233"></td><td class="line-content">                                    <span class="html-tag">&lt;source <span class="html-attribute-name">src</span>="<a class="html-attribute-value html-resource-link" target="_blank" href="https://taochenshh.github.io/projects/files/in_hand_reorientation/downward-table/downward-table-4.mp4" rel="noreferrer noopener">files/in_hand_reorientation/downward-table/downward-table-4.mp4</a>" <span class="html-attribute-name">type</span>="<span class="html-attribute-value">video/mp4</span>"&gt;</span></td></tr><tr><td class="line-number" value="234"></td><td class="line-content">                                <span class="html-tag">&lt;/video&gt;</span></td></tr><tr><td class="line-number" value="235"></td><td class="line-content">                            <span class="html-tag">&lt;/td&gt;</span></td></tr><tr><td class="line-number" value="236"></td><td class="line-content">                        <span class="html-tag">&lt;/tr&gt;</span></td></tr><tr><td class="line-number" value="237"></td><td class="line-content">                        <span class="html-tag">&lt;tr&gt;</span></td></tr><tr><td class="line-number" value="238"></td><td class="line-content">                            <span class="html-tag">&lt;td <span class="html-attribute-name">style</span>='<span class="html-attribute-value">text-align:center; vertical-align:middle</span>' <span class="html-attribute-name">colspan</span>="<span class="html-attribute-value">2</span>"&gt;</span>More videos <span class="html-tag">&lt;a <span class="html-attribute-name">href</span>="<a class="html-attribute-value html-external-link" target="_blank" href="https://taochenshh.github.io/projects/in-hand-reorientation/handdown-table" rel="noreferrer noopener">in-hand-reorientation/handdown-table</a>"&gt;</span>here<span class="html-tag">&lt;/a&gt;</span><span class="html-tag">&lt;/td&gt;</span></td></tr><tr><td class="line-number" value="239"></td><td class="line-content">                        <span class="html-tag">&lt;/tr&gt;</span></td></tr><tr><td class="line-number" value="240"></td><td class="line-content">                    <span class="html-tag">&lt;/table&gt;</span></td></tr><tr><td class="line-number" value="241"></td><td class="line-content">                    <span class="html-tag">&lt;br&gt;</span></td></tr><tr><td class="line-number" value="242"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="243"></td><td class="line-content">                    <span class="html-tag">&lt;table <span class="html-attribute-name">class</span>="<span class="html-attribute-value">center</span>"&gt;</span></td></tr><tr><td class="line-number" value="244"></td><td class="line-content">                        <span class="html-tag">&lt;tr <span class="html-attribute-name">style</span>=<span class="html-attribute-value">font-size:15pt</span>&gt;</span></td></tr><tr><td class="line-number" value="245"></td><td class="line-content">                            <span class="html-tag">&lt;td <span class="html-attribute-name">style</span>='<span class="html-attribute-value">text-align:center; vertical-align:middle; color:#A31F34</span>' <span class="html-attribute-name">colspan</span>="<span class="html-attribute-value">2</span>"&gt;</span>Hand faces downward</td></tr><tr><td class="line-number" value="246"></td><td class="line-content">                                <span class="html-tag">&lt;p&gt;</span>(in the air)<span class="html-tag">&lt;/td&gt;</span></td></tr><tr><td class="line-number" value="247"></td><td class="line-content">                        <span class="html-tag">&lt;/tr&gt;</span></td></tr><tr><td class="line-number" value="248"></td><td class="line-content">                        <span class="html-tag">&lt;tr&gt;</span></td></tr><tr><td class="line-number" value="249"></td><td class="line-content">                            <span class="html-tag">&lt;td&gt;</span></td></tr><tr><td class="line-number" value="250"></td><td class="line-content">                                <span class="html-tag">&lt;video <span class="html-attribute-name">width</span>="<span class="html-attribute-value">500</span>" <span class="html-attribute-name">class</span>="<span class="html-attribute-value">center</span>" <span class="html-attribute-name">controls</span>&gt;</span></td></tr><tr><td class="line-number" value="251"></td><td class="line-content">                                    <span class="html-tag">&lt;source <span class="html-attribute-name">src</span>="<a class="html-attribute-value html-resource-link" target="_blank" href="https://taochenshh.github.io/projects/files/in_hand_reorientation/downward-air/downward-air-1.mp4" rel="noreferrer noopener">files/in_hand_reorientation/downward-air/downward-air-1.mp4</a>" <span class="html-attribute-name">type</span>="<span class="html-attribute-value">video/mp4</span>"&gt;</span></td></tr><tr><td class="line-number" value="252"></td><td class="line-content">                                <span class="html-tag">&lt;/video&gt;</span></td></tr><tr><td class="line-number" value="253"></td><td class="line-content">                            <span class="html-tag">&lt;/td&gt;</span></td></tr><tr><td class="line-number" value="254"></td><td class="line-content">                            <span class="html-tag">&lt;td&gt;</span></td></tr><tr><td class="line-number" value="255"></td><td class="line-content">                                <span class="html-tag">&lt;video <span class="html-attribute-name">width</span>="<span class="html-attribute-value">500</span>" <span class="html-attribute-name">class</span>="<span class="html-attribute-value">center</span>" <span class="html-attribute-name">controls</span>&gt;</span></td></tr><tr><td class="line-number" value="256"></td><td class="line-content">                                    <span class="html-tag">&lt;source <span class="html-attribute-name">src</span>="<a class="html-attribute-value html-resource-link" target="_blank" href="https://taochenshh.github.io/projects/files/in_hand_reorientation/downward-air/downward-air-2.mp4" rel="noreferrer noopener">files/in_hand_reorientation/downward-air/downward-air-2.mp4</a>" <span class="html-attribute-name">type</span>="<span class="html-attribute-value">video/mp4</span>"&gt;</span></td></tr><tr><td class="line-number" value="257"></td><td class="line-content">                                <span class="html-tag">&lt;/video&gt;</span></td></tr><tr><td class="line-number" value="258"></td><td class="line-content">                            <span class="html-tag">&lt;/td&gt;</span></td></tr><tr><td class="line-number" value="259"></td><td class="line-content">                        <span class="html-tag">&lt;/tr&gt;</span></td></tr><tr><td class="line-number" value="260"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="261"></td><td class="line-content">                        <span class="html-tag">&lt;tr&gt;</span></td></tr><tr><td class="line-number" value="262"></td><td class="line-content">                            <span class="html-tag">&lt;td&gt;</span></td></tr><tr><td class="line-number" value="263"></td><td class="line-content">                                <span class="html-tag">&lt;video <span class="html-attribute-name">width</span>="<span class="html-attribute-value">500</span>" <span class="html-attribute-name">class</span>="<span class="html-attribute-value">center</span>" <span class="html-attribute-name">controls</span>&gt;</span></td></tr><tr><td class="line-number" value="264"></td><td class="line-content">                                    <span class="html-tag">&lt;source <span class="html-attribute-name">src</span>="<a class="html-attribute-value html-resource-link" target="_blank" href="https://taochenshh.github.io/projects/files/in_hand_reorientation/downward-air/downward-air-3.mp4" rel="noreferrer noopener">files/in_hand_reorientation/downward-air/downward-air-3.mp4</a>" <span class="html-attribute-name">type</span>="<span class="html-attribute-value">video/mp4</span>"&gt;</span></td></tr><tr><td class="line-number" value="265"></td><td class="line-content">                                <span class="html-tag">&lt;/video&gt;</span></td></tr><tr><td class="line-number" value="266"></td><td class="line-content">                            <span class="html-tag">&lt;/td&gt;</span></td></tr><tr><td class="line-number" value="267"></td><td class="line-content">                            <span class="html-tag">&lt;td&gt;</span></td></tr><tr><td class="line-number" value="268"></td><td class="line-content">                                <span class="html-tag">&lt;video <span class="html-attribute-name">width</span>="<span class="html-attribute-value">500</span>" <span class="html-attribute-name">class</span>="<span class="html-attribute-value">center</span>" <span class="html-attribute-name">controls</span>&gt;</span></td></tr><tr><td class="line-number" value="269"></td><td class="line-content">                                    <span class="html-tag">&lt;source <span class="html-attribute-name">src</span>="<a class="html-attribute-value html-resource-link" target="_blank" href="https://taochenshh.github.io/projects/files/in_hand_reorientation/downward-air/downward-air-4.mp4" rel="noreferrer noopener">files/in_hand_reorientation/downward-air/downward-air-4.mp4</a>" <span class="html-attribute-name">type</span>="<span class="html-attribute-value">video/mp4</span>"&gt;</span></td></tr><tr><td class="line-number" value="270"></td><td class="line-content">                                <span class="html-tag">&lt;/video&gt;</span></td></tr><tr><td class="line-number" value="271"></td><td class="line-content">                            <span class="html-tag">&lt;/td&gt;</span></td></tr><tr><td class="line-number" value="272"></td><td class="line-content">                        <span class="html-tag">&lt;/tr&gt;</span></td></tr><tr><td class="line-number" value="273"></td><td class="line-content">                        <span class="html-tag">&lt;tr&gt;</span></td></tr><tr><td class="line-number" value="274"></td><td class="line-content">                            <span class="html-tag">&lt;td <span class="html-attribute-name">style</span>='<span class="html-attribute-value">text-align:center; vertical-align:middle</span>' <span class="html-attribute-name">colspan</span>="<span class="html-attribute-value">2</span>"&gt;</span>More videos <span class="html-tag">&lt;a <span class="html-attribute-name">href</span>="<a class="html-attribute-value html-external-link" target="_blank" href="https://taochenshh.github.io/projects/in-hand-reorientation/handdown" rel="noreferrer noopener">in-hand-reorientation/handdown</a>"&gt;</span>here<span class="html-tag">&lt;/a&gt;</span><span class="html-tag">&lt;/td&gt;</span></td></tr><tr><td class="line-number" value="275"></td><td class="line-content">                        <span class="html-tag">&lt;/tr&gt;</span></td></tr><tr><td class="line-number" value="276"></td><td class="line-content">                    <span class="html-tag">&lt;/table&gt;</span></td></tr><tr><td class="line-number" value="277"></td><td class="line-content">                    <span class="html-tag">&lt;br&gt;</span></td></tr><tr><td class="line-number" value="278"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="279"></td><td class="line-content">                    <span class="html-tag">&lt;table <span class="html-attribute-name">class</span>="<span class="html-attribute-value">center</span>"&gt;</span></td></tr><tr><td class="line-number" value="280"></td><td class="line-content">                        <span class="html-tag">&lt;tr <span class="html-attribute-name">style</span>=<span class="html-attribute-value">font-size:15pt</span>&gt;</span></td></tr><tr><td class="line-number" value="281"></td><td class="line-content">                            <span class="html-tag">&lt;td <span class="html-attribute-name">style</span>='<span class="html-attribute-value">text-align:center; vertical-align:middle; color:#A31F34</span>' <span class="html-attribute-name">colspan</span>="<span class="html-attribute-value">2</span>"&gt;</span>Hand faces upward<span class="html-tag">&lt;/td&gt;</span></td></tr><tr><td class="line-number" value="282"></td><td class="line-content">                        <span class="html-tag">&lt;/tr&gt;</span></td></tr><tr><td class="line-number" value="283"></td><td class="line-content">                        <span class="html-tag">&lt;tr&gt;</span></td></tr><tr><td class="line-number" value="284"></td><td class="line-content">                            <span class="html-tag">&lt;td&gt;</span></td></tr><tr><td class="line-number" value="285"></td><td class="line-content">                                <span class="html-tag">&lt;video <span class="html-attribute-name">width</span>="<span class="html-attribute-value">500</span>" <span class="html-attribute-name">class</span>="<span class="html-attribute-value">center</span>" <span class="html-attribute-name">controls</span>&gt;</span></td></tr><tr><td class="line-number" value="286"></td><td class="line-content">                                    <span class="html-tag">&lt;source <span class="html-attribute-name">src</span>="<a class="html-attribute-value html-resource-link" target="_blank" href="https://taochenshh.github.io/projects/files/in_hand_reorientation/upward/upward-1.mp4" rel="noreferrer noopener">files/in_hand_reorientation/upward/upward-1.mp4</a>" <span class="html-attribute-name">type</span>="<span class="html-attribute-value">video/mp4</span>"&gt;</span></td></tr><tr><td class="line-number" value="287"></td><td class="line-content">                                <span class="html-tag">&lt;/video&gt;</span></td></tr><tr><td class="line-number" value="288"></td><td class="line-content">                            <span class="html-tag">&lt;/td&gt;</span></td></tr><tr><td class="line-number" value="289"></td><td class="line-content">                            <span class="html-tag">&lt;td&gt;</span></td></tr><tr><td class="line-number" value="290"></td><td class="line-content">                                <span class="html-tag">&lt;video <span class="html-attribute-name">width</span>="<span class="html-attribute-value">500</span>" <span class="html-attribute-name">class</span>="<span class="html-attribute-value">center</span>" <span class="html-attribute-name">controls</span>&gt;</span></td></tr><tr><td class="line-number" value="291"></td><td class="line-content">                                    <span class="html-tag">&lt;source <span class="html-attribute-name">src</span>="<a class="html-attribute-value html-resource-link" target="_blank" href="https://taochenshh.github.io/projects/files/in_hand_reorientation/upward/upward-2.mp4" rel="noreferrer noopener">files/in_hand_reorientation/upward/upward-2.mp4</a>" <span class="html-attribute-name">type</span>="<span class="html-attribute-value">video/mp4</span>"&gt;</span></td></tr><tr><td class="line-number" value="292"></td><td class="line-content">                                <span class="html-tag">&lt;/video&gt;</span></td></tr><tr><td class="line-number" value="293"></td><td class="line-content">                            <span class="html-tag">&lt;/td&gt;</span></td></tr><tr><td class="line-number" value="294"></td><td class="line-content">                        <span class="html-tag">&lt;/tr&gt;</span></td></tr><tr><td class="line-number" value="295"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="296"></td><td class="line-content">                        <span class="html-tag">&lt;tr&gt;</span></td></tr><tr><td class="line-number" value="297"></td><td class="line-content">                            <span class="html-tag">&lt;td&gt;</span></td></tr><tr><td class="line-number" value="298"></td><td class="line-content">                                <span class="html-tag">&lt;video <span class="html-attribute-name">width</span>="<span class="html-attribute-value">500</span>" <span class="html-attribute-name">class</span>="<span class="html-attribute-value">center</span>" <span class="html-attribute-name">controls</span>&gt;</span></td></tr><tr><td class="line-number" value="299"></td><td class="line-content">                                    <span class="html-tag">&lt;source <span class="html-attribute-name">src</span>="<a class="html-attribute-value html-resource-link" target="_blank" href="https://taochenshh.github.io/projects/files/in_hand_reorientation/upward/upward-3.mp4" rel="noreferrer noopener">files/in_hand_reorientation/upward/upward-3.mp4</a>" <span class="html-attribute-name">type</span>="<span class="html-attribute-value">video/mp4</span>"&gt;</span></td></tr><tr><td class="line-number" value="300"></td><td class="line-content">                                <span class="html-tag">&lt;/video&gt;</span></td></tr><tr><td class="line-number" value="301"></td><td class="line-content">                            <span class="html-tag">&lt;/td&gt;</span></td></tr><tr><td class="line-number" value="302"></td><td class="line-content">                            <span class="html-tag">&lt;td&gt;</span></td></tr><tr><td class="line-number" value="303"></td><td class="line-content">                                <span class="html-tag">&lt;video <span class="html-attribute-name">width</span>="<span class="html-attribute-value">500</span>" <span class="html-attribute-name">class</span>="<span class="html-attribute-value">center</span>" <span class="html-attribute-name">controls</span>&gt;</span></td></tr><tr><td class="line-number" value="304"></td><td class="line-content">                                    <span class="html-tag">&lt;source <span class="html-attribute-name">src</span>="<a class="html-attribute-value html-resource-link" target="_blank" href="https://taochenshh.github.io/projects/files/in_hand_reorientation/upward/upward-4.mp4" rel="noreferrer noopener">files/in_hand_reorientation/upward/upward-4.mp4</a>" <span class="html-attribute-name">type</span>="<span class="html-attribute-value">video/mp4</span>"&gt;</span></td></tr><tr><td class="line-number" value="305"></td><td class="line-content">                                <span class="html-tag">&lt;/video&gt;</span></td></tr><tr><td class="line-number" value="306"></td><td class="line-content">                            <span class="html-tag">&lt;/td&gt;</span></td></tr><tr><td class="line-number" value="307"></td><td class="line-content">                        <span class="html-tag">&lt;/tr&gt;</span></td></tr><tr><td class="line-number" value="308"></td><td class="line-content">                        <span class="html-tag">&lt;tr&gt;</span></td></tr><tr><td class="line-number" value="309"></td><td class="line-content">                            <span class="html-tag">&lt;td <span class="html-attribute-name">style</span>='<span class="html-attribute-value">text-align:center; vertical-align:middle</span>' <span class="html-attribute-name">colspan</span>="<span class="html-attribute-value">2</span>"&gt;</span>More videos <span class="html-tag">&lt;a <span class="html-attribute-name">href</span>="<a class="html-attribute-value html-external-link" target="_blank" href="https://taochenshh.github.io/projects/in-hand-reorientation/handup" rel="noreferrer noopener">in-hand-reorientation/handup</a>"&gt;</span>here<span class="html-tag">&lt;/a&gt;</span><span class="html-tag">&lt;/td&gt;</span></td></tr><tr><td class="line-number" value="310"></td><td class="line-content">                        <span class="html-tag">&lt;/tr&gt;</span></td></tr><tr><td class="line-number" value="311"></td><td class="line-content">                    <span class="html-tag">&lt;/table&gt;</span></td></tr><tr><td class="line-number" value="312"></td><td class="line-content">                    <span class="html-tag">&lt;br&gt;</span></td></tr><tr><td class="line-number" value="313"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="314"></td><td class="line-content">                    <span class="html-tag">&lt;table <span class="html-attribute-name">class</span>="<span class="html-attribute-value">center</span>"&gt;</span></td></tr><tr><td class="line-number" value="315"></td><td class="line-content">                        <span class="html-tag">&lt;tr <span class="html-attribute-name">style</span>=<span class="html-attribute-value">font-size:15pt</span>&gt;</span></td></tr><tr><td class="line-number" value="316"></td><td class="line-content">                            <span class="html-tag">&lt;td <span class="html-attribute-name">style</span>='<span class="html-attribute-value">text-align:center; vertical-align:middle; color:#A31F34</span>' <span class="html-attribute-name">colspan</span>="<span class="html-attribute-value">2</span>"&gt;</span>Lifting<span class="html-tag">&lt;/td&gt;</span></td></tr><tr><td class="line-number" value="317"></td><td class="line-content">                        <span class="html-tag">&lt;/tr&gt;</span></td></tr><tr><td class="line-number" value="318"></td><td class="line-content">                        <span class="html-tag">&lt;tr&gt;</span></td></tr><tr><td class="line-number" value="319"></td><td class="line-content">                            <span class="html-tag">&lt;td&gt;</span></td></tr><tr><td class="line-number" value="320"></td><td class="line-content">                                <span class="html-tag">&lt;video <span class="html-attribute-name">width</span>="<span class="html-attribute-value">500</span>" <span class="html-attribute-name">class</span>="<span class="html-attribute-value">center</span>" <span class="html-attribute-name">controls</span>&gt;</span></td></tr><tr><td class="line-number" value="321"></td><td class="line-content">                                    <span class="html-tag">&lt;source <span class="html-attribute-name">src</span>="<a class="html-attribute-value html-resource-link" target="_blank" href="https://taochenshh.github.io/projects/files/in_hand_reorientation/lifting/lifting-1.mp4" rel="noreferrer noopener">files/in_hand_reorientation/lifting/lifting-1.mp4</a>" <span class="html-attribute-name">type</span>="<span class="html-attribute-value">video/mp4</span>"&gt;</span></td></tr><tr><td class="line-number" value="322"></td><td class="line-content">                                <span class="html-tag">&lt;/video&gt;</span></td></tr><tr><td class="line-number" value="323"></td><td class="line-content">                            <span class="html-tag">&lt;/td&gt;</span></td></tr><tr><td class="line-number" value="324"></td><td class="line-content">                            <span class="html-tag">&lt;td&gt;</span></td></tr><tr><td class="line-number" value="325"></td><td class="line-content">                                <span class="html-tag">&lt;video <span class="html-attribute-name">width</span>="<span class="html-attribute-value">500</span>" <span class="html-attribute-name">class</span>="<span class="html-attribute-value">center</span>" <span class="html-attribute-name">controls</span>&gt;</span></td></tr><tr><td class="line-number" value="326"></td><td class="line-content">                                    <span class="html-tag">&lt;source <span class="html-attribute-name">src</span>="<a class="html-attribute-value html-resource-link" target="_blank" href="https://taochenshh.github.io/projects/files/in_hand_reorientation/lifting/lifting-2.mp4" rel="noreferrer noopener">files/in_hand_reorientation/lifting/lifting-2.mp4</a>" <span class="html-attribute-name">type</span>="<span class="html-attribute-value">video/mp4</span>"&gt;</span></td></tr><tr><td class="line-number" value="327"></td><td class="line-content">                                <span class="html-tag">&lt;/video&gt;</span></td></tr><tr><td class="line-number" value="328"></td><td class="line-content">                            <span class="html-tag">&lt;/td&gt;</span></td></tr><tr><td class="line-number" value="329"></td><td class="line-content">                        <span class="html-tag">&lt;/tr&gt;</span></td></tr><tr><td class="line-number" value="330"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="331"></td><td class="line-content">                        <span class="html-tag">&lt;tr&gt;</span></td></tr><tr><td class="line-number" value="332"></td><td class="line-content">                            <span class="html-tag">&lt;td&gt;</span></td></tr><tr><td class="line-number" value="333"></td><td class="line-content">                                <span class="html-tag">&lt;video <span class="html-attribute-name">width</span>="<span class="html-attribute-value">500</span>" <span class="html-attribute-name">class</span>="<span class="html-attribute-value">center</span>" <span class="html-attribute-name">controls</span>&gt;</span></td></tr><tr><td class="line-number" value="334"></td><td class="line-content">                                    <span class="html-tag">&lt;source <span class="html-attribute-name">src</span>="<a class="html-attribute-value html-resource-link" target="_blank" href="https://taochenshh.github.io/projects/files/in_hand_reorientation/lifting/lifting-3.mp4" rel="noreferrer noopener">files/in_hand_reorientation/lifting/lifting-3.mp4</a>" <span class="html-attribute-name">type</span>="<span class="html-attribute-value">video/mp4</span>"&gt;</span></td></tr><tr><td class="line-number" value="335"></td><td class="line-content">                                <span class="html-tag">&lt;/video&gt;</span></td></tr><tr><td class="line-number" value="336"></td><td class="line-content">                            <span class="html-tag">&lt;/td&gt;</span></td></tr><tr><td class="line-number" value="337"></td><td class="line-content">                            <span class="html-tag">&lt;td&gt;</span></td></tr><tr><td class="line-number" value="338"></td><td class="line-content">                                <span class="html-tag">&lt;video <span class="html-attribute-name">width</span>="<span class="html-attribute-value">500</span>" <span class="html-attribute-name">class</span>="<span class="html-attribute-value">center</span>" <span class="html-attribute-name">controls</span>&gt;</span></td></tr><tr><td class="line-number" value="339"></td><td class="line-content">                                    <span class="html-tag">&lt;source <span class="html-attribute-name">src</span>="<a class="html-attribute-value html-resource-link" target="_blank" href="https://taochenshh.github.io/projects/files/in_hand_reorientation/lifting/lifting-4.mp4" rel="noreferrer noopener">files/in_hand_reorientation/lifting/lifting-4.mp4</a>" <span class="html-attribute-name">type</span>="<span class="html-attribute-value">video/mp4</span>"&gt;</span></td></tr><tr><td class="line-number" value="340"></td><td class="line-content">                                <span class="html-tag">&lt;/video&gt;</span></td></tr><tr><td class="line-number" value="341"></td><td class="line-content">                            <span class="html-tag">&lt;/td&gt;</span></td></tr><tr><td class="line-number" value="342"></td><td class="line-content">                        <span class="html-tag">&lt;/tr&gt;</span></td></tr><tr><td class="line-number" value="343"></td><td class="line-content">                        <span class="html-tag">&lt;tr&gt;</span></td></tr><tr><td class="line-number" value="344"></td><td class="line-content">                            <span class="html-tag">&lt;td <span class="html-attribute-name">style</span>='<span class="html-attribute-value">text-align:center; vertical-align:middle</span>' <span class="html-attribute-name">colspan</span>="<span class="html-attribute-value">2</span>"&gt;</span>More videos <span class="html-tag">&lt;a <span class="html-attribute-name">href</span>="<a class="html-attribute-value html-external-link" target="_blank" href="https://taochenshh.github.io/projects/in-hand-reorientation/lifting" rel="noreferrer noopener">in-hand-reorientation/lifting</a>"&gt;</span>here<span class="html-tag">&lt;/a&gt;</span><span class="html-tag">&lt;/td&gt;</span></td></tr><tr><td class="line-number" value="345"></td><td class="line-content">                        <span class="html-tag">&lt;/tr&gt;</span></td></tr><tr><td class="line-number" value="346"></td><td class="line-content">                    <span class="html-tag">&lt;/table&gt;</span></td></tr><tr><td class="line-number" value="347"></td><td class="line-content">                    <span class="html-tag">&lt;br&gt;</span></td></tr><tr><td class="line-number" value="348"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="349"></td><td class="line-content">                    <span class="html-tag">&lt;table <span class="html-attribute-name">class</span>="<span class="html-attribute-value">center</span>"&gt;</span></td></tr><tr><td class="line-number" value="350"></td><td class="line-content">                        <span class="html-tag">&lt;tr <span class="html-attribute-name">style</span>=<span class="html-attribute-value">font-size:15pt</span>&gt;</span></td></tr><tr><td class="line-number" value="351"></td><td class="line-content">                            <span class="html-tag">&lt;td <span class="html-attribute-name">style</span>='<span class="html-attribute-value">text-align:center; vertical-align:middle; color:#A31F34</span>' <span class="html-attribute-name">colspan</span>="<span class="html-attribute-value">2</span>"&gt;</span>Vision policy<span class="html-tag">&lt;/td&gt;</span></td></tr><tr><td class="line-number" value="352"></td><td class="line-content">                        <span class="html-tag">&lt;/tr&gt;</span></td></tr><tr><td class="line-number" value="353"></td><td class="line-content">                        <span class="html-tag">&lt;tr&gt;</span></td></tr><tr><td class="line-number" value="354"></td><td class="line-content">                            <span class="html-tag">&lt;td&gt;</span></td></tr><tr><td class="line-number" value="355"></td><td class="line-content">                                <span class="html-tag">&lt;video <span class="html-attribute-name">width</span>="<span class="html-attribute-value">500</span>" <span class="html-attribute-name">class</span>="<span class="html-attribute-value">center</span>" <span class="html-attribute-name">controls</span>&gt;</span></td></tr><tr><td class="line-number" value="356"></td><td class="line-content">                                    <span class="html-tag">&lt;source <span class="html-attribute-name">src</span>="<a class="html-attribute-value html-resource-link" target="_blank" href="https://taochenshh.github.io/projects/files/in_hand_reorientation/vision/vision-1.mp4" rel="noreferrer noopener">files/in_hand_reorientation/vision/vision-1.mp4</a>" <span class="html-attribute-name">type</span>="<span class="html-attribute-value">video/mp4</span>"&gt;</span></td></tr><tr><td class="line-number" value="357"></td><td class="line-content">                                <span class="html-tag">&lt;/video&gt;</span></td></tr><tr><td class="line-number" value="358"></td><td class="line-content">                            <span class="html-tag">&lt;/td&gt;</span></td></tr><tr><td class="line-number" value="359"></td><td class="line-content">                            <span class="html-tag">&lt;td&gt;</span></td></tr><tr><td class="line-number" value="360"></td><td class="line-content">                                <span class="html-tag">&lt;video <span class="html-attribute-name">width</span>="<span class="html-attribute-value">500</span>" <span class="html-attribute-name">class</span>="<span class="html-attribute-value">center</span>" <span class="html-attribute-name">controls</span>&gt;</span></td></tr><tr><td class="line-number" value="361"></td><td class="line-content">                                    <span class="html-tag">&lt;source <span class="html-attribute-name">src</span>="<a class="html-attribute-value html-resource-link" target="_blank" href="https://taochenshh.github.io/projects/files/in_hand_reorientation/vision/vision-2.mp4" rel="noreferrer noopener">files/in_hand_reorientation/vision/vision-2.mp4</a>" <span class="html-attribute-name">type</span>="<span class="html-attribute-value">video/mp4</span>"&gt;</span></td></tr><tr><td class="line-number" value="362"></td><td class="line-content">                                <span class="html-tag">&lt;/video&gt;</span></td></tr><tr><td class="line-number" value="363"></td><td class="line-content">                            <span class="html-tag">&lt;/td&gt;</span></td></tr><tr><td class="line-number" value="364"></td><td class="line-content">                        <span class="html-tag">&lt;/tr&gt;</span></td></tr><tr><td class="line-number" value="365"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="366"></td><td class="line-content">                        <span class="html-tag">&lt;tr&gt;</span></td></tr><tr><td class="line-number" value="367"></td><td class="line-content">                            <span class="html-tag">&lt;td&gt;</span></td></tr><tr><td class="line-number" value="368"></td><td class="line-content">                                <span class="html-tag">&lt;video <span class="html-attribute-name">width</span>="<span class="html-attribute-value">500</span>" <span class="html-attribute-name">class</span>="<span class="html-attribute-value">center</span>" <span class="html-attribute-name">controls</span>&gt;</span></td></tr><tr><td class="line-number" value="369"></td><td class="line-content">                                    <span class="html-tag">&lt;source <span class="html-attribute-name">src</span>="<a class="html-attribute-value html-resource-link" target="_blank" href="https://taochenshh.github.io/projects/files/in_hand_reorientation/vision/vision-3.mp4" rel="noreferrer noopener">files/in_hand_reorientation/vision/vision-3.mp4</a>" <span class="html-attribute-name">type</span>="<span class="html-attribute-value">video/mp4</span>"&gt;</span></td></tr><tr><td class="line-number" value="370"></td><td class="line-content">                                <span class="html-tag">&lt;/video&gt;</span></td></tr><tr><td class="line-number" value="371"></td><td class="line-content">                            <span class="html-tag">&lt;/td&gt;</span></td></tr><tr><td class="line-number" value="372"></td><td class="line-content">                            <span class="html-tag">&lt;td&gt;</span></td></tr><tr><td class="line-number" value="373"></td><td class="line-content">                                <span class="html-tag">&lt;video <span class="html-attribute-name">width</span>="<span class="html-attribute-value">500</span>" <span class="html-attribute-name">class</span>="<span class="html-attribute-value">center</span>" <span class="html-attribute-name">controls</span>&gt;</span></td></tr><tr><td class="line-number" value="374"></td><td class="line-content">                                    <span class="html-tag">&lt;source <span class="html-attribute-name">src</span>="<a class="html-attribute-value html-resource-link" target="_blank" href="https://taochenshh.github.io/projects/files/in_hand_reorientation/vision/vision-4.mp4" rel="noreferrer noopener">files/in_hand_reorientation/vision/vision-4.mp4</a>" <span class="html-attribute-name">type</span>="<span class="html-attribute-value">video/mp4</span>"&gt;</span></td></tr><tr><td class="line-number" value="375"></td><td class="line-content">                                <span class="html-tag">&lt;/video&gt;</span></td></tr><tr><td class="line-number" value="376"></td><td class="line-content">                            <span class="html-tag">&lt;/td&gt;</span></td></tr><tr><td class="line-number" value="377"></td><td class="line-content">                        <span class="html-tag">&lt;/tr&gt;</span></td></tr><tr><td class="line-number" value="378"></td><td class="line-content">                        <span class="html-tag">&lt;tr&gt;</span></td></tr><tr><td class="line-number" value="379"></td><td class="line-content">                            <span class="html-tag">&lt;td <span class="html-attribute-name">style</span>='<span class="html-attribute-value">text-align:center; vertical-align:middle</span>' <span class="html-attribute-name">colspan</span>="<span class="html-attribute-value">2</span>"&gt;</span>More videos <span class="html-tag">&lt;a <span class="html-attribute-name">href</span>="<a class="html-attribute-value html-external-link" target="_blank" href="https://taochenshh.github.io/projects/in-hand-reorientation/vision" rel="noreferrer noopener">in-hand-reorientation/vision</a>"&gt;</span>here<span class="html-tag">&lt;/a&gt;</span><span class="html-tag">&lt;/td&gt;</span></td></tr><tr><td class="line-number" value="380"></td><td class="line-content">                        <span class="html-tag">&lt;/tr&gt;</span></td></tr><tr><td class="line-number" value="381"></td><td class="line-content">                    <span class="html-tag">&lt;/table&gt;</span></td></tr><tr><td class="line-number" value="382"></td><td class="line-content">                    <span class="html-tag">&lt;br&gt;</span></td></tr><tr><td class="line-number" value="383"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="384"></td><td class="line-content">                <span class="html-tag">&lt;/ul&gt;</span></td></tr><tr><td class="line-number" value="385"></td><td class="line-content">            <span class="html-tag">&lt;/div&gt;</span></td></tr><tr><td class="line-number" value="386"></td><td class="line-content">        <span class="html-tag">&lt;/div&gt;</span></td></tr><tr><td class="line-number" value="387"></td><td class="line-content">    <span class="html-tag">&lt;/div&gt;</span><span class="html-tag">&lt;br&gt;</span><span class="html-tag">&lt;br&gt;</span><span class="html-tag">&lt;br&gt;</span></td></tr><tr><td class="line-number" value="388"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="389"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="390"></td><td class="line-content">    <span class="html-comment">&lt;!-- Bootstrap core JavaScript --&gt;</span></td></tr><tr><td class="line-number" value="391"></td><td class="line-content">    <span class="html-comment">&lt;!-- Placed at the end of the document so the pages load faster --&gt;</span></td></tr><tr><td class="line-number" value="392"></td><td class="line-content">    <span class="html-tag">&lt;script <span class="html-attribute-name">src</span>="<a class="html-attribute-value html-resource-link" target="_blank" href="https://code.jquery.com/jquery-3.2.1.slim.min.js" rel="noreferrer noopener">https://code.jquery.com/jquery-3.2.1.slim.min.js</a>" <span class="html-attribute-name">integrity</span>="<span class="html-attribute-value">sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN</span>" <span class="html-attribute-name">crossorigin</span>="<span class="html-attribute-value">anonymous</span>"&gt;</span><span class="html-tag">&lt;/script&gt;</span></td></tr><tr><td class="line-number" value="393"></td><td class="line-content">    <span class="html-tag">&lt;script <span class="html-attribute-name">src</span>="<a class="html-attribute-value html-resource-link" target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" rel="noreferrer noopener">https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js</a>" <span class="html-attribute-name">integrity</span>="<span class="html-attribute-value">sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4</span>" <span class="html-attribute-name">crossorigin</span>="<span class="html-attribute-value">anonymous</span>"&gt;</span><span class="html-tag">&lt;/script&gt;</span></td></tr><tr><td class="line-number" value="394"></td><td class="line-content">    <span class="html-tag">&lt;script <span class="html-attribute-name">src</span>="<a class="html-attribute-value html-resource-link" target="_blank" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" rel="noreferrer noopener">https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js</a>" <span class="html-attribute-name">integrity</span>="<span class="html-attribute-value">sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1</span>" <span class="html-attribute-name">crossorigin</span>="<span class="html-attribute-value">anonymous</span>"&gt;</span><span class="html-tag">&lt;/script&gt;</span></td></tr><tr><td class="line-number" value="395"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="396"></td><td class="line-content"><span class="html-tag">&lt;/body&gt;</span></td></tr><tr><td class="line-number" value="397"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="398"></td><td class="line-content"><span class="html-tag">&lt;/html&gt;</span><span class="html-end-of-file"></span></td></tr></tbody></table></body></html>
+<head>
+    <meta name=viewport content="width=device-width, initial-scale=1">
+    <meta name="generator" content="HTML Tidy for Linux/x86 (vers 11 February 2007), see www.w3.org">
+    <style type="text/css">
+        /* Color scheme stolen from Sergey Karayev */
+        
+        a {
+            color: #1772d0;
+            text-decoration: none;
+        }
+        
+        a:focus,
+        a:hover {
+            color: #f09228;
+            text-decoration: none;
+        }
+        
+        body,
+        td,
+        th,
+        tr,
+        p,
+        a {
+            font-family: 'Lato', Verdana, Helvetica, sans-serif;
+            font-size: 15px
+        }
+        
+        strong {
+            font-family: 'Lato', Verdana, Helvetica, sans-serif;
+            font-size: 15px;
+        }
+        
+        heading {
+            font-family: 'Lato', Verdana, Helvetica, sans-serif;
+            font-size: 24px;
+        }
+        
+        papertitle {
+            font-family: 'Lato', Verdana, Helvetica, sans-serif;
+            font-size: 15px;
+            font-weight: 700
+        }
+        
+        name {
+            font-family: 'Lato', Verdana, Helvetica, sans-serif;
+            font-size: 32px;
+        }
+        
+        .one {
+            width: 160px;
+            height: 160px;
+            position: relative;
+        }
+        
+        .two {
+            width: 160px;
+            height: 160px;
+            position: absolute;
+            transition: opacity .2s ease-in-out;
+            -moz-transition: opacity .2s ease-in-out;
+            -webkit-transition: opacity .2s ease-in-out;
+        }
+        
+        .fade {
+            transition: opacity .2s ease-in-out;
+            -moz-transition: opacity .2s ease-in-out;
+            -webkit-transition: opacity .2s ease-in-out;
+        }
+        
+        span.highlight {
+            background-color: #ffffd0;
+        }
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- https://fontawesome.com/cheatsheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css">
+    <link rel="icon" type="image/png" href="images/csail_logo.png">
+    <title>Tao Chen</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+</head>
+<script>
+    function toggleblock(blockId) {
+        var block = document.getElementById(blockId);
+        if (block.style.display == 'none') {
+            block.style.display = 'block';
+        } else {
+            block.style.display = 'none';
+        }
+    }
+
+    function hideblock(blockId) {
+        var block = document.getElementById(blockId);
+        block.style.display = 'none';
+    }
+</script>
+<!-- Place this tag in your head or just before your close body tag. -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+<body>
+    <table width="1000" border="0" align="center" cellspacing="0" cellpadding="0">
+        <tr>
+            <td>
+                <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20">
+                    <tr>
+                        <td width="67%" valign="middle">
+                            <p align="center">
+                                <name>Tao Chen (陈涛) </name>
+                            </p>
+                            <p>
+                                I am a Ph.D. student in EECS at <a href="https://www.csail.mit.edu/" target="_blank">MIT CSAIL</a>, advised by Prof. <a href="http://people.csail.mit.edu/pulkitag/" target="_blank">Pulkit Agrawal</a>. My research interests
+                                revolve around the intersection of robot learning (dexterous manipulation, locomotion, navigation).
+                            </p>
+                            <p>
+                                I received my master's degree from the <a href="http://ri.cmu.edu/" target="_blank">Robotics Institute, Carnegie Mellon University (CMU RI)</a> in May 2019, advised by Prof. <a href="http://www.cs.cmu.edu/~abhinavg/" target="_blank">Abhinav Gupta</a>.
+                            </p>
+                            <p>
+                                Prior to this, I was a research engineer in <i><b>Shanghai LX Robotics</b></i>, where I conducted research on <i>object detection, image segmentation, deep reinforcement learning in robotics, SLAM, etc</i>.
+                            </p>
+                            <p>
+                                I earned my bachelor's degree from <a href="http://www.sjtu.edu.cn/" target="_blank">Shanghai Jiao Tong University (SJTU)</a> in June 2016, majoring in <b>mechanical engineering and automation</b>. I was also an exchange
+                                student (<a href="https://opp.purdue.edu/programs/geare/" target="_blank">GEARE</a> program) at <a href="https://engineering.purdue.edu/ME" target="_blank">School of Mechanical Engineering, Purdue University</a>.
+                            </p>
+                            <p align=center>
+                                <a href="mailto:taochen@mit.edu">Email</a> &nbsp/&nbsp
+                                <a href="files/taochen_cv.pdf" target="_blank">CV</a> &nbsp/&nbsp
+                                <a href="https://scholar.google.com/citations?user=gdUv1PIAAAAJ&hl=en&oi=sra" target="_blank">Google Scholar</a> &nbsp/&nbsp
+                                <a href="https://github.com/taochenshh" target="_blank">GitHub</a>&nbsp/&nbsp
+                                <a href="https://linkedin.com/in/taochenshh" target="_blank">LinkedIn</a>&nbsp/&nbsp
+                                <a href="https://twitter.com/taochenshh" target="_blank">Twitter</a>
+                            </p>
+                        </td>
+                        <td width="33%">
+                            <img src="images/my_photo.jpg" style="display:block;" width="100%">
+                        </td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td valign="middle">
+                            <p>
+                                <heading>News</heading>
+                                <ul>
+                                    <li>I am organizing the <a href="https://ei.csail.mit.edu/csl.html">Computational Sensorimotor Learning Seminar</a>. Recordings are available <a href="https://www.youtube.com/playlist?list=PLwNwxAG-kBxNBgIXogC6AShE5wzeXgoa6">here</a>.</li>
+                                    <li>Our paper on in-hand object reorientation wins the
+                                        <font color="red">Best Paper Award</font> at CoRL 2021.</li>
+                                    <!-- <li>Our paper on in-hand object reorientation is accepted to CoRL 2021 (<strong>oral</strong>).</li> -->
+                                    <!-- <li>Our paper on dynamic vision-aware locomotion is accepted to CoRL 2021.</li>
+                                    <li>Our paper on end-to-end differentiable simulator for robot design and control co-optimization is accepted to RSS 2021. </li>
+                                    <li>Our paper on data-efficient policy learning for microrobots with complex dynamics is accepted to ICRA 2021.</li>
+                                    <li>New course: <a href="https://pulkitag.github.io/6.884/" target="_blank">Computational Sensorimotor Learning</a> is online, checkout the lecture videos on <a href="https://youtube.com/playlist?list=PLwNwxAG-kBxPMTIs2fKWSsf7HqL2TcC78"
+                                            target="_blank">YouTube</a>.</li>
+                                    <li>A crash course on deep learning and robotics: <a href="https://pulkitag.github.io/rlbootcamp-iap/">Deep Learning for Control</a>. The lecture videos are available online.</li>
+                                    <li>Our python-oriented robot learning library, <a href="https://github.com/Improbable-AI/airobot" target="_blank">AIRobot</a>, is open-sourced!</li>
+                                    <li>Our open-source robotics research platform, <a href="https://www.pyrobot.org/" target="_blank">PyRobot</a>, is now online!</li> -->
+                                </ul>
+                                <br>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+                <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20">
+                    <tr>
+                        <td>
+                            <heading>Research</heading>
+                        </td>
+                    </tr>
+                </table>
+
+                <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20">
+
+                    <tr>
+                        <td style="padding:20px;width:25%;vertical-align:middle">
+                            <a href="https://openreview.net/forum?id=7uSBJDoP7tY" target="_blank">
+                                <!-- <img src="images/hand_reori/hand_reori1.gif" alt="sym" width="100%" style="border-radius:5px"> -->
+                                <!-- <br>  -->
+                                <img src="images/hand_reori/hand_reori2.gif" alt="sym" width="100%" style="border-radius:5px">
+                            </a>
+                        </td>
+                        <td valign="top" style="padding:20px;width:75%;vertical-align:middle">
+                            <papertitle>A System for General In-Hand Object Re-Orientation
+                            </papertitle>
+                            <br>
+                            <strong>Tao Chen</strong>, <a href="http://people.csail.mit.edu/jiex" target="_blank">Jie Xu</a>,
+                            <a href="http://people.csail.mit.edu/pulkitag/" target="_blank">Pulkit Agrawal</a>
+                            <br>
+                            <em>Conference on Robot Learning (<strong>CoRL</strong>)</em>, 2021 <strong>(<font color="red">Best Paper Award</font>), (<font color="red">Oral</font>, acceptance rate: 6.5%)</strong>
+                            <br>
+                            <a href="https://openreview.net/forum?id=7uSBJDoP7tY" target="_blank">paper</a> /
+                            <a href="https://arxiv.org/abs/2111.03043" target="_blank">arXiv</a> /
+                            <a href="javascript:toggleblock('chen2021system_bib')">bibtex</a> /
+                            <a href="https://taochenshh.github.io/projects/in-hand-reorientation" target="_blank">project page</a> /
+                            <a href="https://youtu.be/r7neFpA20ck" target="_blank">oral talk</a>
+                            <bibtext xml:space="preserve" id="chen2021system_bib">
+                                @article{chen2021system,<br /> title={A System for General In-Hand Object Re-Orientation},<br /> author={Chen, Tao and Xu, Jie and Agrawal, Pulkit},<br /> journal={Conference on Robot Learning},<br /> year={2021}
+                                <br /> }
+                            </bibtext>
+                            <script language="JavaScript">
+                                hideblock('chen2021system_bib');
+                            </script>
+                            <br><br> Press coverage:
+                            <a href="https://news.mit.edu/2021/dexterous-robotic-hands-manipulate-thousands-objects-1112" target="_blank">MIT News</a>,
+                            <a href="https://www.csail.mit.edu/news/dexterous-robotic-hands-manipulate-thousands-objects-ease" target="_blank">MIT CSAIL News</a>,
+                            <a href="https://www.azorobotics.com/Article.aspx?ArticleID=426" target="_blank">AZO Robotics</a>,
+                            <a href="https://aihub.org/2021/11/24/interview-with-tao-chen-jie-xu-and-pulkit-agrawal-corl-2021-best-paper-award-winners/" target="_blank">AIHub</a>,
+                            <a href="https://mp.weixin.qq.com/s/hjJ4R_AifvRaZJ9gH6_AbA" target="_blank">AI科技评论</a>,
+                            <a href="https://techxplore.com/news/2021-11-dexterous-robotic-thousands-ease.html" target="_blank">Tech Xplore</a>,
+                            <a href="https://cacm.acm.org/news/256757-dexterous-robotic-hands-manipulate-objects-with-ease/fulltext" target="_blank">Communications of the ACM</a>,
+                            <a href="https://www.inceptivemind.com/new-ai-system-allows-robots-manipulate-thousands-objects/21936/" target="_blank">Inceptive Mind</a>,
+                            <a href="https://spectrum.ieee.org/video-friday-fridgebot" target="_blank">IEEE Spectrum</a>,
+                            <a href="https://thehackposts.com/dexterous-robotic-hands-manipulate-thousands-of-objects-with-ease/" target="_blank">The Hack Posts</a>,
+                            <a href="https://tectales.com/bionics-robotics/robotic-hands-manipulate-objects-with-ease.html" target="_blank">Tectales</a>,
+                            <a href="https://www.therobotreport.com/mit-teaches-robotic-hands-to-reorient-2000-objects-in-one-hand/" target="_blank">The Robot Report</a>
+                            <p></p>
+                            <p>A system for general in-hand object reorientation.
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+
+                <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20">
+                    <tr>
+                        <td style="padding:20px;width:25%;vertical-align:middle">
+                            <a href="https://taochenshh.github.io/" target="_blank">
+                                <img src="images/cheetah-spin-2022.png" alt="sym" width="100%" style="border-radius:5px">
+                            </a>
+                        </td>
+                        <td style="padding:20px;width:75%;vertical-align:middle">
+                            <papertitle>Rapid Locomotion via Reinforcement Learning
+                            </papertitle>
+                            <br>
+                            <a href="http://people.csail.mit.edu/gmargo/" target="_blank">Gabriel Margolis</a>,
+                            <a href="https://www.episodeyang.com/" target="_blank">Ge Yang</a>,
+                            <a href="https://kartikpaigwar.github.io/" target="_blank">Kartik Paigwar</a>,
+                            <strong>Tao Chen</strong>,
+                            <a href="http://people.csail.mit.edu/pulkitag/" target="_blank">Pulkit Agrawal</a>
+                            <br>
+                            <em>Robotics: Science and Systems (<strong>RSS</strong>)</em>, 2022
+                            <br>
+                            <a href="https://arxiv.org/pdf/2205.02824.pdf" target="_blank">paper</a> /
+                            <a href="https://sites.google.com/view/model-free-speed/" target="_blank">project page</a> /
+                            <a href="javascript:toggleblock('margolis2022rapid_bib')">bibtex</a> /
+                            <a href="https://youtu.be/-BqNl3AtPVw" target="_blank">video</a> /
+                            <bibtext xml:space="preserve" id="margolis2022rapid_bib">
+                                @article{margolis2022rapid, <br />
+                                    title={Rapid Locomotion via Reinforcement Learning}, <br />
+                                    author={Margolis, Gabriel B and Yang, Ge and Paigwar, Kartik and Chen, Tao and Agrawal, Pulkit}, <br />
+                                    journal={Robotics: Science and Systems}, <br />
+                                    year={2022} <br />
+                                }
+                            </bibtext>
+                            <script language="JavaScript">
+                                hideblock('margolis2022rapid_bib');
+                            </script>
+                            <br><br> Press coverage:
+                            <a href="https://www.wired.com/story/this-cheetah-robot-taught-itself-how-to-sprint-in-a-weird-way/">Wired</a>,
+                            <a href="https://www.popsci.com/technology/machine-learning-robot-runs-its-fastest/"> Popular Science</a>,
+                            <a href="https://techcrunch.com/2022/03/17/to-servi-man/"> TechCrunch</a>,
+                            <a href="https://www.bbc.com/news/av/technology-60795221">BBC </a>,
+                            <a href="https://news.mit.edu/2022/3-questions-how-mit-mini-cheetah-learns-run-fast-0317"> MIT News </a>
+                            <p></p>
+                            <p>High-speed running and spinning on diverse terrains with a RL based controller.
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+
+                <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20">
+                    <tr>
+                        <td style="padding:20px;width:25%;vertical-align:middle">
+                            <a href="https://taochenshh.github.io/" target="_blank">
+                                <img src="images/ter/ter_teaser.png" alt="sym" width="100%" style="border-radius:5px">
+                            </a>
+                        </td>
+                        <td style="padding:20px;width:75%;vertical-align:middle">
+                            <papertitle>Topological Experience Replay
+                            </papertitle>
+                            <br>
+                            <a href="https://williamd4112.github.io/" target="_blank">Zhang-Wei Hong</a>,
+                            <strong>Tao Chen</strong>,
+                            <a href="https://yenchenlin.me/" target="_blank">Yen-Chen Lin</a>,
+                            <a href="https://people.aalto.fi/joni.pajarinen" target="_blank">Joni Pajarinen</a>,
+                            <a href="http://people.csail.mit.edu/pulkitag/" target="_blank">Pulkit Agrawal</a>
+                            <br>
+                            <em>International Conference on Learning Representations (<strong>ICLR</strong>)</em>, 2022
+                            <br>
+                            <a href="https://openreview.net/forum?id=OXRZeMmOI7a" target="_blank">paper</a> /
+                            <a href="javascript:toggleblock('hong2021ter_bib')">bibtex</a> /
+                            <a href="https://www.youtube.com/watch?v=IWRxZfJsV2Q" target="_blank">video</a> /
+                            <bibtext xml:space="preserve" id="hong2021ter_bib">
+                                @inproceedings{ <br />
+                                    hong2022topological, <br />
+                                    title={Topological Experience Replay}, <br />
+                                    author={Hong, Zhang-Wei and Chen, Tao and Lin, Yen-Chen and Pajarinen, Joni and Agrawal, Pulkit}, <br />
+                                    booktitle={In Proceedings of The Tenth International Conference on Learning Representations }, <br />
+                                    year={2022}, <br />
+                                    url={https://openreview.net/forum?id=OXRZeMmOI7a}, <br />
+                                }
+                            </bibtext>
+                            <script language="JavaScript">
+                                hideblock('hong2021ter_bib');
+                            </script>
+                            <p></p>
+                            <p>A fast Q-learning method by building a topological graph in the replay buffer.
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+
+                <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20">
+                    <tr>
+                        <td style="padding:20px;width:25%;vertical-align:middle">
+                            <a href="https://openreview.net/pdf?id=R4E8wTUtxdl" target="_blank">
+                                <img src="images/cheetah/cheetah-jump.gif" alt="sym" width="100%" style="border-radius:5px">
+                            </a>
+                        </td>
+                        <td style="padding:20px;width:75%;vertical-align:middle">
+                            <papertitle>Learning to Jump from Pixels
+                            </papertitle>
+                            <br>
+                            <a href="http://people.csail.mit.edu/gmargo/" target="_blank">Gabriel Margolis</a>,
+                            <strong>Tao Chen</strong>,
+                            <a href="https://kartikpaigwar.github.io/" target="_blank">Kartik Paigwar</a>,
+                            <a href="https://xiangfu.co/" target="_blank">Xiang Fu</a>,
+                            <a href="https://dhkim0821.github.io/" target="_blank">Donghyun Kim</a>,
+                            <a href="http://meche.mit.edu/people/faculty/sangbae@mit.edu" target="_blank">Sangbae Kim</a>,
+                            <a href="http://people.csail.mit.edu/pulkitag/" target="_blank">Pulkit Agrawal</a>
+                            <br>
+                            <em>Conference on Robot Learning (<strong>CoRL</strong>)</em>, 2021
+                            <br>
+                            <a href="https://openreview.net/pdf?id=R4E8wTUtxdl" target="_blank">paper</a> /
+                            <a href="data/margolis2021jumping.bib">bibtex</a> /
+                            <a href="https://sites.google.com/view/jumpingfrompixels" target="_blank">project page</a>
+                            <bibtext xml:space="preserve" id="margolis2021jumping_bib">
+                                @article{margolis2021jumping, <br /> title={Learning to Jump from Pixels}, <br /> author={Margolis, Gabriel and Chen, Tao and Paigwar, Kartik and Fu, Xiang and Kim, Donghyun and Kim, Sangbae and Agrawal, Pulkit}, <br />                                journal={Conference on Robot Learning}, <br /> year={2021} <br /> }
+                            </bibtext>
+                            <script language="JavaScript">
+                                hideblock('margolis2021jumping_bib');
+                            </script>
+                            <br><br>
+                            <strong>Press Coverage:</strong> <a href="https://news.mit.edu/2021/one-giant-leap-mini-cheetah-1020" target="_blank">MIT News</a>,
+                            <a href="https://www.azorobotics.com/article.aspx?ArticleID=413" target="_blank">AZO Robotics</a>,
+                            <a href="https://www.therobotreport.com/mit-control-system-improves-agility-of-cheetah-quadruped/" target="_blank">The Robot Report</a>
+
+                            <p></p>
+                            <p> A hierarchical control framework for dynamic vision-aware locomotion. </p>
+                        </td>
+                    </tr>
+                </table>
+
+
+                <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20">
+
+                    <tr>
+                        <td style="padding:20px;width:25%;vertical-align:middle">
+                            <a href="https://arxiv.org/pdf/2104.00631.pdf" target="_blank">
+                                <img src="images/diff_sim.jpg" alt="sym" width="100%" style="border-radius:5px">
+                            </a>
+                        </td>
+                        <td style="padding:20px;width:75%;vertical-align:middle">
+                            <papertitle>An End-to-End Differentiable Framework for Contact-Aware Robot Design
+                            </papertitle>
+                            <br>
+                            <a href="http://people.csail.mit.edu/jiex" target="_blank">Jie Xu</a>,
+                            <strong>Tao Chen</strong>, <a href="https://lara-z.github.io/" target="_blank">Lara Zlokapa</a>,
+                            <a href="https://scholar.google.co.uk/citations?user=NQMazscAAAAJ&hl=en" target="_blank">Michael Foshey</a>,
+                            <a href="https://cdfg.mit.edu/wojciech" target="_blank">Wojciech Matusik</a>,
+                            <a href="https://people.engr.tamu.edu/sueda/index.html" target="_blank">Shinjiro Sueda</a>,
+                            <a href="http://people.csail.mit.edu/pulkitag/" target="_blank">Pulkit Agrawal</a>
+                            <br>
+                            <em>Robotics: Science and Systems (<strong>RSS</strong>) </em>, 2021
+
+                            <br>
+                            <a href="https://people.csail.mit.edu/jiex/papers/DiffHand/paper.pdf" target="_blank">paper</a> /
+                            <a href="https://arxiv.org/abs/2107.07501" target="_blank">arXiv</a> /
+                            <a href="javascript:toggleblock('xu2021diffsim_bib')">bibtex</a> /
+                            <a href="http://diffhand.csail.mit.edu/" target="_blank">project page</a> /
+                            <a href="https://github.com/eanswer/DiffHand" target="_blank">code</a> /
+                            <a href="https://people.csail.mit.edu/jiex/papers/DiffHand/video.mp4" target="_blank">video</a> /
+                            <a href="https://www.youtube.com/watch?v=KUpgXu5hQYM" target="_blank">talk</a>
+                            <bibtext xml:space="preserve" id="xu2021diffsim_bib">
+                                @article{xu2021diffsim,<br /> title={An End-to-End Differentiable Framework for Contact-Aware Robot Design},<br /> author={Xu, Jie and Chen, Tao and Zlokapa, Lara and Matusik, Wojciech and Sueda, Shinjiro and Agrawal, Pulkit},<br
+                                /> journal={Robotics: Science and Systems},<br /> year={2021}
+                                <br /> }
+                            </bibtext>
+                            <script language="JavaScript">
+                                hideblock('xu2021diffsim_bib');
+                            </script>
+                            <br><br>
+                            <strong>Press Coverage:</strong> <a href="https://news.mit.edu/2021/contact-aware-robot-design-0719" target="_blank">MIT News</a>, <a href="https://www.techexplorist.com/representing-robotic-manipulator-using-a-novel-method/40098/"
+                                target="_blank">Tectales</a>
+                            <p></p>
+                            <p> Computational method for design task-specific robotic hands.
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding:20px;width:25%;vertical-align:middle">
+                            <a href="https://arxiv.org/pdf/2104.00631.pdf" target="_blank">
+                                <img src="images/hamr/hamr_rml_logo.png" alt="sym" width="100%" style="border-radius:5px">
+                                <!-- <br> -->
+                                <!-- <img src="images/hamr/hamr.gif" width="100%"> -->
+                            </a>
+                        </td>
+                        <td style="padding:20px;width:75%;vertical-align:middle">
+                            <papertitle>Residual Model Learning for Microrobot Control
+                            </papertitle>
+                            <br>
+                            <a href="https://joshuagruenstein.github.io/" target="_blank">Joshua Gruenstein</a>,
+                            <strong>Tao Chen</strong>,
+                            <a href="https://neeld.github.io/" target="_blank">Neel Doshi</a>,
+                            <a href="http://people.csail.mit.edu/pulkitag/" target="_blank">Pulkit Agrawal</a>
+                            <br>
+                            <em>IEEE International Conference on Robotics and Automation (<strong>ICRA</strong>) </em>, 2021
+                            <br>
+                            <a href="https://arxiv.org/pdf/2104.00631.pdf" target="_blank">paper</a> /
+                            <a href="javascript:toggleblock('gruenstein2021residual_bib')">bibtex</a> /
+                            <a href="https://sites.google.com/view/hamr-icra-2021" target="_blank">project page</a> /
+                            <a href="https://youtu.be/rwsz5f2Yp8g" target="_blank">video</a>
+                            <bibtext xml:space="preserve" id="gruenstein2021residual_bib">
+                                @article{gruenstein2021residual,<br /> title={Residual Model Learning for Microrobot Control},<br /> author={Gruenstein, Joshua and Chen, Tao and Doshi, Neel and Agrawal, Pulkit},<br /> journal={International Conference
+                                on Robotics and Automation},<br /> year={2021}
+                                <br /> }
+                            </bibtext>
+                            <script language="JavaScript">
+                                hideblock('gruenstein2021residual_bib');
+                            </script>
+                            <p></p>
+                            <p>A data-efficient learning method for controlling microrobots with complex dynamics.</p>
+                        </td>
+                    </tr>
+
+
+
+                    <tr>
+                        <td style="padding:20px;width:25%;vertical-align:middle">
+                            <a href="https://taochenshh.github.io/" target="_blank">
+                                <img src="images/regular_exp/craft_env.png" alt="sym" width="100%" style="border-radius:5px">
+                            </a>
+                        </td>
+                        <td style="padding:20px;width:75%;vertical-align:middle">
+                            <papertitle>Language Inference for Reward Learning</papertitle>
+                            <br> Xiang Fu,
+                            <strong>Tao Chen</strong>,
+                            <a href="http://people.csail.mit.edu/pulkitag/" target="_blank">Pulkit Agrawal</a>,
+                            <a href="http://people.csail.mit.edu/tommi/" target="_blank">Tommi S. Jaakkola</a>
+                            <br>
+                            <em><a href="https://sites.google.com/view/biologicalandartificialrl" target="_blank">NeurIPS Biological and Artifical RL workshop</a>, 2020</em>
+                            <br>
+                            <a href="files/regular_exp_paper.pdf" target="_blank">paper</a> /
+                            <a href="javascript:toggleblock('fu2020language_bib')">bibtex</a>
+                            <bibtext xml:space="preserve" id="fu2020language_bib">
+                                @inproceedings{fu2020language,<br /> author = {Xiang Fu and Tao Chen and Pulkit Agrawal and Tommi Jaakkola},<br /> title = {Language Inference for Reward Learning},<br /> booktitle = {Advances in Neural Information Processing
+                                Systems Workshop (Biological and Artificial Reinforcement Learning)},<br /> year = {2020}<br /> }
+                                <br />
+                            </bibtext>
+                            <script language="JavaScript">
+                                hideblock('fu2020language_bib');
+                            </script>
+                            <p></p>
+                            <p> Reward learning by using formal language (regular expression) to capture the reward structure.</p>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td style="padding:20px;width:25%;vertical-align:middle">
+                            <a href="https://sites.google.com/view/learn-from-failures" target="_blank">
+                                <!--                                    <img src="images/snail_memory/snail_memory_net_arch.png" alt="sym" width="100%" style="border-radius:5px">-->
+                                <img src="images/snail_memory/ur.gif" alt="sym" width="100%" style="border-radius:5px">
+                                <!--                                  <img src="images/snail_memory/2dgridworld.gif" alt="sym" width="100%" style="border-radius:5px">-->
+                                <!--                                    <img src="images/snail_memory/3dminiworld.gif" alt="sym" width="100%" style="border-radius:5px">-->
+                            </a>
+                        </td>
+                        <td style="padding:20px;width:75%;vertical-align:middle">
+                            <papertitle>Learning to Learn from Failures using Replay</papertitle>
+                            <br>
+                            <strong>Tao Chen</strong>,
+                            <a href="http://people.csail.mit.edu/pulkitag/" target="_blank">Pulkit Agrawal</a>
+                            <br>
+                            <em><a href="https://biases-invariances-generalization.github.io/index.html" target="_blank">ICML BIG workshop</a>, 2020 </em>
+                            <br>
+                            <a href="https://biases-invariances-generalization.github.io/pdf/big_18.pdf" target="_blank">paper(workshop version)</a> /
+                            <a href="javascript:toggleblock('chen2020memory_bib')">bibtex</a> /
+                            <a href="https://sites.google.com/view/learn-from-failures" target="_blank">project page</a>
+                            <bibtext xml:space="preserve" id="chen2020memory_bib">
+                                @inproceedings{chen2020memory,<br /> author = {Tao Chen and Pulkit Agrawal},<br /> title = {Learning to Learn from Failures using Replay},<br /> booktitle = {International Conference on Machine Learning Workshop (Inductive
+                                Biases, Invariances and Generalization in RL)},<br /> year = {2020}<br /> }
+                                <br />
+                            </bibtext>
+                            <script language="JavaScript">
+                                hideblock('chen2020memory_bib');
+                            </script>
+                            <p></p>
+                            <p> Remembering failures aids faster learning by preventing the agent to oscillate between mistakes.</p>
+                        </td>
+                    </tr>
+
+
+
+                    <tr>
+                        <td width="25%" align="center">
+                            <a href="https://arxiv.org/abs/1906.08236" target="_blank"><img src="images/pyrobot_logo.svg" width="100%" /></a>
+                        </td>
+                        <td width="75%" valign="top">
+                            <p>
+                                <papertitle>PyRobot: An Open-source Robotics Framework for Research and Benchmarking</papertitle>
+                                <br>
+                                <a href="http://www.adithyamurali.com" target="_blank">Adithya Murali*</a>, <strong>Tao Chen*</strong>, <a href="https://www.ri.cmu.edu/ri-people/kalyan-vasudev-alwala/" target="_blank">Kalyan Vasudev Alwala*</a>, <a href="http://www.cs.cmu.edu/~dgandhi/"
+                                    target="_blank">Dhiraj Gandhi*</a>, <a href="http://www.cs.cmu.edu/~lerrelp/" target="_blank">Lerrel Pinto</a>, <a href="http://saurabhg.web.illinois.edu/" target="_blank">Saurabh Gupta</a>, <a href="http://www.cs.cmu.edu/~abhinavg/"
+                                    target="_blank">Abhinav Gupta</a> [* Equal contribution]
+
+                                <br>
+                                <a href="https://arxiv.org/abs/1906.08236" target="_blank">paper</a> / <a href="javascript:toggleblock('pyrobot2019_bib')">bibtex</a> / <a href="https://www.pyrobot.org/" target="_blank">project page</a> / <a href="https://github.com/facebookresearch/pyrobot"
+                                    target="_blank">code</a> <a class="github-button" href="https://github.com/facebookresearch/pyrobot" data-icon="octicon-star" data-show-count="true" aria-label="Star facebookresearch/pyrobot on GitHub" target="_blank">GitHub Star</a>                                / <a href="https://ai.facebook.com/blog/open-sourcing-pyrobot-to-accelerate-ai-robotics-research/" target="_blank">facebook AI blog</a>
+                                <bibtext xml:space="preserve" id="pyrobot2019_bib">
+                                    @article{pyrobot2019,<br /> author = {Adithyavairavan Murali* and Tao Chen* and Kalyan Vasudev Alwala* and Dhiraj Gandhi* and Lerrel Pinto and Saurabh Gupta and Abhinav Gupta},<br /> title = {{PyRobot}: An Open-source
+                                    Robotics Framework for Research and Benchmarking},<br /> journal = {CoRR},<br /> volume = {abs/1906.08236},<br /> year = {2019},<br /> url = {https://arxiv.org/abs/1906.08236},<br /> archivePrefix = {arXiv},<br /> eprint
+                                    = {1906.08236}<br /> }
+                                    <br />
+                                </bibtext>
+                                <script language="JavaScript">
+                                    hideblock('pyrobot2019_bib');
+                                </script>
+                                <br><br>
+                                <strong>Press Coverage:</strong> <a href="https://www.wired.com/story/facebook-unleashes-software-to-make-programming-robots-easy/" target="_blank">WIRED</a>, <a href="https://venturebeat.com/2019/06/20/facebook-launches-robotics-framework-pyrobot/"
+                                    target="_blank">VentureBeat</a>, <a href="https://www.therobotreport.com/facebook-pyrobot-open-source-speed-robotics-ai-research/" target="_blank">THE ROBOT REPORT</a>, <a href="https://siliconangle.com/2019/06/20/facebook-debuts-pyrobot-open-source-framework-controlling-robots/"
+                                    target="_blank">SiliconANGLE</a>, <a href="https://www.ibtimes.com/pyrobot-facebooks-open-source-robotics-framework-designed-make-controlling-bots-easy-2802365" target="_blank">IB Times</a>, <a href="https://sdtimes.com/ai/ai-robotics-research-platform-pyrobot-now-open-sourced/"
+                                    target="_blank">SD Times</a>, <a href="https://towardsdatascience.com/introducing-pyrobot-how-facebook-is-democratizing-robotics-programming-using-deep-learning-7ed3c2a4b065" target="_blank">Medium</a>
+                                <p></p>
+                            </p>
+                            <p>An easy-to-use python interface for robot learning and a low-cost robot learning platform.</p>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td width="25%" align="center">
+                            <!-- <img src="images/chen2018learning.jpg" width="100%"> -->
+                            <!-- <br> -->
+                            <img src="https://thumbs.gfycat.com/ScarceChiefAsianconstablebutterfly-size_restricted.gif" width="100%">
+                        </td>
+                        <td valign="top" width="75%">
+                            <p>
+                                <papertitle>Learning Exploration Policies for Navigation</papertitle>
+                                <br>
+                                <strong>Tao Chen</strong>,
+                                <a href="http://saurabhg.web.illinois.edu/" target="_blank">Saurabh Gupta</a>,
+                                <a href="http://www.cs.cmu.edu/~abhinavg/" target="_blank">Abhinav Gupta</a>
+                                <br>
+                                <em>International Conference on Learning Representations (<strong>ICLR</strong>)</em>, 2019
+                                <br>
+                                <a href="https://arxiv.org/abs/1903.01959" target="_blank">paper</a> / <a href="javascript:toggleblock('chen2018learning_bib')">bibtex</a> / <a href="https://sites.google.com/view/exploration-for-nav/home" target="_blank">project page</a>                                / <a href="https://youtu.be/qenGbObEkOI" target="_blank">video</a> / <a href="https://github.com/taochenshh/exp4nav" target="_blank">code</a> / <a href="files/exp_poster.pdf" target="_blank">poster</a>
+                                <bibtext xml:space="preserve" id="chen2018learning_bib">
+                                    @inproceedings{chen2018learning,<br /> author = "Chen, Tao and Gupta, Saurabh and Gupta, Abhinav",<br /> title = "Learning Exploration Policies for Navigation",<br /> booktitle = "International Conference on Learning
+                                    Representations",
+                                    <br /> year = "2019",<br /> url = "https://openreview.net/forum?id=SyMWn05F7"<br /> }
+                                    <br />
+                                </bibtext>
+                                <script language="JavaScript">
+                                    hideblock('chen2018learning_bib');
+                                </script>
+                                <p></p>
+                            </p>
+                            <p> A framework for learning to explore novel environments with on-board sensors in the testing time.</p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td width="25%">
+                            <img src='images/hcp_logo.png' width="100%">
+                            <br>
+                            <img src="https://thumbs.gfycat.com/SafeNeighboringHydatidtapeworm-size_restricted.gif" width="100%">
+                        </td>
+                        <td valign="top" width="75%">
+                            <p>
+                                <papertitle>Hardware Conditioned Policies for Multi-Robot Transfer Learning</papertitle>
+                                <br>
+                                <strong>Tao Chen</strong>,
+                                <a href="http://adithyamurali.com/" target="_blank">Adithya Murali</a>,
+                                <a href="http://www.cs.cmu.edu/~abhinavg/" target="_blank">Abhinav Gupta</a>
+                                <br>
+                                <em>Advances in Neural Information Processing Systems (<strong>NeurIPS</strong>)</em>, 2018
+                                <br>
+                                <a href="https://arxiv.org/abs/1811.09864" target="_blank">paper</a> / <a href="javascript:toggleblock('chen2018hardware_bib')">bibtex</a> / <a href="https://sites.google.com/view/robot-transfer-hcp/home" target="_blank">project page</a>                                / <a href="https://youtu.be/8odcwNOtAwI" target="_blank">video</a> / <a href="https://github.com/taochenshh/hcp" target="_blank">code</a> / <a href="files/hcp_poster.pdf" target="_blank">poster</a>
+                                <bibtext xml:space="preserve" id="chen2018hardware_bib">
+                                    @inproceedings{chen2018hardware,<br /> title={Hardware Conditioned Policies for Multi-Robot Transfer Learning},<br /> author={Chen, Tao and Murali, Adithyavairavan and Gupta, Abhinav},<br /> booktitle={Advances in Neural
+                                    Information Processing Systems},<br /> pages={9355--9366},
+                                    <br /> year={2018}
+                                    <br /> }
+                                    <br />
+                                </bibtext>
+                                <script language="JavaScript">
+                                    hideblock('chen2018hardware_bib');
+                                </script>
+                                <p></p>
+                            </p>
+                            <p> One policy to control many robots that are kinematically and dynamically different.</p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td width="25%">
+                            <img src='https://thumbs.gfycat.com/TepidAnyBoubou-size_restricted.gif' width="100%">
+                            <br>
+                            <p></p>
+                            <img src="https://thumbs.gfycat.com/BlondHopefulHarpseal-size_restricted.gif" width="100%">
+                        </td>
+                        <td valign="top" width="75%">
+                            <p>
+                                <papertitle>Development of a Soft Elastomeric Gripper for Dexterous Grasping</papertitle>
+                                <br>
+                                <strong>Tao Chen</strong>,
+                                <a href="http://me.sjtu.edu.cn/teacher_directory1/guguoying.html" target="_blank">Guo-Ying Gu</a>
+                                <br>
+                                <em>Bachelor's Thesis</em>, 2016
+                                <br> Awarded <strong>2016 Excellent Bachelor Thesis (Top 1%)</strong> of Shanghai Jiao Tong University
+                                <br>
+                                <a href="https://sites.google.com/view/soft-gripper/home" target="_blank">project page</a>
+                                <p></p>
+                            </p>
+                            <p align="justify">
+                                A four-fingered soft gripper with multi-cavity pneumatic elastomer actuators (MCPEA) for grasping objects with different sizes, shapes, fragility.
+                            </p>
+                        </td>
+                    </tr>
+
+                </table>
+
+
+                <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20">
+                    <tr>
+                        <td>
+                            <heading>Work Experience</heading>
+                        </td>
+                    </tr>
+                </table>
+                <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20">
+                    <tr>
+                        <td width="25%">
+                            <img src='images/automap_logo.png' width="100%">
+                            <br>
+                            <img src="https://thumbs.gfycat.com/SimplisticImpassionedGermanspitz-size_restricted.gif" width="100%">
+                        </td>
+                        <td valign="top" width="75%">
+                            <p>
+                                <papertitle>Autonomous Exploration for Dense Map Construction</papertitle>
+                                <br>
+                                <strong>Tao Chen</strong>
+                                <br>
+                                <em>Shanghai LX Robotics</em>, 2017
+                                <p></p>
+                            </p>
+                            <p align="justify">A key step for robots to get popularized into our daily life is that robots should be able to automatically explore the new environment when they are deployed in new houses or buildings. In this project, I combine the strength
+                                of motion planning (OMPL and SBPL), frontier-based exploration, SLAM (ORB-SLAM2), and object recognition and segmentation (FCIS) techniques to build an automatic mapping system that can autonomously explore the new houses,
+                                recognize daily objects and remember their locations while keep building the dense map as it moves. After the map is built, the robot can be asked to find and move to the objects it has seen (like cup, monitor) autonomously.</p>
+                        </td>
+                    </tr>
+                </table>
+
+                <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20">
+                    <tr>
+                        <td>
+                            <heading>Teaching</heading>
+                        </td>
+                    </tr>
+                </table>
+
+
+                <table width="100%" align="center" border="0" cellpadding="20">
+                    <tr>
+                        <td width="25%" align="center">
+                            <img src="images/teach_logo.png" width="80%">
+                        </td>
+                        <td width="75%" valign="top">
+                            <p>
+                                <a href="https://pulkitag.github.io/6.884/" target="_blank">
+                                    <papertitle>MIT 6.884 Computational Sensorimotor Learning - Spring 2021</papertitle>
+                                </a>
+                                <br> Teaching Assistant (TA)
+                                <br>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+
+                <table width="100%" align="center" border="0" cellpadding="20">
+                    <tr>
+                        <td width="25%" align="center">
+                            <img src="images/teach_logo.png" width="80%">
+                        </td>
+                        <td width="75%" valign="top">
+                            <p>
+                                <a href="https://pulkitag.github.io/rlbootcamp-iap/" target="_blank">
+                                    <papertitle>MIT 6.S090 Deep Learning for Control - IAP 2021</papertitle>
+                                </a>
+                                <br> Instructor
+                                <br>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+
+                <table width="100%" align="center" border="0" cellpadding="20">
+                    <tr>
+                        <td width="25%" align="center">
+                            <img src="images/teach_logo.png" width="80%">
+                        </td>
+                        <td width="75%" valign="top">
+                            <p>
+                                <a href="https://sites.google.com/andrew.cmu.edu/16824-spring2019/" target="_blank">
+                                    <papertitle>CMU 16-824 Visual Learning and Recognition - Spring 2019</papertitle>
+                                </a>
+                                <br> Teaching Assistant (TA)
+                                <br>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+
+                <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20">
+                    <tr>
+                        <td>
+                            <heading>Course Projects</heading>
+                        </td>
+                    </tr>
+                </table>
+
+                <table width="100%" align="center" border="0" cellpadding="20">
+                    <tr>
+                        <td width="25%" align="center">
+                            <img src="https://thumbs.gfycat.com/ClearcutLegitimateIndianringneckparakeet-size_restricted.gif" width="100%">
+                        </td>
+                        <td width="75%" valign="top">
+                            <p>
+                                <a href="https://youtu.be/sxvL3HohEog" target="_blank">
+                                    <papertitle>Robot Construction via Planning and Learning</papertitle>
+                                </a>
+                                <br>
+                                <strong>Tao Chen</strong>, Xianyi Cheng
+                                <br>
+                                <em>Learning for Manipulation</em>, 2018
+                                <br> Instructor: <a href="https://www.ri.cmu.edu/ri-faculty/oliver-kroemer/" target="_blank">Oliver Kroemer</a>
+                                <br>
+                                <a href="https://youtu.be/sxvL3HohEog" target="_blank">video1</a> / <a href="https://youtu.be/K-2i6M3E-7g" target="_blank">video2</a> / <a href="https://youtu.be/cNDd-CNf0g0" target="_blank">video3</a> / <a href="https://github.com/taochenshh/block_stacking"
+                                    target="_blank">code</a> / <a href="https://drive.google.com/open?id=1HNmbnL3vTYEzdehcZsN8x6dRKCBJ9_be" target="_blank">report</a>
+                                <p></p>
+                                <p align="justify">
+                                    We combined the symbolic planning and supervised learning to efficiently learn to move a set of blocks from an initial configuration to a goal configuration (a.k.a, robot construction problem). The symbolic planning module plans the sequence actions (path)
+                                    to move the blocks (a block or a sub-assembly) to reach the goal configurations. The supervised learning module (stability checker) predicts whether the state (RGB image) is stable or not so that the planning module
+                                    only plans with the actions that lead to stable states. We used domain randomization techniques to generate more diversified visual data to make the stability checker more robust. These two modules combined lead to
+                                    an effective way to solve the robot construction problem.
+                                </p>
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td width="25%">
+                            <img src="https://thumbs.gfycat.com/LonePortlyAnhinga-size_restricted.gif" width="100%">
+                        </td>
+                        <td width="75%" valign="top">
+                            <p>
+                                <a href="https://youtu.be/p-u4_u9Ocdc" target="_blank">
+                                    <papertitle>Design and Manufacturing of a Tennis Ball Collecting Robot</papertitle>
+                                </a>
+                                <br>
+                                <strong>Tao Chen</strong>, Matthew Stouder, Zhedong Han, Duankang Fu, Sara Lyons, Zhishang Xu
+                                <br>
+                                <em>GEARE program, Purdue University</em>, 2015
+                                <br>
+                                <a href="https://youtu.be/p-u4_u9Ocdc" target="_blank">video</a> / <a href="https://bitbucket.org/taochenshh/differential_drive_control/src/master/" target="_blank">code</a>
+                                <p></p>
+                                <p align="justify">
+                                    This project was the Senior Engineering Design Capstone project at Purdue University. We built an aesthetically pleasing tennis ball collecting robot which can collect tennis balls dispersed on a tennis court. I was fully responsible for all the programming
+                                    and control tasks for the robot.
+                                </p>
+                            </p>
+                        </td>
+                    </tr>
+
+
+
+                    <tr>
+                        <td width="25%">
+                            <img src="https://thumbs.gfycat.com/WellmadeHonorableFairyfly-size_restricted.gif" width="100%">
+                        </td>
+                        <td width="75%" valign="top">
+                            <p>
+                                <a href="https://youtu.be/DPbkB0Hufag" target="_blank">
+                                    <papertitle>2015 RoboMaster Robotics Competition</papertitle>
+                                </a>
+                                <br>
+                                <strong>Tao Chen</strong>, Mechanical Team Leader
+                                <br>
+                                <em>hosted by <a href="https://www.dji.com/" target="_blank">DJI</a> </em>, 2015
+                                <br>
+                                <a href="https://youtu.be/DPbkB0Hufag" target="_blank">video</a>
+                                <p></p>
+                                <p align="justify">
+                                    This competition was a real-life version of Counter-Strike game with real mobile robots. I led and managed the mechanical group. We won the second prize in 2015 National RoboMaster Robotics Competition of east China and the third prize in 2015 National
+                                    RoboMaster Robotics Competition Final.
+                                </p>
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td width="25%">
+                            <img src="images/rehab_logo.jpg" width="100%">
+                        </td>
+                        <td width="75%" valign="top">
+                            <p>
+                                <a href="https://sites.google.com/view/active-rehab/home" target="_blank">
+                                    <papertitle>An Active Rehabilitation Device for Elbow Joints</papertitle>
+                                </a>
+                                <br>
+                                <strong>Tao Chen</strong>, Leader
+                                <br> Advisor: Prof. Hua Shao
+                                <br>
+                                <em>Engineering Design</em>, 2015
+                                <br>
+                                <strong>China Patent, CN105148460B</strong>
+                                <br>
+                                <a href="https://sites.google.com/view/active-rehab/home" target="_blank">project page</a>
+                                <p></p>
+                                <p align="justify">
+                                    We designed and built an inexpensive yet effective elbow joint rehabilitation device. The device is only composed of mechanical parts such as a lead screw, and a four-bar mechanism. It can help patients exercise their elbow joints in an inexpensive way,
+                                    and it is also very easy to use and portable. We have applied a patent (Application Number: CN201510472161.5, <strong>Publication Number: CN105148460B</strong>) for this rehabilitation
+                                    device.
+                                </p>
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td width="25%">
+                            <img src="images/track1.png" width="49%">
+                            <img src="images/track2.png" width="49%">
+                        </td>
+                        <td width="75%" valign="top">
+                            <p>
+                                <papertitle>A High-adaptability Rescue Robot</papertitle>
+                                <br>
+                                <strong>Tao Chen</strong>, Leader
+                                <br> Advisor: Prof. Qinghua Liang
+                                <br>
+                                <em>Design and Manufacturing</em>, 2014
+                                <br>
+                                <a href="https://github.com/taochenshh/Robot-Control-via-Bluetooth" target="_blank">code 1</a> / <a href="https://github.com/taochenshh/Robot-Car-Control-with-ATmega2560" target="_blank">code 2</a>
+                                <p></p>
+                                <p align="justify">
+                                    We built a high-adaptability track robot with two separate frames. I led and managed the team and I was responsible for electronic control, programming, and part of manufacturing.
+                                </p>
+                            </p>
+                        </td>
+                    </tr>
+
+                </table>
+
+                <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20">
+                    <tr>
+                        <td>
+                            <heading>Service</heading>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding:20px;width:100%;vertical-align:middle">
+                            Reviewer for
+                            <a href="https://iclr.cc/" target="_blank">ICLR (Outstanding Reviewer)</a>,
+                            <a href="https://nips.cc/" target="_blank">NeurIPS</a>,
+                            <a href="https://icml.cc/" target="_blank">ICML</a>,
+                            <a href="https://www.ieee-ras.org/conferences-workshops/fully-sponsored/icra" target="_blank">ICRA</a>,
+                            <a href="https://softroboticsconference.org/" target="_blank">RoboSoft</a>,
+                            <a href="https://www.ieee-ras.org/conferences-workshops/fully-sponsored/humanoids" target="_blank">Humanoids</a>,
+                            <a href="https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=34" target="_blank">TPAMI</a>,
+                            <a href="http://www.ieee-ies.org/pubs/transactions-on-industrial-informatics" target="_blank">TII</a>, etc.
+                        </td>
+                    </tr>
+                </table>
+
+
+
+                <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <br>
+                                <p align="right">
+                                    <font size="2">
+                                        <a href="https://people.eecs.berkeley.edu/~barron/" target="_blank">This guy makes a nice webpage.</a>
+                                    </font>
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- Global site tag (gtag.js) - Google Analytics -->
+                <script async src="https://www.googletagmanager.com/gtag/js?id=UA-79592980-2"></script>
+                <script>
+                    window.dataLayer = window.dataLayer || [];
+
+                    function gtag() {
+                        dataLayer.push(arguments);
+                    }
+                    gtag('js', new Date());
+
+                    gtag('config', 'UA-79592980-2');
+                </script>
+
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>
