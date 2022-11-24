@@ -7,13 +7,13 @@
 
 <head>
     <!-- Title -->
-    <title>A System for General In-Hand Object Re-Orientation</title>
+    <title>Visual Pre-training for Navigation: What Can We Learn from Noise?</title>
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="A System for General In-Hand Object Re-Orientation">
-    <meta name="keywords" content="Dexterous manipulation, in-hand reorientation">
+    <meta name="description" content="Visual Pre-training for Navigation: What Can We Learn from Noise?">
+    <meta name="keywords" content="Synthetic Noise Data, Self-Supervised Learning, Visual Navigation">
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -39,7 +39,7 @@
 <body>
     <!-- <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark"> -->
     <nav class="navbar navbar-expand-md fixed-top navbar-dark" style="background-color: #A31F34;">
-        <a class="navbar-brand" href="#">In-hand Object Reorienation</a>
+        <a class="navbar-brand" href="#">Visual Pre-training for Navigation</a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle">
             <span class="navbar-toggler-icon"></span>
@@ -57,7 +57,7 @@
                     <a class="nav-link" href="#Paper">Paper</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#Oral">Oral Talk</a>
+                    <a class="nav-link" href="#Oral">Talk</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#Teaser">Teaser</a>
@@ -72,11 +72,11 @@
     <div class="container" style="padding-top: 80px; font-size: 20px">
         <div align="center">
             <h2 class="text-center" align="center">
-                A System for General In-Hand Object Re-Orientation
+                Visual Pre-training for Navigation: What Can We Learn from Noise?
             </h2>
             <h6>
-                <a href="https://taochenshh.github.io/" target="_blank">Tao Chen</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="https://people.csail.mit.edu/jiex" target="_blank">Jie Xu</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="https://yanweiw.github.io/" target="_blank">Yanwei Wang</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="https://ireneko.github.io/" target="_blank">Ching-Yun Ko</a>&nbsp;&nbsp;&nbsp;&nbsp;
                 <a href="https://people.csail.mit.edu/pulkitag/" target="_blank">Pulkit Agrawal</a><br>
             </h6>
             <small>Computer Science and Artificial Intelligence Laboratory (CSAIL)</small> <br>
@@ -87,7 +87,7 @@
     <div class="container" style="padding-top: 10px; font-size: 20px">
         <div align="center">
             <div class="center">
-                <img class="img-responsive img-rounded" src="files/in_hand_reorientation/teaser.png" style="width:100%" alt="">
+                <img class="img-responsive img-rounded" src="figs/inf_traj.gif" style="width:100%" alt="">
             </div>
         </div>
     </div><br>
@@ -98,9 +98,7 @@
         <h4 id="Abstract" style="padding-top: 70px; margin-top: -80px; ">Abstract</h4>
         <hr>
         <div style="text-align: justify">
-            In-hand object reorientation has been a challenging problem in robotics due to high dimensional actuation space and the frequent change in contact state between the fingers and the objects. We present a simple model-free framework that can learn to reorient
-            objects with both the hand facing upwards and downwards. We demonstrate the capability of reorienting over 2000 geometrically different objects in both cases. The learned policies show strong zero-shot transfer performance on new objects.
-            We provide evidence that these policies are amenable to real-world operation by distilling them to use observations easily available in the real world.
+            In visual navigation, one powerful paradigm is to predict actions from observations directly. Training such an end-to-end system allows representations that are useful for downstream tasks to emerge automatically. However, the lack of inductive bias makes this system data-hungry. We hypothesize a sufficient representation of the current view and the goal view for a navigation policy can be learned by predicting the location and size of a crop of the current view that corresponds to the goal. We further show that training such random crop prediction in a self-supervised fashion purely on synthetic noise images transfers well to natural home images. The learned representation can then be bootstrapped to learn a navigation policy efficiently with little interaction data.
         </div>
     </div><br><br>
 
@@ -109,22 +107,49 @@
         <h4 id="Paper" style="padding-top: 70px; margin-top: -80px;">Paper</h4>
         <hr>
 
+
+            <td style="padding:20px;width:75%;vertical-align:middle">
+              <a href="https://github.com/yanweiw/noise2ptz">
+              <papertitle>Visual Pre-training for Navigation: What Can We Learn from Noise?</papertitle>
+              </a>
+              <br>
+                            <strong>Yanwei Wang</strong>,
+              Ching-Yun Ko,
+              Pulkit Agrawal
+              <!-- <br> -->
+              <!-- <em>arXiv</em>, 2021  -->
+              <em><br>
+              <a href="https://arxiv.org/abs/2207.00052">arxiv</a>
+              /
+              <a href="https://github.com/yanweiw/noise2ptz">code</a>
+              /
+              <a href="https://sites.google.com/view/pretrain-noise">video</a><br>
+              <strong>NeurIPS 2022</strong> (Synthetic Data for Empowering ML Research Workshop & Self-Supervised Learning Workshop)
+              </em><br>
+              <p>By learning how to pan, tilt and zoom its camera to focus on random crops of a noise image, an embodied agent can pick up navigation skills in realistically simulated environments.</p>
+            </td>
+
         <div class="row">
             <div class="col-md-12">
-                <b>A System for General In-Hand Object Re-Orientation</b><br>
-                <a href="https://taochenshh.github.io/" target="_blank">Tao Chen</a>,
-                <a href="https://people.csail.mit.edu/jiex" target="_blank">Jie Xu</a>,
-                <a href="https://people.csail.mit.edu/pulkitag/" target="_blank">Pulkit Agrawal</a> <br>
-                <em>Conference on Robot Learning (<strong>CoRL</strong>)</em>, 2021 <strong>(<font color="red">Best Paper Award</font>) (<font color="red">Oral
-                    </font>, acceptance rate: 6.5%)</strong>
-                <br>
-                <a href="https://openreview.net/forum?id=7uSBJDoP7tY" target="_blank">paper</a> /
-                <a href="https://arxiv.org/abs/2111.03043" target="_blank">arXiv</a> /
-                <a href="https://taochenshh.github.io/projects/in-hand-reorientation" target="_blank">project page</a> /
+                <b>Visual Pre-training for Navigation: What Can We Learn from Noise?</b><br>
+                <strong>Yanwei Wang</strong>, Ching-Yun Ko, Pulkit Agrawal<br>
+                <em><br>
+                <a href="https://arxiv.org/abs/2207.00052">arxiv</a><br>
+                <a href="https://openreview.net/forum?id=RJhC_uIwdsj">review</a><br>
+                <a href="https://github.com/yanweiw/noise2ptz">code</a><br>
+                <!-- <a href="https://sites.google.com/view/pretrain-noise">video</a><br> -->
+                <strong>NeurIPS 2022</strong> (Synthetic Data for Empowering ML Research Workshop & Self-Supervised Learning Workshop)
+                </em><br>
+                <!-- <em>Conference on Robot Learning (<strong>CoRL</strong>)</em>, 2021 <strong>(<font color="red">Best Paper Award</font>) (<font color="red">Oral -->
+                    <!-- </font>, acceptance rate: 6.5%)</strong> -->
+                <!-- <br> -->
+                <!-- <a href="https://openreview.net/forum?id=7uSBJDoP7tY" target="_blank">paper</a> / -->
+                <!-- <a href="https://arxiv.org/abs/2111.03043" target="_blank">arXiv</a> / -->
+                <!-- <a href="https://taochenshh.github.io/projects/in-hand-reorientation" target="_blank">project page</a> / -->
                 <a href="" data-toggle="modal" data-target="#bibtex">
                     bibtex
                 </a> <br>
-                <br> Press coverage:
+   <!--              <br> Press coverage:
                 <a href="https://news.mit.edu/2021/dexterous-robotic-hands-manipulate-thousands-objects-1112" target="_blank">MIT News</a>,
                 <a href="https://www.csail.mit.edu/news/dexterous-robotic-hands-manipulate-thousands-objects-ease" target="_blank">MIT CSAIL News</a>,
                 <a href="https://www.azorobotics.com/Article.aspx?ArticleID=426" target="_blank">AZO Robotics</a>,
@@ -136,7 +161,7 @@
                 <a href="https://spectrum.ieee.org/video-friday-fridgebot" target="_blank">IEEE Spectrum</a>,
                 <a href="https://thehackposts.com/dexterous-robotic-hands-manipulate-thousands-of-objects-with-ease/" target="_blank">The Hack Posts</a>,
                 <a href="https://tectales.com/bionics-robotics/robotic-hands-manipulate-objects-with-ease.html" target="_blank">Tectales</a>,
-                <a href="https://www.therobotreport.com/mit-teaches-robotic-hands-to-reorient-2000-objects-in-one-hand/" target="_blank">The Robot Report</a>
+                <a href="https://www.therobotreport.com/mit-teaches-robotic-hands-to-reorient-2000-objects-in-one-hand/" target="_blank">The Robot Report</a> -->
                 <!-- Modal -->
                 <div class="modal fade" id="bibtex" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -149,13 +174,13 @@
                             </div>
                             <div class="modal-body">
                                 <pre>
-@article{chen2021system,
-    title={A System for General In-Hand Object Re-Orientation},
-    author={Chen, Tao and Xu, Jie and Agrawal, Pulkit},
-    journal={Conference on Robot Learning},
-    year={2021}
-}
-</pre>
+                                    @article{wang2022visual,
+                                      title={Visual Pre-training for Navigation: What Can We Learn from Noise?},
+                                      author={Wang, Yanwei and Ko, Ching-Yun},
+                                      journal={arXiv preprint arXiv:2207.00052},
+                                      year={2022}
+                                    }
+                                </pre>
                             </div>
                         </div>
                     </div>
@@ -166,7 +191,7 @@
 
 
     <!-- Video -->
-    <div class="container">
+<!--     <div class="container">
         <h4 id="Oral" style="padding-top: 30px; margin-top: -40px;">Oral Talk</h4>
         <hr>
         <div class="row justify-content-md-center">
@@ -194,7 +219,7 @@
                 </video>
             </div>
         </div>
-    </div><br><br><br>
+    </div><br><br><br> -->
 
     <div class="container">
         <h4 id="MoreVideos" style="padding-top: 30px; margin-top: -40px;">More Videos</h4>
