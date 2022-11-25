@@ -1,7 +1,7 @@
 ## Visual Pre-training for Navigation: What Can We Learn from Noise?
-[Yanwei Wang](https://yanweiw.github.io/), [Ching-Yun Ko](https://ireneko.github.io/)
+[Yanwei Wang](https://yanweiw.github.io/), [Ching-Yun Ko](https://ireneko.github.io/), [Pulkit Agrawal](https://people.csail.mit.edu/pulkitag/)
 
-Codebase of this [paper](https://arxiv.org/abs/2207.00052).
+Codebase of this [paper](https://arxiv.org/abs/2207.00052). See videos on the [paper website](https://yanweiw.github.io/noise2ptz/).
 
 ### Dependency
 1. Run `conda create --name <env> --file requirements.txt`
